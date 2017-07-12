@@ -1,6 +1,19 @@
-# HauntedHouse
+# Betrayal at House on the Hill (for the web)
+
+A fan-made web-based copy of the popular board game [Betrayal at House on the Hill](http://avalonhill.wizards.com/games/betrayal-at-house-on-the-hill) built by [Epicodus](https://www.epicodus.com/) students.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+
+## Specs/Wishlist
+
+| Pivotal Game Objects | Requirements |
+|---|---|
+| House | Static Foyer, random rooms |
+| Item "cards" | Database Objects referencing in-game items (probably in an array?) |
+| Omen "cards" | same as items, but different object/array |
+| Event "cards" | see omen |
+| Characters | this may be part of the stretch goals, due to complexity in routing <br> for different characters |
+| Turn Counter | this is an `if` dependent on the character functionality |
 
 ## Development server
 
