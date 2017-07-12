@@ -9,6 +9,10 @@ import { CharacterInfoComponent } from './character-info/character-info.componen
 import { EnterComponent } from './enter/enter.component';
 import { LeftRoomComponent } from './left-room/left-room.component';
 import { RightRoomComponent } from './right-room/right-room.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
+import { GardenComponent } from './garden/garden.component';
+import { MusicRoomComponent } from './music-room/music-room.component';
+import { LibraryComponent } from './library/library.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { RightRoomComponent } from './right-room/right-room.component';
     CharacterInfoComponent,
     EnterComponent,
     LeftRoomComponent,
-    RightRoomComponent
+    RightRoomComponent,
+    KitchenComponent,
+    GardenComponent,
+    MusicRoomComponent,
+    LibraryComponent
   ],
   imports: [
     BrowserModule,

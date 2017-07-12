@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RightRoomComponent implements OnInit {
 
+  doTheBack(){
+    window.history.back();
+  }
+
   constructor() { }
 
   ngOnInit() {

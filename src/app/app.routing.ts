@@ -5,6 +5,10 @@ import {CharacterInfoComponent} from './character-info/character-info.component'
 import { EnterComponent } from './enter/enter.component';
 import { LeftRoomComponent } from './left-room/left-room.component';
 import { RightRoomComponent } from './right-room/right-room.component';
+import { GardenComponent } from './garden/garden.component';
+import { MusicRoomComponent } from './music-room/music-room.component';
+import { LibraryComponent } from './library/library.component';
+import { KitchenComponent } from './kitchen/kitchen.component';
 
 const appRoutes: Routes = [
   {
@@ -16,16 +20,32 @@ const appRoutes: Routes = [
     component: CharacterInfoComponent
   },
   {
-    path: 'character-info/enter',
+    path: 'enter',
     component: EnterComponent
   },
   {
-    path: 'character-info/enter/leftRoom',
+    path: 'enter/leftRoom',
     component: LeftRoomComponent
   },
   {
-    path: 'character-info/enter/rightRoom',
+    path: 'enter/rightRoom',
     component: RightRoomComponent
+  },
+  {
+    path: 'kitchen',
+    component: KitchenComponent
+  },
+  {
+    path: 'library',
+    component: LibraryComponent
+  },
+  {
+    path: 'garden',
+    component: GardenComponent
+  },
+  {
+    path: 'music-room',
+    component: MusicRoomComponent
   }
 ];
 
