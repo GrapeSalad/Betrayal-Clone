@@ -50,6 +50,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 *Room Tile* <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Random Generation <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Triggers <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Events <br>
 *Draw Card* <br>
 *Special Room* (Maybe not part of MVP) <br>
 *Haunt?* <br>
@@ -79,3 +80,18 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Technologies Utilized
+
+* Angular
+* Firebase
+* Node.js
+* Bower
+* SASS
+
+## Credits
+
+* David Wilson
+* Alyssa Moody
+* James Lannon
+* Karina Roush
