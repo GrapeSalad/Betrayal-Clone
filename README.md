@@ -13,7 +13,47 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 | Omen "cards" | same as items, but different object/array |
 | Event "cards" | see omen |
 | Characters | this may be part of the stretch goals, due to complexity in routing <br> for different characters |
-| Turn Counter | this is an `if` dependent on the character functionality |
+| Turn Counter | this is an *if* dependent on the character functionality |
+
+## MVP
+
+#### Front End
+
+*Character Art* (One Character) <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Character Card  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Token/Figure “in game”
+
+
+*Card Art* (We don’t need all of the cards for the mvp) <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Item ~ 8 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Omen ~ 10 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Event ~ 15
+
+
+*Room Tiles* <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Upstairs ~ 5 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Ground ~ 10 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Downstairs ~ 5
+
+
+*Haunt* (We should decide on one haunt that we all think is do-able and engaging)
+
+#### Back End
+
+
+*Character Data* <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Scaling stats <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Items <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Omens
+
+
+*Room Tile* <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Random Generation <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Triggers <br>
+*Draw Card* <br>
+*Special Room* (Maybe not part of MVP) <br>
+*Haunt?* <br>
+*How to traverse the rooms?!?!?*
 
 ## Development server
 

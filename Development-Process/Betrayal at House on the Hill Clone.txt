@@ -1,0 +1,39 @@
+﻿Names of Team Members:
+*  David Wilson
+*  Alyssa Moody
+*  James
+*  Karina
+
+
+Name of Project: Betrayal at House on the Hill Clone
+
+
+Project’s Purpose or Goal: This program will allow users to play a simple online version of the board game.
+
+
+List the absolute minimum features the project requires to meet this purpose or goal:
+*  Player is able to move through randomly generated rooms to gain/lose stats and randomly generated items, omens, and events.
+*  A haunt begins.
+*  Player must escape the haunt.
+
+
+What tools, frameworks, libraries, APIs, Drupal modules and/or other resources will you use to create this MVP? List them all here. Be specific.
+*  Angular CLI (NPM, Bower, etc)
+*  Firebase
+*  SASS
+
+
+Which aspects of the project will each student be responsible for? Be specific about features and/or roles.
+*
+*
+*
+*
+
+
+If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.
+*  Multi-player feature
+*  Randomly generated haunts
+*  Animations
+
+
+Is there anything else you’d like your instructor to know?

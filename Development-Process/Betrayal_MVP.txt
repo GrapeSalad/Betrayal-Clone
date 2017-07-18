@@ -1,0 +1,46 @@
+﻿MVP
+Front End
+
+
+Character Art (One Character)
+        Character Card
+        Token/Figure “in game”
+
+
+Card Art (We don’t need all of the cards for the mvp)
+        Item ~ 8
+        Omen ~ 10
+        Event ~ 15
+
+
+Room Tiles
+        Upstairs ~ 5
+        Ground ~ 10
+        Downstairs ~ 5
+
+
+Haunt (We should decide on one haunt that we all think is do-able and engaging)
+
+
+
+
+
+
+
+
+Back End
+
+
+Character Data 
+Scaling stats
+Items
+Omens
+
+
+Room Tile
+        Random Generation
+        Triggers
+-Draw Card
+-Special Room (Maybe not part of MVP)
+        Haunt?
+How to traverse the rooms?!?!?
