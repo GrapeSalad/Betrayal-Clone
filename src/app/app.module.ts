@@ -13,6 +13,9 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { GardenComponent } from './garden/garden.component';
 import { MusicRoomComponent } from './music-room/music-room.component';
 import { LibraryComponent } from './library/library.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CharacterSelectComponent } from './character-select/character-select.component';
+import { GameBoardComponent } from './game-board/game-board.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { LibraryComponent } from './library/library.component';
     KitchenComponent,
     GardenComponent,
     MusicRoomComponent,
-    LibraryComponent
+    LibraryComponent,
+    LandingPageComponent,
+    CharacterSelectComponent,
+    GameBoardComponent
   ],
   imports: [
     BrowserModule,
