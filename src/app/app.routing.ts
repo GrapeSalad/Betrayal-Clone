@@ -17,10 +17,6 @@ const appRoutes: Routes = [
     component: CharacterSelectComponent
   },
   {
-    path: 'game-board',
-    component: GameBoardComponent
-  },
-  {
     path: 'about',
     component: AboutComponent
   },
@@ -31,6 +27,10 @@ const appRoutes: Routes = [
   {
     path: 'rules',
     component: RulesComponent
+  },
+  {
+    path: 'game',
+    component: GameBoardComponent
   }
 ];
 
