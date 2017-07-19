@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+// @import '~bourbon/app/assets/stylesheets/_bourbon';
+// @import '~bourbon-neat/app/assets/stylesheets/_neat';
+// @import '~normalize.css';
+
+@font-face {
+  font-family: ghastly;
+  src: url('assets/fonts/ghastly-panic.regular.ttf')
+}
+
+@font-face {
+  font-family: necrotype;
+  src: url('assets/fonts/necrotype.regular.ttf')
+}
+
+@font-face {
+  font-family: straighttohell;
+  src: url('assets/fonts/straighttohell.bb.ttf')
+}
+
+@import './bower_components/neat/core/_neat.scss';
+
+body{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+}
+
+.left-column{
+   @include grid-column(5);
+   @include grid-push(1);
+   background-color: thistle;
+   font-family: straighttohell;
+ }
+ .right-column{
+   @include grid-column(5);
+   background-color: honeydew;
+ }
