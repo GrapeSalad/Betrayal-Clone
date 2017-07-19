@@ -1,0 +1,24 @@
+@import './bower_components/neat/core/_neat.scss';
+
+$custom-grid: (
+  gutter:0,
+);
+
+.container {
+  @include grid-column(12, $custom-grid);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  background-image: url('/assets/img/hauntedhousebg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .links {
+    background-color: red;
+    @include grid-column(12);
+  }
+
+}

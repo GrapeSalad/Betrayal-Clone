@@ -20,7 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
-        "./bower_components/neat/core/_neat.scss",
+        "./bower_components/neat/core/_neat.scss"
       ],
       "scripts": [
       ],
