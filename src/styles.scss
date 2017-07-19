@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+// @import '~bourbon/app/assets/stylesheets/_bourbon';
+// @import '~bourbon-neat/app/assets/stylesheets/_neat';
+// @import '~normalize.css';
+@import './bower_components/neat/core/_neat.scss';
+
+.left-column{
+   @include grid-column(5);
+   @include grid-push(1);
+   background-color: thistle;
+ }
+ .right-column{
+   @include grid-column(5);
+   background-color: honeydew;
+ }
