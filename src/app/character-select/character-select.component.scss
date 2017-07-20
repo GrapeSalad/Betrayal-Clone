@@ -1,0 +1,49 @@
+@import './bower_components/neat/core/_neat.scss';
+$custom-grid: (
+  gutter:0,
+);
+
+.char-container {
+overflow-x: hidden;
+  h1{
+    margin: 0;
+  }
+}
+
+
+
+.first-row, .second-row, .third-row {
+  @include grid-column(12, $custom-grid);
+  border: 3px dotted pink;
+  margin: 50px 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  .character-card {
+    @include grid-column(2);
+    height: 500px;
+    border: 1px dotted grey;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .character-image {
+      text-align: center;
+      img {
+        height: 150px;
+      }
+    }
+
+    .character-bio {
+      height: 200px;
+      overflow: auto;
+      text-align: left;
+      ul {
+        list-style: none;
+        padding-left: 7px;
+      }
+    }
+  }
+}
