@@ -12,14 +12,19 @@ $custom-grid: (
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #494240;
- background-blend-mode: screen;
+  background-blend-mode: screen;
+  .header {
+    -webkit-filter: drop-shadow(0px 0px 30px black);
+    filter: drop-shadow(0px 0px 30px black);
+  }
   h1 {
     font-family: straighttohell;
     font-size: 6em;
     color: #c29540;
-    -webkit-text-stroke-width: .01px;
+    -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
-    margin: 5px 0;
+    margin: 25px 0;
+    text-shadow: 3px 3px 15px black;
   }
 }
 
@@ -50,6 +55,8 @@ $custom-grid: (
       text-align: center;
       img {
         height: 150px;
+        -webkit-filter: drop-shadow(3px 3px 2px black);
+        filter: drop-shadow(3px 3px 2px black);
       }
       h3{
         margin: 0;
@@ -62,7 +69,7 @@ $custom-grid: (
       height: 200px;
       overflow: auto;
       text-align: left;
-      margin-top: -40px;
+      margin-top: -15px;
       margin-right: 10px;
       margin-left: 10px;
       ul {
@@ -75,5 +82,17 @@ $custom-grid: (
         font-size: 1.4em;
       }
     } //end character-bio
+
+    .select-button {
+      transform: rotateZ(-8deg);
+      a {
+        color: darkred;
+        font-family: spoopy;
+        text-decoration: none;
+        font-size: 4em;
+        font-weight: bolder;
+        text-shadow: 2px 2px 2px black;
+      }
+    }
   } // end character-card
 } // end rows
