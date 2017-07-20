@@ -38,11 +38,12 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.roomTiles = dataLastEmittedFromObserver;
       for(var i=0; i < dataLastEmittedFromObserver.length; i++) {
-        this.roomTileArr.push(new Room(dataLastEmittedFromObserver[i].name, dataLastEmittedFromObserver[i].basement, dataLastEmittedFromObserver[i].ground, dataLastEmittedFromObserver[i].upper, dataLastEmittedFromObserver[i].eventCard, dataLastEmittedFromObserver[i].omenCard, dataLastEmittedFromObserver[i].itemCard, dataLastEmittedFromObserver[i].topDoor, dataLastEmittedFromObserver[i].bottomDoor, dataLastEmittedFromObserver[i].leftDoor, dataLastEmittedFromObserver[i].rightDoor, dataLastEmittedFromObserver[i].text));
+        this.roomTileArr.push(new Room(dataLastEmittedFromObserver[i].name, dataLastEmittedFromObserver[i].basement, dataLastEmittedFromObserver[i].ground, dataLastEmittedFromObserver[i].upper, dataLastEmittedFromObserver[i].eventCard, dataLastEmittedFromObserver[i].omenCard, dataLastEmittedFromObserver[i].itemCard, dataLastEmittedFromObserver[i].topDoor, dataLastEmittedFromObserver[i].bottomDoor, dataLastEmittedFromObserver[i].leftDoor, dataLastEmittedFromObserver[i].rightDoor, dataLastEmittedFromObserver[i].text, dataLastEmittedFromObserver[i].src));
       }
       for(var i=0; i<40;i++){
         var randomNumber = this.gameService.getRandomNumber(0, (this.roomTileArr.length-1));
         var removed = this.roomTileArr.splice(randomNumber, 1);
+        console.log(removed[0].src)
         if(removed[0].ground){
           this.randomGroundRoomTiles.push(removed);
         }

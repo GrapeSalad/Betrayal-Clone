@@ -4,24 +4,22 @@
 
 <h4>Ground</h4>
 <div class="cell" *ngFor="let room of randomGroundRoomTiles">
-  <p>{{room[0].name}}</p>
+  <img [src]="room[0].src">
+  <!-- <p>{{room[0].name}}</p> -->
 </div>
 <hr>
 <h4>Basement</h4>
 <div class="cell" *ngFor="let room of randomBasementRoomTiles">
-  <p>{{room[0].name}}</p>
+  <img [src]="room[0].src">
+  <!-- <img src="././assets/img/rooms/basement-stairs.jpg"> -->
+  <!-- <p>{{room[0].name}}</p> -->
 </div>
 <hr>
 <h4>Upstairs</h4>
 <div class="cell" *ngFor="let room of randomUpperRoomTiles">
-  <p>{{room[0].name}}</p>
+  <img [src]=room[0].src>
+  <!-- <p>{{room[0].name}}</p> -->
 </div>
-
-
-<div>
-<img src="././assets/img/rooms/attic.png">
-</div>
-
 
 
 
