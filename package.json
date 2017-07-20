@@ -1,5 +1,5 @@
 {
-  "name": "haunted-house",
+  "name": "betrayal-clone",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -42,9 +42,21 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "node-sass": "^4.5.3",
+    "promise-polyfill": "^6.0.2",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "description": "A fan-made web-based copy of the popular board game [Betrayal at House on the Hill](http://avalonhill.wizards.com/games/betrayal-at-house-on-the-hill) built by [Epicodus](https://www.epicodus.com/) students.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrapeSalad/Betrayal-Clone.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/GrapeSalad/Betrayal-Clone/issues"
+  },
+  "homepage": "https://github.com/GrapeSalad/Betrayal-Clone#readme"
 }
