@@ -2,7 +2,79 @@
   <p>{{staticRoomTile.name}}</p>
 </div>
 
-<div class="row">
+<h4>Ground</h4>
+<div class="cell" *ngFor="let room of randomGroundRoomTiles">
+  <p>{{room[0].name}}</p>
+</div>
+<hr>
+<h4>Basement</h4>
+<div class="cell" *ngFor="let room of randomBasementRoomTiles">
+  <p>{{room[0].name}}</p>
+</div>
+<hr>
+<h4>Upstairs</h4>
+<div class="cell" *ngFor="let room of randomUpperRoomTiles">
+  <p>{{room[0].name}}</p>
+</div>
+
+
+<div>
+<img src="././assets/img/rooms/attic.png">
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
   <div class="cell" id="01-01"></div>
   <div class="cell" id="01-02"></div>
   <div class="cell" id="01-03"></div>
@@ -144,4 +216,4 @@
   <div class="cell" id="11-09"></div>
   <div class="cell" id="11-10"></div>
   <div class="cell" id="11-11"></div>
-</div>
+</div> -->

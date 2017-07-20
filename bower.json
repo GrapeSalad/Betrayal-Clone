@@ -1,9 +1,9 @@
 {
-  "name": "haunted-house",
+  "name": "betrayal-clone",
   "description": "",
   "main": "",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/GrapeSalad/Betrayal-Clone",
   "ignore": [
     "**/.*",
     "node_modules",

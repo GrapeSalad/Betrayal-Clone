@@ -3,6 +3,7 @@ import { Character } from './character.model';
 import { EventCard } from './event-card.model';
 import { OmenCard } from './omen-card.model';
 import { Haunt } from './haunt.model';
+import { Room } from './room.model';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Injectable()
@@ -15,6 +16,10 @@ export class GameService {
 
   getStaticRoomTiles(){
     return this.staticRoomTiles;
+  }
+
+  getRoomTiles(){
+    return this.database.object('/rooms/')
   }
 
   getEventCardById(cardId: number) {
