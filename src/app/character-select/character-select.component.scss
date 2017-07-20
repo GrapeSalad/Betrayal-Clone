@@ -2,6 +2,14 @@
 $custom-grid: (
   gutter:0,
 );
+@keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 25px #353535, 0 0 30px #353535, 0 0 35px #353535, 0 0 40px #353535, 0 0 45px #353535;
+  }
+  to {
+    text-shadow: 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 25px black, 0 0 30px black, 0 0 35px black, 0 0 40px black, 0 0 45px black;
+  }
+}
 
 .char-container {
   overflow-x: hidden;
@@ -38,7 +46,7 @@ $custom-grid: (
     @include grid-column(2);
     height: 500px;
     border: 1px dotted grey;
-    min-width: 300px;
+    width: 300px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -81,7 +89,10 @@ $custom-grid: (
         font-family: necrotype;
         font-size: 1.4em;
       }
+
+
     } //end character-bio
+
 
     .select-button {
       transform: rotateZ(-8deg);
@@ -92,7 +103,20 @@ $custom-grid: (
         font-size: 4em;
         font-weight: bolder;
         text-shadow: 2px 2px 2px black;
+        &:hover {
+          animation: neon1 1.5s ease-in-out infinite alternate;
+        }
       }
     }
   } // end character-card
 } // end rows
+
+.character-bio::-webkit-scrollbar {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.character-bio::-webkit-scrollbar-thumb {
+  background-color: #997855;
+  outline: 1px solid #997855;
+  border-radius: 2rem;
+}
