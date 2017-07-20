@@ -16,6 +16,7 @@ export class GameBoardComponent implements OnInit {
   roomTiles;
   roomTileArr: Room[] = [];
   randomGroundRoomTiles: any[] = [];
+  rightToLeftDoorArray: any[] = [];
   randomUpperRoomTiles: any[] = [];
   randomBasementRoomTiles: any[] = [];
   basementLanding = false;
@@ -38,28 +39,41 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.roomTiles = dataLastEmittedFromObserver;
       for(var i=0; i < dataLastEmittedFromObserver.length; i++) {
-        this.roomTileArr.push(new Room(dataLastEmittedFromObserver[i].name, dataLastEmittedFromObserver[i].basement, dataLastEmittedFromObserver[i].ground, dataLastEmittedFromObserver[i].upper, dataLastEmittedFromObserver[i].eventCard, dataLastEmittedFromObserver[i].omenCard, dataLastEmittedFromObserver[i].itemCard, dataLastEmittedFromObserver[i].topDoor, dataLastEmittedFromObserver[i].bottomDoor, dataLastEmittedFromObserver[i].leftDoor, dataLastEmittedFromObserver[i].rightDoor, dataLastEmittedFromObserver[i].text));
+        this.roomTileArr.push(new Room(dataLastEmittedFromObserver[i].name, dataLastEmittedFromObserver[i].basement, dataLastEmittedFromObserver[i].ground, dataLastEmittedFromObserver[i].upper, dataLastEmittedFromObserver[i].eventCard, dataLastEmittedFromObserver[i].omenCard, dataLastEmittedFromObserver[i].itemCard, dataLastEmittedFromObserver[i].topDoor, dataLastEmittedFromObserver[i].bottomDoor, dataLastEmittedFromObserver[i].leftDoor, dataLastEmittedFromObserver[i].rightDoor, dataLastEmittedFromObserver[i].text, dataLastEmittedFromObserver[i].src));
       }
-      for(var i=0; i<40;i++){
+      while(this.roomTileArr.length > 0){
         var randomNumber = this.gameService.getRandomNumber(0, (this.roomTileArr.length-1));
+        // console.log(this.roomTileArr.length);
+        // while(this.roomTileArr.length > 4) {
+        //   console.log("hi");
+        // }
         var removed = this.roomTileArr.splice(randomNumber, 1);
         if(removed[0].ground){
           this.randomGroundRoomTiles.push(removed);
         }
         else if(removed[0].basement){
-          //for showing the basement landing tile always
-          // if(removed[0].name === "Basement Landing"){
-          //   this.basementLanding = true;
-          //   this.randomBasementRoomTiles.push(removed);
-          // }
-          // else{
             this.randomBasementRoomTiles.push(removed);
-          // }
         }
         else{
           this.randomUpperRoomTiles.push(removed);
         }
       }
+      //trying to test left/right pathing
+      for(i=0; i<this.randomGroundRoomTiles.length; i++) {
+        if(this.randomGroundRoomTiles[i][0].rightDoor && this.randomGroundRoomTiles[i+1][0].leftDoor){
+          this.rightToLeftDoorArray.push(this.randomGroundRoomTiles[i]);
+          for(var k=0;k<this.rightToLeftDoorArray.length; k++){
+            if(this.randomGroundRoomTiles[i+1][0] === this.rightToLeftDoorArray[k][0]){
+              this.rightToLeftDoorArray.push(this.randomGroundRoomTiles[i+1][0]);
+            }
+          }
+        }
+        else{
+          console.log("not yay");
+        }
+      }
+      console.log(this.rightToLeftDoorArray);
+
     })
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenEvent = dataLastEmittedFromObserver;
@@ -70,19 +84,7 @@ export class GameBoardComponent implements OnInit {
     this.gameService.getRoomTileById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenRoom = dataLastEmittedFromObserver;
     })
-  }
 
-  // randomizeRoomTiles() {
-  //   // console.log(this.roomTileArr);
-  //   // this.roomTileArr
-  //   // randomIndex.getRandomNumber(0,(this.roomTileArr.length-1))
-  //
-  //   for(var i=0; i<this.roomTileArr.length;i++){
-  //     var randomNumber = this.gameService.getRandomNumber(0, (this.roomTileArr.length-1));
-  //     this.randomizedRoomTiles.push(this.roomTileArr[randomNumber]);
-  //     this.roomTileArr.splice(randomNumber, 1);
-  //   }
-  //   console.log(this.randomizedRoomTiles);
-  // }
+  }
 
 }
