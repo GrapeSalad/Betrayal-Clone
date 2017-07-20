@@ -45,7 +45,6 @@ $custom-grid: (
   .character-card {
     @include grid-column(2);
     height: 500px;
-    border: 1px dotted grey;
     width: 300px;
     border-radius: 20px;
     display: flex;
