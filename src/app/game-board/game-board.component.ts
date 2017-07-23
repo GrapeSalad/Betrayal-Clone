@@ -31,15 +31,24 @@ export class GameBoardComponent implements OnInit {
   chosenRoom;
   key;
   classToAdd;
-  selectedAnchorId;
+  selectedAnchorId: any[] = [];
   characterInEntranceHall = false;
 
-  constructor(private gameService: GameService) { }
+constructor(private gameService: GameService) { }
 
-  getIdOfElement(e){
-    this.selectedAnchorId = e.currentTarget.id;
-    console.log(this.selectedAnchorId);
+getIdOfElement(e){
+  document.getElementById('39').classList.remove('active');
+  if (this.selectedAnchorId.length === 0) {
+    this.selectedAnchorId.push(e.currentTarget);
+    this.selectedAnchorId[0].classList.add('active');
   }
+  if (this.selectedAnchorId.length === 1) {
+    this.selectedAnchorId[0].classList.remove('active');
+    this.selectedAnchorId = [];
+    this.selectedAnchorId.push(e.currentTarget);
+    this.selectedAnchorId[0].classList.add('active');
+  }
+}
 
   // @HostListener('document:keypress',['$event'])
   handleKeyboardEvent(event: KeyboardEvent){

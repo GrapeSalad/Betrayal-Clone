@@ -43,9 +43,9 @@
   <div class="cell" id="34"></div>
   <div class="cell" id="35"></div>
   <div class="cell" id="36"></div>
-  <div class="cell" id="37"><img [src]="grandStaircase?.src"></div>
-  <div class="cell" id="38"><img [src]="foyer?.src"></div>
-  <div class="cell" id="39" [ngClass]="{'active': 'characterInEntranceHall'}"(click)="getIdOfElement($event)"><img [src]="entranceHall?.src"></div>
+  <div class="cell" id="37" (click)="getIdOfElement($event)"><img [src]="grandStaircase?.src"></div>
+  <div class="cell" id="38" (click)="getIdOfElement($event)"><img [src]="foyer?.src"></div>
+  <div class="cell active" id="39" (click)="getIdOfElement($event)"><img [src]="entranceHall?.src"></div>
   <div class="cell" id="40"></div>
 </div>
 <div class="row">
