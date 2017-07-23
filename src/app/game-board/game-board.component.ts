@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import {Character} from '../character.model';
 import {Room} from '../room.model';
 import {Router} from '@angular/router';
@@ -30,6 +30,8 @@ export class GameBoardComponent implements OnInit {
   chosenOmen;
   chosenRoom;
   key;
+  // currentRoomTileArray: any[] = [];
+  currentRoomTileId;
   classToAdd;
   selectedAnchorId: any[] = [];
   characterInEntranceHall = false;
@@ -51,33 +53,49 @@ getIdOfElement(e){
 }
 
   // @HostListener('document:keypress',['$event'])
+  // @ViewChild('tile') tile:ElementRef;
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
-    console.log(this.key);
+    // console.log(this.key);
 
     if(this.key === 13){
+      //does the opposite, i know....
+      // document.getElementById('39').classList.remove('active');
+
       //add class active to entrance hall div(should be static div)
-      // event.target.classList.add("active");
-      if(this.characterInEntranceHall === false){
-        this.characterInEntranceHall = true;
-        console.log(this.characterInEntranceHall);
-      }
-      else{
-        this.characterInEntranceHall = false;
-        console.log(this.characterInEntranceHall);
-      }
     }
-    else if(this.key === 37){
-      //get active div id
-      //remove active class from div id
-      //add active class to div on the left eg:(#7) from (#8)
+    if(this.key === 40){
+      // if(this.tile.nativeElement.classList.contains('active')) {
+      //   this.tile.nativeElement.classList.remove('active');
+      // }
+      this.currentRoomTileId += 8;
+      document.getElementById(this.currentRoomTileId).classList.add('active');
     }
-  }
-  clicked(event){
-    event.target.classList.add("active");
+
+    if(this.key === 39){
+      this.currentRoomTileId += 1;
+      document.getElementById(this.currentRoomTileId).classList.add('active');
+    }
+
+    if(this.key === 38){
+      this.currentRoomTileId -= 8;
+      document.getElementById(this.currentRoomTileId).classList.add('active');
+    }
+
+    if(this.key === 37){
+      this.currentRoomTileId -= 1;
+      document.getElementById(this.currentRoomTileId).classList.add('active');
+    }
   }
 
+
+  // clicked(event){
+  //   event.target.classList.add("active");
+  // }
+
   ngOnInit() {
+    this.currentRoomTileId = 39;
+
     this.gameService.getStaticRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.staticRoomTiles = dataLastEmittedFromObserver;
       this.entranceHall = dataLastEmittedFromObserver[0];
