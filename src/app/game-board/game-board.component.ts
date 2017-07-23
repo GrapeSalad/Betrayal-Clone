@@ -30,61 +30,95 @@ export class GameBoardComponent implements OnInit {
   chosenOmen;
   chosenRoom;
   key;
-  // currentRoomTileArray: any[] = [];
+  currentRoomTileArray: any[] = [];
   currentRoomTileId;
-  classToAdd;
-  selectedAnchorId: any[] = [];
-  characterInEntranceHall = false;
+  // selectedAnchorId: any[] = [];
 
 constructor(private gameService: GameService) { }
 
-getIdOfElement(e){
-  document.getElementById('39').classList.remove('active');
-  if (this.selectedAnchorId.length === 0) {
-    this.selectedAnchorId.push(e.currentTarget);
-    this.selectedAnchorId[0].classList.add('active');
-  }
-  if (this.selectedAnchorId.length === 1) {
-    this.selectedAnchorId[0].classList.remove('active');
-    this.selectedAnchorId = [];
-    this.selectedAnchorId.push(e.currentTarget);
-    this.selectedAnchorId[0].classList.add('active');
-  }
-}
+// getIdOfElement(e){
+//   document.getElementById('39').classList.remove('active');
+//   if (this.selectedAnchorId.length === 0) {
+//     this.selectedAnchorId.push(e.currentTarget);
+//     this.selectedAnchorId[0].classList.add('active');
+//   }
+//   if (this.selectedAnchorId.length === 1) {
+//     this.selectedAnchorId[0].classList.remove('active');
+//     this.selectedAnchorId = [];
+//     this.selectedAnchorId.push(e.currentTarget);
+//     this.selectedAnchorId[0].classList.add('active');
+//   }
+// }
+
+  // NOTE:active/selected: need to have two classes (or one class and one boolean)
 
   // @HostListener('document:keypress',['$event'])
-  // @ViewChild('tile') tile:ElementRef;
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
-    // console.log(this.key);
 
+    //enter Key to start game
     if(this.key === 13){
-      //does the opposite, i know....
-      // document.getElementById('39').classList.remove('active');
-
-      //add class active to entrance hall div(should be static div)
-    }
-    if(this.key === 40){
-      // if(this.tile.nativeElement.classList.contains('active')) {
-      //   this.tile.nativeElement.classList.remove('active');
-      // }
-      this.currentRoomTileId += 8;
-      document.getElementById(this.currentRoomTileId).classList.add('active');
+      document.getElementById('39').classList.add('active');
     }
 
-    if(this.key === 39){
-      this.currentRoomTileId += 1;
-      document.getElementById(this.currentRoomTileId).classList.add('active');
-    }
-
+    //up
     if(this.key === 38){
       this.currentRoomTileId -= 8;
-      document.getElementById(this.currentRoomTileId).classList.add('active');
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
     }
 
+    //down
+    if(this.key === 40){
+      this.currentRoomTileId += 8;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
+
+    //right
+    if(this.key === 39){
+      this.currentRoomTileId += 1;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
+
+    //left
     if(this.key === 37){
       this.currentRoomTileId -= 1;
-      document.getElementById(this.currentRoomTileId).classList.add('active');
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
     }
   }
 
