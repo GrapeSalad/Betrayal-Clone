@@ -9,7 +9,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
-  host: {'(document:keydown)': 'handleKeyboardEvent($event)'},
+  host: {'(document:keyup)': 'handleKeyboardEvent($event)'},
   providers: [GameService]
 })
 
@@ -30,20 +30,42 @@ export class GameBoardComponent implements OnInit {
   chosenOmen;
   chosenRoom;
   key;
+  classToAdd;
+  selectedAnchorId;
+  characterInEntranceHall = false;
+
   constructor(private gameService: GameService) { }
+
+  getIdOfElement(e){
+    this.selectedAnchorId = e.currentTarget.id;
+    console.log(this.selectedAnchorId);
+  }
 
   // @HostListener('document:keypress',['$event'])
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
     console.log(this.key);
+
     if(this.key === 13){
       //add class active to entrance hall div(should be static div)
+      // event.target.classList.add("active");
+      if(this.characterInEntranceHall === false){
+        this.characterInEntranceHall = true;
+        console.log(this.characterInEntranceHall);
+      }
+      else{
+        this.characterInEntranceHall = false;
+        console.log(this.characterInEntranceHall);
+      }
     }
     else if(this.key === 37){
       //get active div id
       //remove active class from div id
       //add active class to div on the left eg:(#7) from (#8)
     }
+  }
+  clicked(event){
+    event.target.classList.add("active");
   }
 
   ngOnInit() {
