@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
 import {Character} from '../character.model';
 import {Room} from '../room.model';
 import {Router} from '@angular/router';
@@ -30,45 +30,106 @@ export class GameBoardComponent implements OnInit {
   chosenOmen;
   chosenRoom;
   key;
-  classToAdd;
-  selectedAnchorId;
-  characterInEntranceHall = false;
+  currentRoomTileArray: any[] = [];
+  currentRoomTileId;
+  // selectedAnchorId: any[] = [];
 
-  constructor(private gameService: GameService) { }
+constructor(private gameService: GameService) { }
 
-  getIdOfElement(e){
-    this.selectedAnchorId = e.currentTarget.id;
-    console.log(this.selectedAnchorId);
-  }
+// getIdOfElement(e){
+//   document.getElementById('39').classList.remove('active');
+//   if (this.selectedAnchorId.length === 0) {
+//     this.selectedAnchorId.push(e.currentTarget);
+//     this.selectedAnchorId[0].classList.add('active');
+//   }
+//   if (this.selectedAnchorId.length === 1) {
+//     this.selectedAnchorId[0].classList.remove('active');
+//     this.selectedAnchorId = [];
+//     this.selectedAnchorId.push(e.currentTarget);
+//     this.selectedAnchorId[0].classList.add('active');
+//   }
+// }
+
+  // NOTE:active/selected: need to have two classes (or one class and one boolean)
 
   // @HostListener('document:keypress',['$event'])
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
-    console.log(this.key);
 
+    //enter Key to start game
     if(this.key === 13){
-      //add class active to entrance hall div(should be static div)
-      // event.target.classList.add("active");
-      if(this.characterInEntranceHall === false){
-        this.characterInEntranceHall = true;
-        console.log(this.characterInEntranceHall);
-      }
-      else{
-        this.characterInEntranceHall = false;
-        console.log(this.characterInEntranceHall);
+      document.getElementById('39').classList.add('active');
+    }
+
+    //up
+    if(this.key === 38){
+      this.currentRoomTileId -= 8;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
       }
     }
-    else if(this.key === 37){
-      //get active div id
-      //remove active class from div id
-      //add active class to div on the left eg:(#7) from (#8)
+
+    //down
+    if(this.key === 40){
+      this.currentRoomTileId += 8;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
+
+    //right
+    if(this.key === 39){
+      this.currentRoomTileId += 1;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
+
+    //left
+    if(this.key === 37){
+      this.currentRoomTileId -= 1;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
     }
   }
-  clicked(event){
-    event.target.classList.add("active");
-  }
+
+
+  // clicked(event){
+  //   event.target.classList.add("active");
+  // }
 
   ngOnInit() {
+    this.currentRoomTileId = 39;
+
     this.gameService.getStaticRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.staticRoomTiles = dataLastEmittedFromObserver;
       this.entranceHall = dataLastEmittedFromObserver[0];
