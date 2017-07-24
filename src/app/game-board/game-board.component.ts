@@ -32,6 +32,7 @@ export class GameBoardComponent implements OnInit {
   key;
   currentRoomTileArray: any[] = [];
   currentRoomTileId;
+  visibleRoomTileArray: any[] = [];
   // selectedAnchorId: any[] = [];
 
 constructor(private gameService: GameService) { }
@@ -57,12 +58,32 @@ constructor(private gameService: GameService) { }
     this.key = event.which || event.keyCode;
 
     //enter Key to start game
+    // if(this.key === 13){
+    //   document.getElementById('39').classList.add('active');
+    // }
+
     if(this.key === 13){
-      document.getElementById('39').classList.add('active');
+      // this.currentRoomTileId.classList.add('dustyHallway');
+      console.log(this.visibleRoomTileArray + this.currentRoomTileId);
+
     }
 
+    //up to foyer from basement stairs
+    if(this.key === 38 && this.currentRoomTileId === 201){
+      this.currentRoomTileId = 38;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('201').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
     //up
-    if(this.key === 38){
+    else if(this.key === 38){
       this.currentRoomTileId -= 8;
       if (this.currentRoomTileArray.length === 0) {
         document.getElementById('39').classList.remove('active');
@@ -74,10 +95,72 @@ constructor(private gameService: GameService) { }
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
         this.currentRoomTileArray[0].classList.add('active');
       }
+      if(this.currentRoomTileId === 31){
+        this.currentRoomTileArray[0].classList.add('bloodyRoom');
+      }
+      else if(this.currentRoomTileId === 23){
+        this.currentRoomTileArray[0].classList.add('graveyard');
+      }
+      else if(this.currentRoomTileId === 22){
+        this.currentRoomTileArray[0].classList.add('ballroom');
+      }
+      else if(this.currentRoomTileId === 46){
+        this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+      }
+      else if(this.currentRoomTileId === 87){
+        this.currentRoomTileArray[0].classList.add('operatingLaboratory');
+      }
+      else if(this.currentRoomTileId === 97){
+        this.currentRoomTileArray[0].classList.add('balcony');
+      }
+      else if(this.currentRoomTileId === 89){
+        this.currentRoomTileArray[0].classList.add('creakyHallway');
+      }
+      else if(this.currentRoomTileId === 81){
+        this.currentRoomTileArray[0].classList.add('attic');
+      }
+      else if(this.currentRoomTileId === 218){
+        this.currentRoomTileArray[0].classList.add('catacombs');
+      }
+      else if(this.currentRoomTileId === 219){
+        this.currentRoomTileArray[0].classList.add('wineCellar');
+      }
+      else if(this.currentRoomTileId === 210){
+        this.currentRoomTileArray[0].classList.add('servantsQuarters');
+      }
+      else if(this.currentRoomTileId === 211){
+        this.currentRoomTileArray[0].classList.add('furnaceRoom');
+      }
+      else if(this.currentRoomTileId === 202){
+        this.currentRoomTileArray[0].classList.add('organRoom');
+      }
+      else if(this.currentRoomTileId === 203){
+        this.currentRoomTileArray[0].classList.add('gymnasium');
+      }
+      else if(this.currentRoomTileId === 201){
+        this.currentRoomTileArray[0].classList.add('stairsFromBasement');
+      }
     }
 
+    //down to the basement from the coal coalChute
+    if(this.currentRoomTileId === 55){
+      this.currentRoomTileId = 226;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+      if(this.currentRoomTileId === 226){
+        this.currentRoomTileArray[0].classList.add("basementLanding");
+      }
+    }
     //down
-    if(this.key === 40){
+    else if(this.key === 40){
       this.currentRoomTileId += 8;
       if (this.currentRoomTileArray.length === 0) {
         document.getElementById('39').classList.remove('active');
@@ -88,6 +171,66 @@ constructor(private gameService: GameService) { }
         this.currentRoomTileArray = [];
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
         this.currentRoomTileArray[0].classList.add('active');
+      }
+      if(this.currentRoomTileId === 29){
+        this.currentRoomTileArray[0].classList.add('conservatory');
+      }
+      else if(this.currentRoomTileId === 46){
+        this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+      }
+      else if(this.currentRoomTileId === 54){
+        this.currentRoomTileArray[0].classList.add('gameRoom');
+      }
+      else if(this.currentRoomTileId === 62){
+        this.currentRoomTileArray[0].classList.add('kitchen');
+      }
+      else if(this.currentRoomTileId === 47){
+        this.currentRoomTileArray[0].classList.add('abandonedRoom');
+      }
+      else if(this.currentRoomTileId === 55){
+        this.currentRoomTileArray[0].classList.add('coalChute');
+      }
+      else if(this.currentRoomTileId === 56){
+        this.currentRoomTileArray[0].classList.add('gardens');
+      }
+      else if(this.currentRoomTileId === 97){
+        this.currentRoomTileArray[0].classList.add('balcony');
+      }
+      else if(this.currentRoomTileId === 103){
+        this.currentRoomTileArray[0].classList.add('charredRoom');
+      }
+      else if(this.currentRoomTileId === 111){
+        this.currentRoomTileArray[0].classList.add('gallery');
+      }
+      else if(this.currentRoomTileId === 119){
+        this.currentRoomTileArray[0].classList.add('storeroom');
+      }
+      else if(this.currentRoomTileId === 105){
+        this.currentRoomTileArray[0].classList.add('collapsedRoom');
+      }
+      else if(this.currentRoomTileId === 113){
+        this.currentRoomTileArray[0].classList.add('chapel');
+      }
+      else if(this.currentRoomTileId === 234){
+        this.currentRoomTileArray[0].classList.add('larder');
+      }
+      else if(this.currentRoomTileId === 235){
+        this.currentRoomTileArray[0].classList.add('crypt');
+      }
+      else if(this.currentRoomTileId === 242){
+        this.currentRoomTileArray[0].classList.add('researchLaboratory');
+      }
+      else if(this.currentRoomTileId === 250){
+        this.currentRoomTileArray[0].classList.add('vault');
+      }
+      else if(this.currentRoomTileId === 227){
+        this.currentRoomTileArray[0].classList.add('dustyHallway');
+      }
+      else if(this.currentRoomTileId === 219){
+        this.currentRoomTileArray[0].classList.add('wineCellar');
+      }
+      else if(this.currentRoomTileId === 218){
+        this.currentRoomTileArray[0].classList.add('catacombs');
       }
     }
 
@@ -104,10 +247,58 @@ constructor(private gameService: GameService) { }
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
         this.currentRoomTileArray[0].classList.add('active');
       }
+      if(this.currentRoomTileId === 32){
+        this.currentRoomTileArray[0].classList.add('library');
+      }
+      else if(this.currentRoomTileId === 48){
+        this.currentRoomTileArray[0].classList.add('patio');
+      }
+      else if(this.currentRoomTileId === 88){
+        this.currentRoomTileArray[0].classList.add('tower');
+      }
+      else if(this.currentRoomTileId === 89){
+        this.currentRoomTileArray[0].classList.add('creakyHallway');
+      }
+      else if(this.currentRoomTileId === 104){
+        this.currentRoomTileArray[0].classList.add('bedroom');
+      }
+      else if(this.currentRoomTileId === 105){
+        this.currentRoomTileArray[0].classList.add('collapsedRoom');
+      }
+      else if(this.currentRoomTileId === 106){
+        this.currentRoomTileArray[0].classList.add('masterBedroom');
+      }
+      //basement
+      else if(this.currentRoomTileId === 227){
+        this.currentRoomTileArray[0].classList.add('dustyHallway');
+      }
+      else if(this.currentRoomTileId === 228){
+        this.currentRoomTileArray[0].classList.add('chasm');
+      }
+      else if(this.currentRoomTileId === 211){
+        this.currentRoomTileArray[0].classList.add('furnaceRoom');
+      }
     }
 
+    //left movement to upstairs from grand staircase
+    if(this.key === 37 && this.currentRoomTileId === 37){
+      this.currentRoomTileId = 95;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('39').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+      if(this.currentRoomTileId === 95){
+        this.currentRoomTileArray[0].classList.add("upperLanding");
+      }
+    }
     //left
-    if(this.key === 37){
+    else if(this.key === 37){
       this.currentRoomTileId -= 1;
       if (this.currentRoomTileArray.length === 0) {
         document.getElementById('39').classList.remove('active');
@@ -118,6 +309,34 @@ constructor(private gameService: GameService) { }
         this.currentRoomTileArray = [];
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
         this.currentRoomTileArray[0].classList.add('active');
+      }
+      if(this.currentRoomTileId === 30){
+        this.currentRoomTileArray[0].classList.add('diningRoom');
+      }
+      else if(this.currentRoomTileId === 21){
+        this.currentRoomTileArray[0].classList.add('junkroom');
+      }
+      else if(this.currentRoomTileId === 87){
+        this.currentRoomTileArray[0].classList.add('operatingLaboratory');
+      }
+      else if(this.currentRoomTileId === 88){
+        this.currentRoomTileArray[0].classList.add('tower');
+      }
+      else if(this.currentRoomTileId === 103){
+        this.currentRoomTileArray[0].classList.add('charredRoom');
+      }
+      else if(this.currentRoomTileId === 104){
+        this.currentRoomTileArray[0].classList.add('bedroom');
+      }
+      //basement
+      else if(this.currentRoomTileId === 210){
+        this.currentRoomTileArray[0].classList.add('servantsQuarters');
+      }
+      else if(this.currentRoomTileId === 209){
+        this.currentRoomTileArray[0].classList.add('undergroundLake');
+      }
+      else if(this.currentRoomTileId === 225){
+        this.currentRoomTileArray[0].classList.add('pentagramChamber');
       }
     }
   }
