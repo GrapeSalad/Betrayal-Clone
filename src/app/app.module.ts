@@ -13,6 +13,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
 import { RulesComponent } from './rules/rules.component';
 import { CreditsComponent } from './credits/credits.component';
 import { AboutComponent } from './about/about.component';
+import { FriendSelectComponent } from './friend-select/friend-select.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -29,7 +30,8 @@ export const firebaseConfig = {
     GameBoardComponent,
     RulesComponent,
     CreditsComponent,
-    AboutComponent
+    AboutComponent,
+    FriendSelectComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,15 @@
 @import './bower_components/neat/core/_neat.scss';
-
 $custom-grid: (
   gutter:0,
 );
+@keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px black, 0 0 70px black, 0 0 80px black, 0 0 100px black, 0 0 150px black;
+  }
+  to {
+    text-shadow: 0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px darkred, 0 0 35px darkred, 0 0 40px darkred, 0 0 50px darkred, 0 0 75px darkred;
+  }
+}
 
 .container {
   @include grid-column(12, $custom-grid);
@@ -16,9 +23,41 @@ $custom-grid: (
   background-size: cover;
   background-repeat: no-repeat;
 
+  .logo {
+    img {
+      -webkit-filter: drop-shadow(6px 6px 30px #8fc470);
+      filter: drop-shadow(6px 6px 30px #8fc470);
+      height: 200px;
+    }
+  }
+
+  .start {
+    transform: rotateZ(-8deg);
+    a {
+      font-family: ghastly;
+      color: darkred;
+      font-size: 10em;
+      text-decoration: none;
+      letter-spacing: 20px;
+      animation: neon1 1.5s ease-in-out infinite alternate;
+    }
+  }
+
   .links {
-    background-color: red;
-    @include grid-column(12);
+    @include grid-column(12, $custom-grid);
+    display: flex;
+    justify-content: center;
+    -webkit-filter: drop-shadow(12px 12px 30px #8fc470);
+    filter: drop-shadow(12px 12px 30px #8fc470);
+    a {
+      padding: 30px;
+      text-decoration: none;
+      font-size: 5em;
+      font-family: straighttohell;
+      color: #c29540;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    }
   }
 
 }

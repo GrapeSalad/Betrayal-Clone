@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+// import { FriendSelectComponent } from './friend-select/friend-select.component';
 
 @Component({
   selector: 'app-character-select',

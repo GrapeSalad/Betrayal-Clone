@@ -6,6 +6,7 @@ import { GameBoardComponent } from './game-board/game-board.component';
 import { AboutComponent } from './about/about.component';
 import { RulesComponent } from './rules/rules.component';
 import { CreditsComponent } from './credits/credits.component';
+import { FriendSelectComponent } from './friend-select/friend-select.component';
 
 const appRoutes: Routes = [
   {
@@ -31,6 +32,10 @@ const appRoutes: Routes = [
   {
     path: 'game',
     component: GameBoardComponent
+  },
+  {
+    path: 'friend-select',
+    component: FriendSelectComponent
   }
 ];
 
