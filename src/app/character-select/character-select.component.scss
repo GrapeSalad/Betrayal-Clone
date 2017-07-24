@@ -119,3 +119,23 @@ $custom-grid: (
   outline: 1px solid #997855;
   border-radius: 2rem;
 }
+
+.selected-char {
+  background-color: rgba(53, 53, 53, 0.8);
+  border-radius: 20px;
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  z-index: 3;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h3 {
+    font-family: necrotype;
+    font-size: 3em;
+    transform: rotateZ(-45deg);
+    color: darkred;
+    text-shadow: 2px 2px 2px black;
+  }
+}
