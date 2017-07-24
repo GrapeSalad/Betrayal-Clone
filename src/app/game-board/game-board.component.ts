@@ -33,6 +33,10 @@ export class GameBoardComponent implements OnInit {
   currentRoomTileArray: any[] = [];
   currentRoomTileId;
   visibleRoomTileArray: any[] = [];
+  startScreen: boolean = true;
+  groundShow: boolean = true;
+  upstairsShow: boolean = false;
+  basementShow: boolean = false;
   // selectedAnchorId: any[] = [];
 
 constructor(private gameService: GameService) { }
@@ -63,14 +67,28 @@ constructor(private gameService: GameService) { }
     // }
 
     if(this.key === 13){
-      // this.currentRoomTileId.classList.add('dustyHallway');
-      console.log(this.visibleRoomTileArray + this.currentRoomTileId);
-
+      this.startScreen = false;
     }
-
+    //go downstairs from upper landing
+    if(this.currentRoomTileId === 95 && this.key === 13){
+      this.currentRoomTileId = 37;
+      this.groundShow = true;
+      this.upstairsShow = false;
+      if (this.currentRoomTileArray.length === 0) {
+        document.getElementById('95').classList.remove('active');
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      } else {
+        this.currentRoomTileArray[0].classList.remove('active');
+        this.currentRoomTileArray = [];
+        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+        this.currentRoomTileArray[0].classList.add('active');
+      }
+    }
     //up to foyer from basement stairs
     if(this.key === 38 && this.currentRoomTileId === 201){
       this.currentRoomTileId = 38;
+      this.groundShow = true;
       if (this.currentRoomTileArray.length === 0) {
         document.getElementById('201').classList.remove('active');
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
@@ -145,6 +163,8 @@ constructor(private gameService: GameService) { }
     //down to the basement from the coal coalChute
     if(this.currentRoomTileId === 55){
       this.currentRoomTileId = 226;
+      this.groundShow = false;
+      this.basementShow = true;
       if (this.currentRoomTileArray.length === 0) {
         document.getElementById('39').classList.remove('active');
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
@@ -282,9 +302,11 @@ constructor(private gameService: GameService) { }
 
     //left movement to upstairs from grand staircase
     if(this.key === 37 && this.currentRoomTileId === 37){
+      this.groundShow = false;
+      this.upstairsShow = true;
       this.currentRoomTileId = 95;
       if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
+        document.getElementById('37').classList.remove('active');
         this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
         this.currentRoomTileArray[0].classList.add('active');
       } else {

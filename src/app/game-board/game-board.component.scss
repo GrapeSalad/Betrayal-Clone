@@ -1,8 +1,10 @@
 .cell {
+  margin: 0;
+  padding: 0;
   display: inline-block;
   width: 98px;
   height: 98px;
-  border: 2px solid black;
+  // border: 2px solid black;
 }
 
 img {
@@ -11,7 +13,8 @@ img {
 }
 
 .active {
-  border: 1px solid green;
+  // border: 1px solid green;
+  box-shadow: 10px 5px 5px black;
 }
 
 .dustyHallway{

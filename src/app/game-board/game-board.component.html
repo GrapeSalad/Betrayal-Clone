@@ -1,212 +1,224 @@
-<h3>Ground Floor</h3>
-<div class="row">
-  <div class="cell" id="1"></div>
-  <div class="cell" id="2"></div>
-  <div class="cell" id="3"></div>
-  <div class="cell" id="4"></div>
-  <div class="cell" id="5"></div>
-  <div class="cell" id="6"></div>
-  <div class="cell" id="7"></div>
-  <div class="cell" id="8"></div>
+<div *ngIf="startScreen">
+  <p>To start the game press enter</p>
+  <p>Move around using the arrow keys</p>
 </div>
-<div class="row">
-  <div class="cell" id="9"></div>
-  <div class="cell" id="10"></div>
-  <div class="cell" id="11"></div>
-  <div class="cell" id="12"></div>
-  <div class="cell" id="13"></div>
-  <div class="cell" id="14"></div>
-  <div class="cell" id="15"></div>
-  <div class="cell" id="16"></div>
-</div>
-<div class="row">
-  <div class="cell" id="17"></div>
-  <div class="cell" id="18"></div>
-  <div class="cell" id="19"></div>
-  <div class="cell" id="20"></div>
-  <div class="cell" id="21"></div>
-  <div class="cell" id="22"></div>
-  <div class="cell" id="23"></div>
-  <div class="cell" id="24"></div>
-</div>
-<div class="row">
-  <div class="cell" id="25"></div>
-  <div class="cell" id="26"></div>
-  <div class="cell" id="27"></div>
-  <div class="cell" id="28"></div>
-  <div class="cell" id="29"></div>
-  <div class="cell" id="30"></div>
-  <div class="cell" id="31"></div>
-  <div class="cell" id="32"></div>
-</div>
-<div class="row">
-  <div class="cell" id="33"></div>
-  <div class="cell" id="34"></div>
-  <div class="cell" id="35"></div>
-  <div class="cell" id="36"></div>
-  <div class="cell" id="37"><img [src]="grandStaircase?.src"></div>
-  <div class="cell" id="38"><img [src]="foyer?.src"></div>
-  <div class="cell" id="39"><img [src]="entranceHall?.src"></div>
-  <div class="cell" id="40"></div>
-</div>
-<div class="row">
-  <div class="cell" id="41"></div>
-  <div class="cell" id="42"></div>
-  <div class="cell" id="43"></div>
-  <div class="cell" id="44"></div>
-  <div class="cell" id="45"></div>
-  <div class="cell" id="46"></div>
-  <div class="cell" id="47"></div>
-  <div class="cell" id="48"></div>
-</div>
-<div class="row">
-  <div class="cell" id="49"></div>
-  <div class="cell" id="50"></div>
-  <div class="cell" id="51"></div>
-  <div class="cell" id="52"></div>
-  <div class="cell" id="53"></div>
-  <div class="cell" id="54"></div>
-  <div class="cell" id="55"></div>
-  <div class="cell" id="56"></div>
-</div>
-<div class="row">
-  <div class="cell" id="57"></div>
-  <div class="cell" id="58"></div>
-  <div class="cell" id="59"></div>
-  <div class="cell" id="60"></div>
-  <div class="cell" id="61"></div>
-  <div class="cell" id="62"></div>
-  <div class="cell" id="63"></div>
-  <div class="cell" id="64"></div>
-</div>
-<h3>Upstairs</h3>
-<div class="row">
-  <div class="cell" id="77"></div>
-  <div class="cell" id="78"></div>
-  <div class="cell" id="79"></div>
-  <div class="cell" id="80"></div>
-  <div class="cell" id="81"></div>
-  <div class="cell" id="82"></div>
-  <div class="cell" id="83"></div>
-  <div class="cell" id="84"></div>
-</div><div class="row">
-  <div class="cell" id="85"></div>
-  <div class="cell" id="86"></div>
-  <div class="cell" id="87"></div>
-  <div class="cell" id="88"></div>
-  <div class="cell" id="89"></div>
-  <div class="cell" id="90"></div>
-  <div class="cell" id="91"></div>
-  <div class="cell" id="92"></div>
-</div><div class="row">
-  <div class="cell" id="93"></div>
-  <div class="cell" id="94"></div>
-  <div class="cell" id="95"></div><!--ul-->
-  <div class="cell" id="96"></div>
-  <div class="cell" id="97"></div>
-  <div class="cell" id="98"></div>
-  <div class="cell" id="99"></div>
-  <div class="cell" id="100"></div>
-</div><div class="row">
-  <div class="cell" id="101"></div>
-  <div class="cell" id="102"></div>
-  <div class="cell" id="103"></div>
-  <div class="cell" id="104"></div>
-  <div class="cell" id="105"></div>
-  <div class="cell" id="106"></div>
-  <div class="cell" id="107"></div>
-  <div class="cell" id="108"></div>
-</div><div class="row">
-  <div class="cell" id="109"></div>
-  <div class="cell" id="110"></div>
-  <div class="cell" id="111"></div>
-  <div class="cell" id="112"></div>
-  <div class="cell" id="113"></div>
-  <div class="cell" id="114"></div>
-  <div class="cell" id="115"></div>
-  <div class="cell" id="116"></div>
-</div>
-<div class="row">
-  <div class="cell" id="117"></div>
-  <div class="cell" id="118"></div>
-  <div class="cell" id="119"></div>
-  <div class="cell" id="120"></div>
-  <div class="cell" id="121"></div>
-  <div class="cell" id="122"></div>
-  <div class="cell" id="123"></div>
-  <div class="cell" id="124"></div>
-</div>
-<h3>Basement</h3>
 
-<div class="row">
-  <div class="cell" id="200"></div>
-  <div class="cell" id="201"></div>
-  <div class="cell" id="202"></div>
-  <div class="cell" id="203"></div>
-  <div class="cell" id="204"></div>
-  <div class="cell" id="205"></div>
-  <div class="cell" id="206"></div>
-  <div class="cell" id="207"></div>
-</div>
-<div class="row">
-  <div class="cell" id="208"></div>
-  <div class="cell" id="209"></div>
-  <div class="cell" id="210"></div>
-  <div class="cell" id="211"></div>
-  <div class="cell" id="212"></div>
-  <div class="cell" id="213"></div>
-  <div class="cell" id="214"></div>
-  <div class="cell" id="215"></div>
-</div>
-<div class="row">
-  <div class="cell" id="216"></div>
-  <div class="cell" id="217"></div>
-  <div class="cell" id="218"></div>
-  <div class="cell" id="219"></div>
-  <div class="cell" id="220"></div>
-  <div class="cell" id="221"></div>
-  <div class="cell" id="222"></div>
-  <div class="cell" id="223"></div>
-</div>
-<div class="row">
-  <div class="cell" id="224"></div>
-  <div class="cell" id="225"></div>
-  <div class="cell" id="226"></div><!--BL-->
-  <div class="cell" id="227"></div>
-  <div class="cell" id="228"></div>
-  <div class="cell" id="229"></div>
-  <div class="cell" id="230"></div>
-  <div class="cell" id="231"></div>
-</div>
-<div class="row">
-  <div class="cell" id="232"></div>
-  <div class="cell" id="233"></div>
-  <div class="cell" id="234"></div>
-  <div class="cell" id="235"></div>
-  <div class="cell" id="236"></div>
-  <div class="cell" id="237"></div>
-  <div class="cell" id="238"></div>
-  <div class="cell" id="239"></div>
-</div>
-<div class="row">
-  <div class="cell" id="240"></div>
-  <div class="cell" id="241"></div>
-  <div class="cell" id="242"></div>
-  <div class="cell" id="243"></div>
-  <div class="cell" id="244"></div>
-  <div class="cell" id="245"></div>
-  <div class="cell" id="246"></div>
-  <div class="cell" id="247"></div>
-</div>
-<div class="row">
-  <div class="cell" id="248"></div>
-  <div class="cell" id="249"></div>
-  <div class="cell" id="250"></div>
-  <div class="cell" id="251"></div>
-  <div class="cell" id="252"></div>
-  <div class="cell" id="253"></div>
-  <div class="cell" id="254"></div>
-  <div class="cell" id="255"></div>
+<div *ngIf="!startScreen">
+  <div *ngIf="groundShow">
+    <h3>Ground Floor</h3>
+    <div class="row">
+      <div class="cell" id="1"></div>
+      <div class="cell" id="2"></div>
+      <div class="cell" id="3"></div>
+      <div class="cell" id="4"></div>
+      <div class="cell" id="5"></div>
+      <div class="cell" id="6"></div>
+      <div class="cell" id="7"></div>
+      <div class="cell" id="8"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="9"></div>
+      <div class="cell" id="10"></div>
+      <div class="cell" id="11"></div>
+      <div class="cell" id="12"></div>
+      <div class="cell" id="13"></div>
+      <div class="cell" id="14"></div>
+      <div class="cell" id="15"></div>
+      <div class="cell" id="16"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="17"></div>
+      <div class="cell" id="18"></div>
+      <div class="cell" id="19"></div>
+      <div class="cell" id="20"></div>
+      <div class="cell" id="21"></div>
+      <div class="cell" id="22"></div>
+      <div class="cell" id="23"></div>
+      <div class="cell" id="24"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="25"></div>
+      <div class="cell" id="26"></div>
+      <div class="cell" id="27"></div>
+      <div class="cell" id="28"></div>
+      <div class="cell" id="29"></div>
+      <div class="cell" id="30"></div>
+      <div class="cell" id="31"></div>
+      <div class="cell" id="32"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="33"></div>
+      <div class="cell" id="34"></div>
+      <div class="cell" id="35"></div>
+      <div class="cell" id="36"></div>
+      <div class="cell" id="37"><img [src]="grandStaircase?.src"></div>
+      <div class="cell" id="38"><img [src]="foyer?.src"></div>
+      <div class="cell" id="39"><img [src]="entranceHall?.src"></div>
+      <div class="cell" id="40"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="41"></div>
+      <div class="cell" id="42"></div>
+      <div class="cell" id="43"></div>
+      <div class="cell" id="44"></div>
+      <div class="cell" id="45"></div>
+      <div class="cell" id="46"></div>
+      <div class="cell" id="47"></div>
+      <div class="cell" id="48"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="49"></div>
+      <div class="cell" id="50"></div>
+      <div class="cell" id="51"></div>
+      <div class="cell" id="52"></div>
+      <div class="cell" id="53"></div>
+      <div class="cell" id="54"></div>
+      <div class="cell" id="55"></div>
+      <div class="cell" id="56"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="57"></div>
+      <div class="cell" id="58"></div>
+      <div class="cell" id="59"></div>
+      <div class="cell" id="60"></div>
+      <div class="cell" id="61"></div>
+      <div class="cell" id="62"></div>
+      <div class="cell" id="63"></div>
+      <div class="cell" id="64"></div>
+    </div>
+  </div>
+  <div *ngIf="upstairsShow">
+    <h3>Upstairs</h3>
+    <div class="row">
+      <div class="cell" id="77"></div>
+      <div class="cell" id="78"></div>
+      <div class="cell" id="79"></div>
+      <div class="cell" id="80"></div>
+      <div class="cell" id="81"></div>
+      <div class="cell" id="82"></div>
+      <div class="cell" id="83"></div>
+      <div class="cell" id="84"></div>
+    </div><div class="row">
+      <div class="cell" id="85"></div>
+      <div class="cell" id="86"></div>
+      <div class="cell" id="87"></div>
+      <div class="cell" id="88"></div>
+      <div class="cell" id="89"></div>
+      <div class="cell" id="90"></div>
+      <div class="cell" id="91"></div>
+      <div class="cell" id="92"></div>
+    </div><div class="row">
+      <div class="cell" id="93"></div>
+      <div class="cell" id="94"></div>
+      <div class="cell" id="95"></div><!--ul-->
+      <div class="cell" id="96"></div>
+      <div class="cell" id="97"></div>
+      <div class="cell" id="98"></div>
+      <div class="cell" id="99"></div>
+      <div class="cell" id="100"></div>
+    </div><div class="row">
+      <div class="cell" id="101"></div>
+      <div class="cell" id="102"></div>
+      <div class="cell" id="103"></div>
+      <div class="cell" id="104"></div>
+      <div class="cell" id="105"></div>
+      <div class="cell" id="106"></div>
+      <div class="cell" id="107"></div>
+      <div class="cell" id="108"></div>
+    </div><div class="row">
+      <div class="cell" id="109"></div>
+      <div class="cell" id="110"></div>
+      <div class="cell" id="111"></div>
+      <div class="cell" id="112"></div>
+      <div class="cell" id="113"></div>
+      <div class="cell" id="114"></div>
+      <div class="cell" id="115"></div>
+      <div class="cell" id="116"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="117"></div>
+      <div class="cell" id="118"></div>
+      <div class="cell" id="119"></div>
+      <div class="cell" id="120"></div>
+      <div class="cell" id="121"></div>
+      <div class="cell" id="122"></div>
+      <div class="cell" id="123"></div>
+      <div class="cell" id="124"></div>
+    </div>
+  </div>
+  <div *ngIf="basementShow">
+    <h3>Basement</h3>
+    <div class="row">
+      <div class="cell" id="200"></div>
+      <div class="cell" id="201"></div>
+      <div class="cell" id="202"></div>
+      <div class="cell" id="203"></div>
+      <div class="cell" id="204"></div>
+      <div class="cell" id="205"></div>
+      <div class="cell" id="206"></div>
+      <div class="cell" id="207"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="208"></div>
+      <div class="cell" id="209"></div>
+      <div class="cell" id="210"></div>
+      <div class="cell" id="211"></div>
+      <div class="cell" id="212"></div>
+      <div class="cell" id="213"></div>
+      <div class="cell" id="214"></div>
+      <div class="cell" id="215"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="216"></div>
+      <div class="cell" id="217"></div>
+      <div class="cell" id="218"></div>
+      <div class="cell" id="219"></div>
+      <div class="cell" id="220"></div>
+      <div class="cell" id="221"></div>
+      <div class="cell" id="222"></div>
+      <div class="cell" id="223"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="224"></div>
+      <div class="cell" id="225"></div>
+      <div class="cell" id="226"></div><!--BL-->
+      <div class="cell" id="227"></div>
+      <div class="cell" id="228"></div>
+      <div class="cell" id="229"></div>
+      <div class="cell" id="230"></div>
+      <div class="cell" id="231"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="232"></div>
+      <div class="cell" id="233"></div>
+      <div class="cell" id="234"></div>
+      <div class="cell" id="235"></div>
+      <div class="cell" id="236"></div>
+      <div class="cell" id="237"></div>
+      <div class="cell" id="238"></div>
+      <div class="cell" id="239"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="240"></div>
+      <div class="cell" id="241"></div>
+      <div class="cell" id="242"></div>
+      <div class="cell" id="243"></div>
+      <div class="cell" id="244"></div>
+      <div class="cell" id="245"></div>
+      <div class="cell" id="246"></div>
+      <div class="cell" id="247"></div>
+    </div>
+    <div class="row">
+      <div class="cell" id="248"></div>
+      <div class="cell" id="249"></div>
+      <div class="cell" id="250"></div>
+      <div class="cell" id="251"></div>
+      <div class="cell" id="252"></div>
+      <div class="cell" id="253"></div>
+      <div class="cell" id="254"></div>
+      <div class="cell" id="255"></div>
+    </div>
+  </div>
 </div>
 <!-- <div (keypress)="handleKeyboardEvent($event)" tabindex="1">
 
