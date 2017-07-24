@@ -87,8 +87,12 @@ $breakpoint-medium: "only screen and (max-width: 1300px)";
         font-family: necrotype;
         font-size: 1.4em;
       }
-
-
+      a {
+        color: darkred;
+        text-decoration: none;
+        font-family: spoopy;
+        font-size: 2em;
+      }
     } //end character-bio
 
 
