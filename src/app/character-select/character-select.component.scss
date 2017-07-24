@@ -2,14 +2,6 @@
 $custom-grid: (
   gutter:0,
 );
-@keyframes neon1 {
-  from {
-    text-shadow: 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 25px #353535, 0 0 30px #353535, 0 0 35px #353535, 0 0 40px #353535, 0 0 45px #353535;
-  }
-  to {
-    text-shadow: 0 0 10px #000, 0 0 15px #000, 0 0 20px #000, 0 0 25px black, 0 0 30px black, 0 0 35px black, 0 0 40px black, 0 0 45px black;
-  }
-}
 
 .char-container {
   overflow-x: hidden;
@@ -101,9 +93,10 @@ $custom-grid: (
         text-decoration: none;
         font-size: 4em;
         font-weight: bolder;
-        text-shadow: 2px 2px 2px black;
+        text-shadow: 0px 2px 2px black;
         &:hover {
-          animation: neon1 1.5s ease-in-out infinite alternate;
+          text-shadow: 0px 7px 7px black;
+          transition: 3s;
         }
       }
     }
