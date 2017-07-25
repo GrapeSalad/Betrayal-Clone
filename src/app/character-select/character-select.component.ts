@@ -42,7 +42,7 @@ export class CharacterSelectComponent implements OnInit {
           new Might(dataLastEmittedFromObserver[i].might[0].initialIndex, dataLastEmittedFromObserver[i].might[0].array),
           new Knowledge(dataLastEmittedFromObserver[i].knowledge[0].initialIndex, dataLastEmittedFromObserver[i].knowledge[0].array),
           new Sanity(dataLastEmittedFromObserver[i].sanity[0].initialIndex, dataLastEmittedFromObserver[i].sanity[0].array)));
-          // console.log(dataLastEmittedFromObserver[i].$key);
+          // console.log(dataLastEmittedFromObserver[i]);
       }
     });
   }

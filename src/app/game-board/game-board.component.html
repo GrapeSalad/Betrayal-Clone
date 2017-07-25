@@ -1,18 +1,31 @@
-<div *ngIf="startScreen">
-  <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
-  <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
-  <p>To start the game press enter</p>
-  <p>Move around using the arrow keys</p>
+<div class="board-container">
+  <div *ngIf="startScreen" class="start-screen">
+    <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
+    <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
+    <p>To start the game press enter</p>
+    <p>Move around using the arrow keys</p>
+  </div>
+<!--
+  <p>{{chosenEvent?.description}}</p>
+  <p>{{selectedCharacter?.name}}</p> -->
+  <ul *ngFor="let stat of selectedCharacter?.sanity?.statArray">
+    <li>{{stat}}</li>
+  </ul>
+
+
+<div class="top-row">
+  <div class="logo">
+    logo
+  </div>
+  <div class="haunt-counter">
+    haunt counter
+  </div>
 </div>
 
-<p>{{chosenEvent?.description}}</p>
-<p>{{selectedCharacter?.name}}</p>
-<ul *ngFor="let stat of selectedCharacter?.sanity?.statArray">
-  <li>{{stat}}</li>
-</ul>
-
-<div *ngIf="!startScreen">
-  <!-- <div *ngIf="groundShow"> -->
+<div class="middle-row">
+  <div class="emptydiv"></div>
+  <div *ngIf="!startScreen" class="board-grid">
+    <!-- <div *ngIf="groundShow"> -->
     <h3>Ground Floor</h3>
     <div class="row">
       <div class="cell" id="1"></div>
@@ -94,8 +107,25 @@
       <div class="cell" id="63"></div>
       <div class="cell" id="64"></div>
     </div>
-  <!-- </div> -->
-  <!-- <div *ngIf="upstairsShow"> -->
+  </div>   <!-- end board grid div -->
+  <div class="omenevent-cards">
+
+  </div>
+
+</div><!-- end middle rowdiv -->
+
+<div class="last-row">
+  <div class="character-details">
+
+  </div>
+  <div class="play-instructions">
+
+  </div>
+</div>
+
+
+
+    <div *ngIf="upstairsShow">
     <h3>Upstairs</h3>
     <div class="row">
       <div class="cell" id="77"></div>
@@ -153,8 +183,8 @@
       <div class="cell" id="123"></div>
       <div class="cell" id="124"></div>
     </div>
-  <!-- </div> -->
-  <!-- <div *ngIf="basementShow"> -->
+    </div>
+    <div *ngIf="basementShow">
     <h3>Basement</h3>
     <div class="row">
       <div class="cell" id="200"></div>
@@ -226,8 +256,13 @@
       <div class="cell" id="254"></div>
       <div class="cell" id="255"></div>
     </div>
-  <!-- </div> -->
-</div>
+    <!-- </div> -->
+  </div>   <!-- end basement div -->
+</div>  <!-- end board container div -->
+
+
+
+
 <!-- <div (keypress)="handleKeyboardEvent($event)" tabindex="1">
 
 </div> -->
