@@ -14,12 +14,12 @@
   display: flex;
   justify-content: space-between;
   .logo {
-    width: 300px;
+    width: 15%;
     border:2px solid #511E74;
     height: 10vh;
   }
   .haunt-counter {
-    width: 400px;
+    width: 15%;
     border: 2px solid blue;
     height: 10vh;
   }
@@ -57,7 +57,21 @@
 }
 
 // LAST ROW //
-
+.last-row {
+  border: 1px solid hotpink;
+  height: 20vh;
+  display: flex;
+  .character-details {
+    height: 20vh;
+    width: 20%;
+    border: 2px dotted purple;
+  }
+  .play-instructions {
+    height: 20vh;
+    border: 2px dotted green;
+    width: 80%;
+  }
+}
 
 
 
