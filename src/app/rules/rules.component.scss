@@ -1,0 +1,72 @@
+.rules-container {
+  background-image: url('/assets/img/charbg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Noto Sans;
+  .content-container {
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    h1 {
+      font-family: straighttohell;
+      font-size: 6em;
+      color: #c29540;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+      text-shadow: 3px 3px 10px black;
+      align-self: center;
+      margin: 0;
+    }
+    h4 {
+      font-family: necrotype;
+      font-size: 3em;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    h5 {
+      font-family: spoopy;
+      font-size: 3em;
+      color: darkred;
+      margin-top: 0;
+      margin-bottom: 10px;
+      margin-left: 40px;
+    }
+
+    p {
+      margin-left: 40px;
+    }
+    ul {
+      margin-left: 40px;
+    }
+    b {
+      font-family: necrotype;
+      font-size: 1.2em;
+    }
+    .home {
+      transform: rotateZ(-8deg);
+      align-self: center;
+      padding-bottom: 20px;
+      a {
+        font-family: spoopy;
+        color: darkred;
+        font-size: 7em;
+        text-decoration: none;
+        letter-spacing: 7px;
+        text-shadow: 0px 2px 2px black;
+        &:hover {
+          text-shadow: 0px 10px 10px black;
+          transition: 3s;
+        }
+      }
+    }
+  }
+}

@@ -14,6 +14,11 @@ $breakpoint-medium: "only screen and (max-width: 1300px)";
   background-repeat: no-repeat;
   background-color: #494240;
   background-blend-mode: screen;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
 
   .header {
     -webkit-filter: drop-shadow(0px 0px 30px black);
@@ -30,11 +35,13 @@ $breakpoint-medium: "only screen and (max-width: 1300px)";
   }
 }
 
-.first-row, .second-row, .third-row {
+.first-row {
   margin-bottom: 60px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  width: 80vw;
+  align-self: center;
   @media #{$breakpoint-medium} {
     width: 70vw;
     margin: auto;

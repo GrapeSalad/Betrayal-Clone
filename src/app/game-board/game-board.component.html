@@ -1,9 +1,11 @@
-<div *ngIf="startScreen">
+<div *ngIf="startScreen" class="start-screen">
   <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
   <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
   <p>To start the game press enter</p>
   <p>Move around using the arrow keys</p>
 </div>
+<div class="board-container">
+
 
 <p>{{chosenEvent?.event}}</p>
 <p>{{chosenEvent?.flavor}}</p>
@@ -34,8 +36,20 @@
   </ul>
 </div>
 
-<div *ngIf="!startScreen">
-  <!-- <div *ngIf="groundShow"> -->
+
+<div class="top-row">
+  <div class="logo">
+    <img src="/assets/img/logo.png" alt="logo">
+  </div>
+  <div class="haunt-counter">
+    haunt counter
+  </div>
+</div>
+
+<div class="middle-row">
+  <div class="emptydiv"></div>
+  <div *ngIf="!startScreen" class="board-grid">
+    <!-- <div *ngIf="groundShow"> -->
     <h3>Ground Floor</h3>
     <div class="row">
       <div class="cell hidden" id="1"></div>
@@ -117,8 +131,8 @@
       <div class="cell" id="63"></div>
       <div class="cell" id="64"></div>
     </div>
-  <!-- </div> -->
-  <!-- <div *ngIf="upstairsShow"> -->
+
+    <div *ngIf="upstairsShow">
     <h3>Upstairs</h3>
     <div class="row">
       <div class="cell hidden" id="77"></div>
@@ -176,8 +190,8 @@
       <div class="cell hidden" id="123"></div>
       <div class="cell hidden" id="124"></div>
     </div>
-  <!-- </div> -->
-  <!-- <div *ngIf="basementShow"> -->
+    </div>
+    <div *ngIf="basementShow">
     <h3>Basement</h3>
     <div class="row">
       <div class="cell hidden" id="200"></div>
@@ -249,8 +263,48 @@
       <div class="cell hidden" id="254"></div>
       <div class="cell hidden" id="255"></div>
     </div>
-  <!-- </div> -->
+    <!-- </div> -->
+  </div>   <!-- end basement div -->
+  </div>   <!-- end board grid div -->
+  <div class="omenevent-cards">
+    <div class="omen-cards">
+      <h3>Omen</h3>
+      <img src="/assets/img/crow.png" alt="crow">
+    </div>
+    <div class="event-cards">
+      <h3>Event</h3>
+      <img src="/assets/img/spiral.png" alt="spiral">
+    </div>
+  </div>
+
+</div><!-- end middle rowdiv -->
+
+<div class="last-row">
+  <div class="character-details">
+    <div class="portrait">
+      <h5>Heather Granville</h5>
+      <div class="character-image">
+        <img src="/assets/img/heathergranville.png" alt="heather">
+      </div>
+    </div>
+    <div class="stats">
+      <h5><b>Might</b> 5</h5>
+      <h5><b>Speed</b> 4</h5>
+      <h5><b>Knowledge</b> 2</h5>
+      <h5><b>Sanity</b> 3</h5>
+      <h5><b>Hobbies</b> Television, Shopping, Frogs, Doctoring</h5>
+    </div>
+  </div>
+  <div class="play-instructions">
+    instructions for each play
+  </div>
 </div>
+
+</div>  <!-- end board container div -->
+
+
+
+
 <!-- <div (keypress)="handleKeyboardEvent($event)" tabindex="1">
 
 </div> -->
