@@ -252,15 +252,15 @@
   },{
     "event": "Whoops!",
     "flavor": "You feel a body under your foot. Before you can leap away from it, you're knocked over. A giggling voice runs away from you.",
-    "description": "Turn over your item cards (not your omen cards) and shuffle them. The player to your right randomly discards one of them. Then turn your item cards face up again."
+    "description": "Lose 1 sanity."
   },{
     "event": "Smoke",
     "flavor": "Smoke billows around you. You cough, wiping away tears.",
-    "description": "Put the Smoke token in this room. The Smoke blocks line of sight from adjacent rooms. An explorer rolls 2 fewer dice (minimum of 1 die) on all trait rolls while in this room."
+    "description": "Put the Smoke token in this room. The Smoke blocks line of sight from adjacent rooms. Lose 1 speed."
   },{
     "event": "Skeletons",
     "flavor": "Mother and child, still embracing.",
-    "description": "Put the Skeletons token in this room. Take 1 die of mental damage. Once during an explorer's turn, that explorer can attempt a Sanity roll to search the Skeletons: 5+ Draw an item card. Remove the Skeletons token. 0-4 You dig around, but find nothing. Take 1 die of mental damage. Each result affects only the explorer making that roll."
+    "description": "Put the Skeletons token in this room. Take 1 die of mental damage. Once during an explorer's turn, that explorer can attempt a Sanity roll to search the Skeletons: 5+ Gain 1 Knowledge. Remove the Skeletons token. 0-4 You dig around, but find nothing. Take 1 die of mental damage. Each result affects only the explorer making that roll."
   },{
     "event": "Spider",
     "flavor": "A spider the size of a fist lands on your shoulder...and crawls into your hair.",
@@ -276,7 +276,7 @@
   },{
     "event": "Something Hidden",
     "flavor": "There's something odd about this room, but what? It's tickling the back of your mind.",
-    "description": "Attempt a Knowledge roll: 4+ A section of wall slides away, revealing an alcove. Draw an item card. 0-3 You can't figure it out, and that makes you a bit crazy. Lose 1 Sanity."
+    "description": "Attempt a Knowledge roll: 4+ A section of wall slides away, revealing an alcove. Gain 1 Knowledge. 0-3 You can't figure it out, and that makes you a bit crazy. Lose 1 Sanity."
   },{
     "event": "Burning Man",
     "flavor": "A man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.",
@@ -284,7 +284,7 @@
   },{
     "event": "Locked Safe",
     "flavor": "Behind a portrait is a wall safe. It is trapped, of course.",
-    "description": "Put the safe token in this room. Once during an explorer's turn, that explorer can attempt a Knowledge roll to open the Safe. 5+ Draw 2 item cards and remove the Safe token. 2-4 Take 1 die of physical damage. The Safe won't open. 0-1 Take 2 dice of physical damage. The Safe won't open."
+    "description": "Put the safe token in this room. Once during an explorer's turn, that explorer can attempt a Knowledge roll to open the Safe. 5+ Gain 1 Knowledge and remove the Safe token. 2-4 Take 1 die of physical damage. The Safe won't open. 0-1 Take 2 dice of physical damage. The Safe won't open."
   },{
     "event": "Disquieting Sounds",
     "flavor": "A baby's cry, lost and abandoned. A scream. The crack of breaking glass. Then silence.",
@@ -292,19 +292,19 @@
   },{
     "event": "Image in the Mirror",
     "flavor": "There is an old mirror in this room.",
-    "description": "Your frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror: THIS WILL HELP Then it hands you an item through the mirror. Draw an item card."
+    "description": "Your frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror: THIS WILL HELP Then it whispers something to you through the mirror. Gain 1 Knowledge."
   },{
     "event": "Groundskeeper",
     "flavor": "You turn to see a man in groundskeeper clothing. He raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.",
-    "description": "You must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.) 4+ You find something in the mud. Draw an item card. 0-3 The groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might."
+    "description": "You must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.) 4+ You find something in the mud. Gain 1 Knowledge. 0-3 The groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might."
   },{
     "event": "Mist from the Walls",
     "flavor": "Mists pour out from the walls. There are faces in the mist, human and...inhuman.",
-    "description": "Each explorer in the basement must attempt a Sanity roll: 4+ The faces are tricks of light and shadow. All is well. 1-3 Take 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol). 0 Take 1 die of mental damage (and 2 additional dice of damage if that explorer is in a room with an event symbol)."
+    "description": "Each explorer in the basement must attempt a Sanity roll: 4+ The faces are tricks of light and shadow. All is well. 1-3 Take 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol). 0 Take 1 die of mental damage."
   },{
     "event": "The Voice",
     "flavor": "'I'm under the floor, buried under the floor...' The voice whispers once, then is gone.",
-    "description": "You must attempt a Knowledge roll: 4+ You find something under the floor. Draw an item card. 0-3 You dig and search for the voice, but to no avail."
+    "description": "You must attempt a Knowledge roll: 4+ You find something under the floor. Gain 1 Knowledge. 0-3 You dig and search for the voice, but to no avail."
   },{
     "event": "Phone Call",
     "flavor": "A phone rings in the room. You feel compelled to answer it.",
@@ -319,8 +319,8 @@
     "description": "You must attempt a Sanity roll: 5+ Troubling odors, nothing more. Gain 1 Sanity. 2-4 Lose 1 Might. 1 Lose 1 Might and 1 Speed. 0 You double over with nausea. Lose 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity."
   },{
     "event": "The Walls",
-    "flavor": "This room is warm. Flesh-like walls pulse with a steady heartbeat. Your own heart beats with the rhythm of the house. You are drawn into the walls...and emerge somewhere else.",
-    "description": "You must draw the next room tile and put it in the house. Put your explorer in that room."
+    "flavor": "This room is warm. Flesh-like walls pulse with a steady heartbeat. Your own heart beats with the rhythm of the house. You are drawn into the walls...",
+    "description": "You must attempt a Sanity roll: 4+ You blink, and the walls have returned to normal. Gain 1 Sanity. 2-3 The vision disturbs you. Lose 1 Sanity. 0-1 You are stuck in the wall. Lose 1 Sanity and 1 Might as you struggle to break free."
   },{
     "event": "Hanged Men",
     "flavor": "A breeze chills the room. Before you, three men hand from frayed ropes. They stare at you with cold, dead eyes. The trio swing silently, then fade into dist that falls to the ground. You start to choke.",
@@ -336,7 +336,7 @@
   },{
     "event": "Closet Door",
     "flavor": "The closet door is open...just a crack. There must be somethig inside.",
-    "description": "Put the Closet token in this room. Once during an explorer's turn, that explorer can roll 2 dice to open the Closet. 4 Draw an item card. 2-3 Draw an event card. 0-1 Draw an event card and remove the Closet token."
+    "description": "Put the Closet token in this room. Once during an explorer's turn, that explorer can roll 2 dice to open the Closet. 4 Gain 1 Knowledge. 2-3 Draw an event card. 0-1 Draw an event card and remove the Closet token."
   },{
     "event": "Bloody Vision",
     "flavor": "The walls of this room are damp with blood. The blood drips from the ceiling, down the walls, over the furniture, and onto your shoes. In a blink, it is gone.",

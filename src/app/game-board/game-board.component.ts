@@ -47,9 +47,35 @@ export class GameBoardComponent implements OnInit {
   selectedCharacter;
   selectedFriend;
   cardId;
-  currentIndex;
+  currentSanityIndex;
+  currentKnowledgeIndex;
+  currentMightIndex;
+  currentSpeedIndex;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
+
+  eventCardResolution(){
+    this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
+      this.chosenEvent = dataLastEmittedFromObserver;
+      this.cardId = dataLastEmittedFromObserver.$key;
+      var statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
+      console.log("stat affected array " + statAffectedArray);
+      var stat = statAffectedArray[0];
+      var amount = statAffectedArray[1];
+      if(stat === "sanity"){
+        this.currentSanityIndex += Number(amount);
+      }
+      else if(stat === "speed"){
+        this.currentSpeedIndex += Number(amount);
+      }
+      else if(stat === "might"){
+        this.currentMightIndex += Number(amount);
+      }
+      else if(stat === "knowledge"){
+        this.currentKnowledgeIndex += Number(amount);
+      }
+    })
+  }
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
@@ -57,7 +83,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     //enter Key to start game
     if(this.key === 13){
       this.startScreen = false;
-      document.getElementsByClassName(this.currentIndex)[0].classList.add('highlighted');
+      document.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
     }
     //go downstairs from upper landing
     if(this.currentRoomTileId === 95 && this.key === 13){
@@ -112,14 +138,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.currentRoomTileId === 23){
         if(!this.currentRoomTileArray[0].classList.contains('graveyard')){
           this.currentRoomTileArray[0].classList.add('graveyard');
-          this.gameService.getEventCardById(15).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-            this.cardId = dataLastEmittedFromObserver.$key;
-            this.selectedCharacter.sanity.initialIndex += Number(this.gameService.getEventCardEffects(this.cardId)[1]);
-
-            console.log(this.chosenEvent);
-            console.log(this.selectedCharacter.sanity.initialIndex);
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 22){
@@ -581,7 +600,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.characterService.getSelectedCharacters().subscribe(dataLastEmittedFromObserver =>{
       this.selectedCharacter = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2];
       this.selectedFriend = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-1];
-      this.currentIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].sanity.initialIndex;
+      this.currentSanityIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].sanity.initialIndex;
+      this.currentKnowledgeIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].knowledge.initialIndex;
+      this.currentSpeedIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].speed.initialIndex;
+      this.currentMightIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].might.initialIndex;
     })
 
 

@@ -44,13 +44,26 @@ export class GameService {
     var dieRoll: number = 0;
     for(var i=0; i<num; i++){
       dieRoll += this.getRandomNumber(0,2);
+      console.log("die roll: " + dieRoll);
     }
     return dieRoll;
   }
 
-  //NOTE: Event cards that SUCK: Whoops(1), Smoke(2), The Walls(18)
-  getEventCardEffects(cardId: string){
+  getEventCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
     var damageDone: any[] = [];
+    var chosenTrait: number;
+    if(speed != null){
+      chosenTrait = speed;
+    }
+    else if(might != null){
+      chosenTrait = might;
+    }
+    else if(sanity != null){
+      chosenTrait = sanity;
+    }
+    else{
+      chosenTrait = knowledge;
+    }
     if(Number(cardId) === 15){
       var roll: number = this.diceToRoll(2);
       if(roll === 4){
@@ -65,8 +78,18 @@ export class GameService {
       console.log(damageDone);
       return damageDone;
     }
+    else if(Number(cardId) === 1){
+      damageDone.push("sanity", -1);
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 2){
+      damageDone.push("speed", -1);
+      console.log(damageDone);
+      return damageDone;
+    }
     else if(Number(cardId) === 0){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSpeed);
+      var roll: number = this.diceToRoll(speed);
       if(roll >= 4){
         damageDone.push("speed", 1);
       }
@@ -82,80 +105,77 @@ export class GameService {
     }
     else if(Number(cardId) === 3){
       var roll: number = this.diceToRoll(1);
-      //NOTE: should be mental damage
+      //should be mental damage
       damageDone.push("sanity", -roll);
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
-      if(roll >= 5){
-        //draw an item card
-        // damageDone.push("speed", 1);
+      var roll1: number = this.diceToRoll(sanity);
+      if(roll1 >= 5){
+        damageDone.push("knowledge", 1);
       }
       else{
-        var roll: number = this.diceToRoll(1);
-        //NOTE: should be mental damage
-        damageDone.push("knowledge", -roll);
+        var roll2: number = this.diceToRoll(1);
+        //should be mental damage
+        damageDone.push("knowledge", -roll2);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 4){
       //add choice for speed or sanity
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSpeed);
+      var roll: number = this.diceToRoll(speed);
       if(roll >= 4){
         damageDone.push("speed", 1);
       } else if(roll >= 1){
-        var roll: number = this.diceToRoll(1);
+        var roll1: number = this.diceToRoll(1);
         //should be physical damage
-        damageDone.push("speed", -roll));
+        damageDone.push("speed", -roll1);
       }
       else{
-        var roll: number = this.diceToRoll(2);
+        var roll2: number = this.diceToRoll(2);
         //should be physical damage
-        damageDone.push("speed", -roll);
+        damageDone.push("speed", -roll2);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 5){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSpeed);
+      var roll: number = this.diceToRoll(speed);
       if(roll >= 5){
         damageDone.push("speed", 1);
       } else if(roll >= 2){
-        var roll: number = this.diceToRoll(1);
+        var roll1: number = this.diceToRoll(1);
         //should be mental damage
-        damageDone.push("knowledge", -roll));
+        damageDone.push("knowledge", -roll1);
       }
       else{
-        var roll: number = this.diceToRoll(1);
+        var roll3: number = this.diceToRoll(1);
         //should be physical damage
-        damageDone.push("speed", -roll);
-        var roll: number = this.diceToRoll(1);
+        damageDone.push("speed", -roll3);
+        var roll2: number = this.diceToRoll(1);
         //should be mental damage
-        damageDone.push("sanity", -roll);
+        damageDone.push("sanity", -roll2);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 6){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
-      if(roll >= 4){
-        //you resist the sound
-      } else if(roll >= 1){
-        var roll: number = this.diceToRoll(1);
+      var roll: number = this.diceToRoll(sanity);
+      if(roll >= 1 && roll <=3){
+        var roll1: number = this.diceToRoll(1);
         //should be mental damage
-        damageDone.push("knowledge", -roll));
+        damageDone.push("knowledge", -roll1);
       }
       else{
-        var roll: number = this.diceToRoll(2);
+        var roll1: number = this.diceToRoll(2);
         //should be mental damage
-        damageDone.push("sanity", -roll);
+        damageDone.push("sanity", -roll1);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 7){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
+      var roll: number = this.diceToRoll(knowledge);
       if(roll >= 4){
-        //draw an item card
+        damageDone.push("knowledge", 1);
       }
       else{
         damageDone.push("sanity", -1);
@@ -164,123 +184,113 @@ export class GameService {
       return damageDone;
     }
     else if(Number(cardId) === 8){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
+      var roll: number = this.diceToRoll(sanity);
       if(roll >= 4){
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
+        console.log("move to entrance hall");
         //move to entrance hall
       }
       else{
-        var roll: number = this.diceToRoll(1);
+        var roll1: number = this.diceToRoll(1);
         //should be physical damage
-        damageDone.push("might", -roll);
+        damageDone.push("might", -roll1);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 9){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
+      var roll: number = this.diceToRoll(knowledge);
       if(roll >= 5){
-        //draw 2 item cards
+        damageDone.push("knowledge", 1);
+        damageDone.push("sanity", 1);
       } else if(roll >= 2){
-        var roll: number = this.diceToRoll(1);
+        var roll1: number = this.diceToRoll(1);
         //should be physical damage
-        damageDone.push("speed", -roll);
+        damageDone.push("speed", -roll1);
       }
       else{
-        var roll: number = this.diceToRoll(2);
+        var roll2: number = this.diceToRoll(2);
         //should be physical damage
-        damageDone.push("speed", -roll);
+        damageDone.push("speed", -roll2);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 10){
       var roll: number = this.diceToRoll(6);
-      if(roll >= this.numberOfOmenCardsDrawn){
+      if(roll >= numberOfOmenCardsDrawn){
         damageDone.push("sanity", 1);
       }
       else{
-        var roll: number = this.diceToRoll(1);
+        var roll1: number = this.diceToRoll(1);
         //should be mental damage
-        damageDone.push("knowledge", -roll);
+        damageDone.push("knowledge", -roll1);
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 11){
-      //draw 1 item card
+      damageDone.push("knowledge", 1);
+      return damageDone;
     }
     else if(Number(cardId) === 12){
       //if in the gardens, roll 2 fewer die
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
+      var roll: number = this.diceToRoll(knowledge);
       if(roll >= 4){
-        //draw an item card
+        damageDone.push("knowledge", 1);
       }
       else{
         //computer roll Might 4 attack
-        var roll: number = this.diceToRoll(4);
+        var roll1: number = this.diceToRoll(4);
         //player roll
-        var roll2: number = this.diceToRoll(this.selectedCharacter.currentMight);
-        if (roll > roll2) {
-          damageDone.push("might", -(roll-roll2);
-        } else
-        //nothing happens
+        var roll2: number = this.diceToRoll(might);
+        if (roll1 > roll2) {
+          damageDone.push("might", -(roll1-roll2));
+        }
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 13){
       //each explorer in the basement must attempt a sanity roll
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
-      if(roll >= 4){
-        //all is well. nothing happens
-      } else if(roll >= 1){
-        if (this.currentRoomTile.eventCard) {
-          var roll: number = this.diceToRoll(2);
-          //should be mental damage
-          damageDone.push("sanity", -roll);
-        } else {
-          var roll: number = this.diceToRoll(1);
-          //should be mental damage
-          damageDone.push("sanity", -roll);
-        }
+      var roll: number = this.diceToRoll(sanity);
+      if(roll >=1 && roll <= 3){
+        var roll1: number = this.diceToRoll(1);
+        //should be mental damage
+        damageDone.push("sanity", -roll1);
       }
       else{
-        if (this.currentRoomTile.eventCard) {
-          var roll: number = this.diceToRoll(3);
+          var roll2: number = this.diceToRoll(1);
           //should be mental damage
-          damageDone.push("sanity", -roll);
-        } else {
-          var roll: number = this.diceToRoll(1);
-          //should be mental damage
-          damageDone.push("sanity", -roll);
+          damageDone.push("sanity", -roll2);
         }
-      }
+
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 14){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
+      var roll: number = this.diceToRoll(knowledge);
       if(roll >= 4){
-        //draw 1 item card
-      } else{
-        //nothing happens
+        damageDone.push("knowledge", 1);
       }
+      console.log(damageDone);
+      return damageDone;
     }
     else if(Number(cardId) === 16){
       //choose any trait to roll
-      var roll: number = this.diceToRoll(this.selectedCharacter.selectedTrait.current#);
+      var roll: number = this.diceToRoll(chosenTrait);
       if(roll >= 4){
-        damageDone.push("selectedTrait", 1);
+        damageDone.push(chosenTrait, 1);
       } else{
+        console.log("trait drops to its lowest value before 0");
         //trait drops to its lowest value before 0
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 17){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
+      var roll: number = this.diceToRoll(sanity);
       if(roll >= 5){
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
@@ -298,15 +308,29 @@ export class GameService {
       console.log(damageDone);
       return damageDone;
     }
+    else if(Number(cardId) === 18){
+      var roll: number = this.diceToRoll(sanity);
+      if(roll >= 4){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        damageDone.push("sanity", -1);
+      }
+      else{
+        damageDone.push("sanity", -1);
+        damageDone.push("might", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
     else if(Number(cardId) === 19){
-      var sanityRoll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
-      var knowledgeRoll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
-      var speedRoll: number = this.diceToRoll(this.selectedCharacter.currentSpeed);
-      var mightRoll: number = this.diceToRoll(this.selectedCharacter.currentMight);
+      var sanityRoll: number = this.diceToRoll(sanity);
+      var knowledgeRoll: number = this.diceToRoll(knowledge);
+      var speedRoll: number = this.diceToRoll(speed);
+      var mightRoll: number = this.diceToRoll(might);
       if(sanityRoll >= 2 && knowledgeRoll >= 2 && speedRoll >= 2 && mightRoll >= 2){
-        damageDone.push(this.selectedTrait, 1);
+        damageDone.push(chosenTrait, 1);
       } else if(sanityRoll >= 2 || knowledgeRoll >= 2 || speedRoll >= 2 || mightRoll >= 2){
-        //nothing happens
+        console.log("nothing happens");
       } else if(sanityRoll < 1){
         damageDone.push("sanity", -1);
       } else if(mightRoll < 1){
@@ -320,7 +344,7 @@ export class GameService {
       return damageDone;
     }
     else if(Number(cardId) === 20){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
+      var roll: number = this.diceToRoll(sanity);
       if(roll >= 4){
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
@@ -334,7 +358,7 @@ export class GameService {
       return damageDone;
     }
     else if(Number(cardId) === 21){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
+      var roll: number = this.diceToRoll(sanity);
       if(roll >= 5){
         damageDone.push("sanity", 1);
       } else if(roll >= 1){
@@ -348,32 +372,27 @@ export class GameService {
     } else if(Number(cardId) === 22){
       var roll: number = this.diceToRoll(2);
       if(roll >= 4){
-        //draw an item card
+        damageDone.push("knowledge", 1);
       } else{
-        //draw an event card
+        console.log("draw an event card");
       }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 23){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentSanity);
+      var roll: number = this.diceToRoll(sanity);
       if(roll >= 4){
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
         damageDone.push("sanity", -1);
       }
-      else{
-        //attack a monster or explorer closest to you
-      }
       console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 24){
-      var roll: number = this.diceToRoll(this.selectedCharacter.currentKnowledge);
+      var roll: number = this.diceToRoll(knowledge);
       if(roll >= 5){
         damageDone.push("knowledge", 1);
-      } else{
-        //nothing
       }
       console.log(damageDone);
       return damageDone;
