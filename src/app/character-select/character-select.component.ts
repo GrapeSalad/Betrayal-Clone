@@ -41,8 +41,8 @@ export class CharacterSelectComponent implements OnInit {
           new Speed(dataLastEmittedFromObserver[i].speed[0].initialIndex, dataLastEmittedFromObserver[i].speed[0].array),
           new Might(dataLastEmittedFromObserver[i].might[0].initialIndex, dataLastEmittedFromObserver[i].might[0].array),
           new Knowledge(dataLastEmittedFromObserver[i].knowledge[0].initialIndex, dataLastEmittedFromObserver[i].knowledge[0].array),
-          new Sanity(dataLastEmittedFromObserver[i].sanity[0].initialIndex, dataLastEmittedFromObserver[i].sanity[0].array)));
-          // console.log(dataLastEmittedFromObserver[i]);
+          new Sanity(dataLastEmittedFromObserver[i].sanity[0].initialIndex, dataLastEmittedFromObserver[i].sanity[0].array), dataLastEmittedFromObserver[i].src));
+          console.log(dataLastEmittedFromObserver[i].src);
       }
     });
   }

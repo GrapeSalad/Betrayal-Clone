@@ -205,7 +205,6 @@
   display: inline-block;
   width: 198px;
   height: 198px;
-  border: 2px solid black;
 }
 
 img {
@@ -219,7 +218,7 @@ img {
 
 .active {
   // border: 1px solid green;
-  box-shadow: 10px 5px 5px black;
+  box-shadow: 0 0 30px yellow;
 }
 
 .hidden {

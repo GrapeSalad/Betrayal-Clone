@@ -1,42 +1,4 @@
-<div *ngIf="startScreen" class="start-screen">
-  <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
-  <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
-  <p>To start the game press enter</p>
-  <p>Move around using the arrow keys</p>
-</div>
 <div class="board-container">
-
-
-<p>{{chosenEvent?.event}}</p>
-<p>{{chosenEvent?.flavor}}</p>
-<p>{{chosenEvent?.description}}</p>
-<p>{{selectedCharacter?.name}}</p>
-<div id="sanity">
-  <p>Sanity</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.sanity?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="might">
-  <p>Might</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.might?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="speed">
-  <p>Speed</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.speed?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="knowledge">
-  <p>Knowledge</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.knowledge?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-
-
 <div class="top-row">
   <div class="logo">
     <img src="/assets/img/logo.png" alt="logo">
@@ -132,7 +94,7 @@
       <div class="cell" id="64"></div>
     </div>
 
-    <div *ngIf="upstairsShow">
+    <!-- <div *ngIf="upstairsShow"> -->
     <h3>Upstairs</h3>
     <div class="row">
       <div class="cell hidden" id="77"></div>
@@ -190,8 +152,8 @@
       <div class="cell hidden" id="123"></div>
       <div class="cell hidden" id="124"></div>
     </div>
-    </div>
-    <div *ngIf="basementShow">
+    <!-- </div> -->
+    <!-- <div *ngIf="basementShow"> -->
     <h3>Basement</h3>
     <div class="row">
       <div class="cell hidden" id="200"></div>
@@ -264,7 +226,7 @@
       <div class="cell hidden" id="255"></div>
     </div>
     <!-- </div> -->
-  </div>   <!-- end basement div -->
+  <!-- </div>   <!-- end basement div --> -->
   </div>   <!-- end board grid div -->
   <div class="omenevent-cards">
     <div class="omen-cards">
@@ -282,9 +244,9 @@
 <div class="last-row">
   <div class="character-details">
     <div class="portrait">
-      <h5>Heather Granville</h5>
+      <h5>{{selectedCharacter?.name}}</h5>
       <div class="character-image">
-        <img src="/assets/img/heathergranville.png" alt="heather">
+        <img [src]=selectedCharacter?.src alt="characterPic">
       </div>
     </div>
     <div class="stats">
@@ -302,27 +264,30 @@
 
 </div>  <!-- end board container div -->
 
-
-
-
-<!-- <div (keypress)="handleKeyboardEvent($event)" tabindex="1">
-
-</div> -->
-
-<!-- <div *ngFor="let staticRoomTile of staticRoomTiles">
-  <p>{{staticRoomTile.name}}</p>
-</div> -->
-<!--<h4>Ground</h4>
-<div class="cell" *ngFor="let room of randomGroundRoomTiles">
-  <img [src]="room[0].src">
+<p>{{chosenEvent?.event}}</p>
+<p>{{chosenEvent?.flavor}}</p>
+<p>{{chosenEvent?.description}}</p>
+<div id="sanity">
+  <p>Sanity</p>
+  <ul>
+    <li *ngFor="let stat of selectedCharacter?.sanity?.statArray; let i=index" [class]="i">{{stat}}</li>
+  </ul>
 </div>
-<hr>
-<h4>Basement</h4>
-<div class="cell" *ngFor="let room of randomBasementRoomTiles">
-  <img [src]="room[0].src">
+<div id="might">
+  <p>Might</p>
+  <ul>
+    <li *ngFor="let stat of selectedCharacter?.might?.statArray; let i=index" [class]="i">{{stat}}</li>
+  </ul>
 </div>
-<hr>
-<h4>Upstairs</h4>
-<div class="cell" *ngFor="let room of randomUpperRoomTiles">
-  <img [src]=room[0].src>
-</div> -->
+<div id="speed">
+  <p>Speed</p>
+  <ul>
+    <li *ngFor="let stat of selectedCharacter?.speed?.statArray; let i=index" [class]="i">{{stat}}</li>
+  </ul>
+</div>
+<div id="knowledge">
+  <p>Knowledge</p>
+  <ul>
+    <li *ngFor="let stat of selectedCharacter?.knowledge?.statArray; let i=index" [class]="i">{{stat}}</li>
+  </ul>
+</div>

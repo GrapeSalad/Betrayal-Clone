@@ -15,5 +15,6 @@ export class Character {
     public speed: Speed,
     public might: Might,
     public knowledge: Knowledge,
-    public sanity: Sanity) { }
+    public sanity: Sanity,
+    public src: string) { }
 }
