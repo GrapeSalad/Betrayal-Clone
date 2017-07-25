@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import {CharacterService} from '../character.service';
 import {Character} from '../character.model';
 import {Speed} from '../speed.model';
@@ -9,6 +9,7 @@ import {Room} from '../room.model';
 import {Router} from '@angular/router';
 import {GameService} from '../game.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-game-board',
@@ -44,9 +45,9 @@ export class GameBoardComponent implements OnInit {
   basementShow: boolean = false;
   selectedCharacters: Character[] = [];
   selectedCharacter;
-  selectedCharacterId;
   selectedFriend;
   cardId;
+  currentIndex;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
@@ -56,6 +57,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     //enter Key to start game
     if(this.key === 13){
       this.startScreen = false;
+      document.getElementsByClassName(this.currentIndex)[0].classList.add('highlighted');
     }
     //go downstairs from upper landing
     if(this.currentRoomTileId === 95 && this.key === 13){
@@ -114,6 +116,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
             this.chosenEvent = dataLastEmittedFromObserver;
             this.cardId = dataLastEmittedFromObserver.$key;
             this.selectedCharacter.sanity.initialIndex += Number(this.gameService.getEventCardEffects(this.cardId)[1]);
+
+            console.log(this.chosenEvent);
             console.log(this.selectedCharacter.sanity.initialIndex);
           })
         }
@@ -575,21 +579,11 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   ngOnInit() {
     this.currentRoomTileId = 39;
     this.characterService.getSelectedCharacters().subscribe(dataLastEmittedFromObserver =>{
-      // if(dataLastEmittedFromObserver.length === 0) {
-      //   this.selectedCharacter = dataLastEmittedFromObserver[0];
-      //   this.selectedFriend = dataLastEmittedFromObserver[1];
-      // }
-      // else{
-      //   var charInDatabase = this.getCharacterById(dataLastEmittedFromObserver[0].$key);
-      //   var friendInDatabase = this.getCharacterById(dataLastEmittedFromObserver[1].$key);
-      //   console.log(dataLastEmittedFromObserver[0]);
-      //
-      //   // charInDatabase.remove();
-      //   // friendInDatabase.remove();
-        this.selectedCharacter = dataLastEmittedFromObserver[0];
-        this.selectedFriend = dataLastEmittedFromObserver[1];
-        console.log(this.selectedCharacter.sanity.statArray);
+      this.selectedCharacter = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2];
+      this.selectedFriend = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-1];
+      this.currentIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].sanity.initialIndex;
     })
+
 
     this.gameService.getStaticRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.staticRoomTiles = dataLastEmittedFromObserver;
@@ -597,7 +591,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.foyer = dataLastEmittedFromObserver[1];
       this.grandStaircase = dataLastEmittedFromObserver[2];
     })
-
   }
 
 }

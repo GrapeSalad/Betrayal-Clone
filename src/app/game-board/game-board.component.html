@@ -5,10 +5,11 @@
   <p>Move around using the arrow keys</p>
 </div>
 
+<p>{{chosenEvent?.event}}</p>
 <p>{{chosenEvent?.description}}</p>
 <p>{{selectedCharacter?.name}}</p>
-<ul *ngFor="let stat of selectedCharacter?.sanity?.statArray">
-  <li>{{stat}}</li>
+<ul>
+  <li *ngFor="let stat of selectedCharacter?.sanity?.statArray; let i=index" [class]="i">{{stat}}</li>
 </ul>
 
 <div *ngIf="!startScreen">
