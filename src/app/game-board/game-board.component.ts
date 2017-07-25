@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import {CharacterService} from '../character.service';
 import {Character} from '../character.model';
 import {Speed} from '../speed.model';
@@ -9,6 +9,7 @@ import {Room} from '../room.model';
 import {Router} from '@angular/router';
 import {GameService} from '../game.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-game-board',
@@ -44,11 +45,76 @@ export class GameBoardComponent implements OnInit {
   basementShow: boolean = false;
   selectedCharacters: Character[] = [];
   selectedCharacter;
-  selectedCharacterId;
   selectedFriend;
   cardId;
+  currentSanityIndex;
+  currentKnowledgeIndex;
+  currentMightIndex;
+  currentSpeedIndex;
+  rollSanity: boolean = false;
+  rollSpeed: boolean = false;
+  rollMight: boolean = false;
+  rollKnowledge: boolean = false;
+  statAffectedArray;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
+
+  eventCardResolution(){
+    this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
+      this.chosenEvent = dataLastEmittedFromObserver;
+      this.cardId = dataLastEmittedFromObserver.$key;
+      if(this.chosenEvent.sanity){
+        this.rollSanity = true;
+        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, 0, this.selectedCharacter.sanity.statArray[this.currentSanityIndex], 0);
+      }
+      else if(this.chosenEvent.speed){
+        this.rollSpeed = true;
+        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId,  this.selectedCharacter.speed.statArray[this.currentSpeedIndex], 0, 0, 0);
+      }
+      else if(this.chosenEvent.might){
+        this.rollMight = true;
+        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, this.selectedCharacter.might.statArray[this.currentMightIndex],  0, 0);
+      }
+      else if(this.chosenEvent.knowledge){
+        this.rollKnowledge = true;
+        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, 0, 0, this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex]);
+      }
+      else{
+        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
+      }
+      console.log("stat affected array " + this.statAffectedArray);
+      var stat = this.statAffectedArray[0];
+      var amount = this.statAffectedArray[1];
+      if(stat === "sanity"){
+        var tag = document.getElementById('sanity');
+        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
+        this.currentSanityIndex += Number(amount);
+        console.log("currentSanityIndex: " + this.currentSanityIndex);
+        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "speed"){
+        var tag = document.getElementById('speed');
+        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
+        this.currentSpeedIndex += Number(amount);
+        console.log("currentSpeedIndex: " + this.currentSpeedIndex);
+        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "might"){
+        var tag = document.getElementById('might');
+        tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
+        this.currentMightIndex += Number(amount);
+        console.log("currentMightIndex: " + this.currentMightIndex);
+        tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "knowledge"){
+        var tag = document.getElementById('knowledge');
+        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
+        this.currentKnowledgeIndex += Number(amount);
+        console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
+        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+      }
+    })
+  }
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
@@ -56,6 +122,14 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     //enter Key to start game
     if(this.key === 13){
       this.startScreen = false;
+      var tag = document.getElementById('knowledge');
+      tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+      var tag = document.getElementById('speed');
+      tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+      var tag = document.getElementById('might');
+      tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+      var tag = document.getElementById('sanity');
+      tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
     }
     //go downstairs from upper landing
     if(this.currentRoomTileId === 95 && this.key === 13){
@@ -110,12 +184,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.currentRoomTileId === 23){
         if(!this.currentRoomTileArray[0].classList.contains('graveyard')){
           this.currentRoomTileArray[0].classList.add('graveyard');
-          this.gameService.getEventCardById(15).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-            this.cardId = dataLastEmittedFromObserver.$key;
-            this.selectedCharacter.sanity.initialIndex += Number(this.gameService.getEventCardEffects(this.cardId)[1]);
-            console.log(this.selectedCharacter.sanity.initialIndex);
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 22){
@@ -575,21 +644,14 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   ngOnInit() {
     this.currentRoomTileId = 39;
     this.characterService.getSelectedCharacters().subscribe(dataLastEmittedFromObserver =>{
-      // if(dataLastEmittedFromObserver.length === 0) {
-      //   this.selectedCharacter = dataLastEmittedFromObserver[0];
-      //   this.selectedFriend = dataLastEmittedFromObserver[1];
-      // }
-      // else{
-      //   var charInDatabase = this.getCharacterById(dataLastEmittedFromObserver[0].$key);
-      //   var friendInDatabase = this.getCharacterById(dataLastEmittedFromObserver[1].$key);
-      //   console.log(dataLastEmittedFromObserver[0]);
-      //
-      //   // charInDatabase.remove();
-      //   // friendInDatabase.remove();
-        this.selectedCharacter = dataLastEmittedFromObserver[0];
-        this.selectedFriend = dataLastEmittedFromObserver[1];
-        console.log(this.selectedCharacter.sanity.statArray);
+      this.selectedCharacter = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2];
+      this.selectedFriend = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-1];
+      this.currentSanityIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].sanity.initialIndex;
+      this.currentKnowledgeIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].knowledge.initialIndex;
+      this.currentSpeedIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].speed.initialIndex;
+      this.currentMightIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].might.initialIndex;
     })
+
 
     this.gameService.getStaticRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.staticRoomTiles = dataLastEmittedFromObserver;
@@ -597,7 +659,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.foyer = dataLastEmittedFromObserver[1];
       this.grandStaircase = dataLastEmittedFromObserver[2];
     })
-
   }
 
 }
