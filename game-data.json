@@ -201,25 +201,25 @@
     "companion": false,
     "weapon": false,
     "flavor": "A skull, cracked and missing teeth.",
-    "description": "If you take mental damage, you can take all of it as physical damage instead. Make a haunt roll now."
+    "description": "You find a glowing skull on the ground. Make a haunt roll now."
   },{
     "omen": "Spear",
     "companion": false,
     "weapon": true,
     "flavor": "A weapon pulsing with power.",
-    "description": "You roll 2 additional dice (maximum of 8 dice) when making a Might attack with this weapon. You can't use another weapon while you're using this one. Make a haunt roll now."
+    "description": "Gain 2 Might. Make a haunt roll now."
   },{
     "omen": "Dog",
     "companion": true,
     "weapon": false,
     "flavor": "This mangy dog seems friendly. At least you hope it is.",
-    "description": "Gain 1 Might and 1 Sanity now. Lose 1 Might and 1 Sanity if you lose custody of the dog. Take a small monster token to represent the Dog. Put it in your room. Once during your turn, the Dog can move up to 6 spaces away, using doors and stairs, and then return. It can pick up, carry, and/or drop 1 item before it returns. The Dog isn't slowed by opponents. It can't use one-way passages or rooms that require a roll. It can't carry items that slow movement. This omen can't be dropped, traded, or stolen. Make a haunt roll now."
+    "description": "Gain 1 Might and 1 Sanity now. Lose 1 Might and 1 Sanity if you lose custody of the dog. Make a haunt roll now."
   },{
     "omen": "Bite",
     "companion": false,
     "weapon": false,
     "flavor": "A growl, the scent of death. Pain. Darkness. Gone.",
-    "description": "When you draw this card, something bites you. The player on your right rolls a Might 4 attack against you for the mysterious something (before it runs away into the darkness). You defend against this attack as normal, by rolling dice equal to your Might. This omen can't be dropped, traded, or stolen. Make a haunt roll now."
+    "description": "When you draw this card, something bites you. You try to defend against this mysterious something, but it runs away into the darkness. Lose 1 Might. This omen can't be dropped, traded, or stolen. Make a haunt roll now."
   },{
     "omen": "Madman",
     "companion": true,
@@ -1001,8 +1001,8 @@
   "haunts": [{
     "haunt": "Buried Alive",
     "flavor": "The spirit board slides back and forth, back and forth across the letters, moving without anyone's aid. Everyone stares in horrified fascination as it spells out: B U R I E D A L I V E.  Looking around, you realize that you haven't seen your friend since you entered this house. Some twisted magic must have prevented you from remembering! If your friend really is buried alive, you must find that person now.",
-    "what-you-know": "The house has buried your friend in a basement room. You don't know which room the person is buried in, but you know that it was in the house when the haunt began.",
-    "you-win-when": "...you find and dig up the buried person before he or she dies. The Spirit Board will help you.",
+    "what-you-know": "The house has buried your friend in a basement room, but you don't know which room the person is buried in.",
+    "you-win-when": "...you find and dig up the buried person before he or she dies.",
     "how": "Each time you move into a room, you can search it by attempting a Knowledge roll of 3+ in that room. If you succeed at this roll, ask the house whether this is the burial room. You can search a room only once during your turn. Once you've found the burial room, you can attempt a Might roll of 4+ in that room to help dig up the buried person. You can attempt one roll during your turn. Each time you (the hero) succeed, a Might roll token appears in that room. To save the buried person, you need two tokens.",
     "if-you-win": "Digging frantically, you finally free your trapped friend. Your companion's fingernails are broken-splintered from clawing at the wooden coffin-and blood runs down their shaking hands. Your friend hasn't made a sound since being freed. Slowly you help them out of the house, sure that with the proper care, they will be good as new...someday."
   }]
