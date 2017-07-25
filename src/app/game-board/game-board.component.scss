@@ -1,10 +1,12 @@
 .board-container {
   // border: 5px dotted black;
-  height: 102vh;
+  height: 100vh;
   background-image: url('/assets/img/trophyroom.jpg');
   background-position: center;
   background-size: cover;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .start-screen {
@@ -23,6 +25,8 @@
     img {
       height: 100%;
       width: auto;
+      -webkit-filter: drop-shadow(6px 6px 30px #8fc470);
+      filter: drop-shadow(6px 6px 30px #8fc470);
     }
   }
   .haunt-counter {
@@ -35,16 +39,16 @@
 // MIDDLE ROW //
 .middle-row {
   // border: 2px solid gray;
-  height: 70vh;
+  height: 65vh;
   display: flex;
   .emptydiv {
     width: 15%;
-    height: 70vh;
+    height: 65vh;
     // border: 1px solid red;
   }
   .board-grid {
     background-color: rgba(138, 137, 133, 0.3);
-    height: 70vh;
+    height: 65vh;
     width: 70%;
     display: flex;
     overflow: auto;
@@ -56,12 +60,17 @@
     background-position: center;
     background-size: cover;
     h3 {
-      margin: 0;
+      margin: 10px;
+      font-family: spoopy;
+      color: darkred;
+      font-size: 5em;
+      text-shadow: 4px 4px 20px black;
+      letter-spacing: 4px;
     }
   }
   .omenevent-cards {
     // border: 1px solid orange;
-    height: 70vh;
+    height: 65vh;
     width: 15%;
     display: flex;
     flex-direction: column;
@@ -133,15 +142,28 @@
   }
 }
 
+.board-grid::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.board-grid::-webkit-scrollbar-thumb {
+  background-color: #01283a;
+  outline: 5px solid #01283a;
+  border-radius: 2rem;
+  box-shadow: 0px 0px 30px #8fc470;
+  // -webkit-filter: drop-shadow(0px 0px 10px #8fc470);
+  // filter: drop-shadow(0px 0px 10px #8fc470);
+}
+
 // LAST ROW //
 .last-row {
   // border: 1px solid hotpink;
   height: 20vh;
   display: flex;
-  margin-top: 20px;
+  // margin-top: 20px;
   .character-details {
     height: 20vh;
-    width: 20%;
+    width: 40%;
     // border: 2px dotted purple;
     display: flex;
     background-image: url('/assets/img/charbg.jpg');
@@ -173,18 +195,37 @@
       width: 60%;
       height: 20vh;
       display: flex;
-      flex-direction: column;
       justify-content: space-around;
-      h5 {
-        margin: 0;
-        font-family: spoopy;
-        color: darkred;
-        font-size: 1.8em;
-        b{
+      flex-direction: column;
+      #speed, #might, #knowledge, #sanity {
+        display: flex;
+        // justify-content: space-between;
+
+        h5 {
+          margin-top: 12px;
+          margin-bottom: 0;
           font-family: necrotype;
-          color: black;
+          font-size: 1.8em;
+
+
+        }
+        ul {
+          list-style: none;
+          width: 200px;
+          display: flex;
+          justify-content: space-around;
+
+          li {
+            font-family: spoopy;
+            font-size: 2.5em;
+            display: inline-block;
+
+
+          }
+
         }
       }
+
 
     }
   }
@@ -213,12 +254,14 @@ img {
 }
 
 .highlighted {
-  background: #934804;
+  font-family: spoopy;
+  color: darkred;
+  text-shadow: 1px 1px 5px black;
 }
 
 .active {
   // border: 1px solid green;
-  box-shadow: 0 0 30px yellow;
+  box-shadow: 0 0 50px #8fc470;
 }
 
 .hidden {

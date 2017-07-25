@@ -250,44 +250,39 @@
       </div>
     </div>
     <div class="stats">
-      <h5><b>Might</b> 5</h5>
-      <h5><b>Speed</b> 4</h5>
-      <h5><b>Knowledge</b> 2</h5>
-      <h5><b>Sanity</b> 3</h5>
-      <h5><b>Hobbies</b> Television, Shopping, Frogs, Doctoring</h5>
-    </div>
-  </div>
+      <div id="sanity">
+        <h5>Sanity</h5>
+        <ul>
+          <li *ngFor="let stat of selectedCharacter?.sanity?.statArray; let i=index" [class]="i">{{stat}}</li>
+        </ul>
+      </div>
+      <div id="might">
+        <h5>Might</h5>
+        <ul>
+          <li *ngFor="let stat of selectedCharacter?.might?.statArray; let i=index" [class]="i">{{stat}}</li>
+        </ul>
+      </div>
+      <div id="speed">
+        <h5>Speed</h5>
+        <ul>
+          <li *ngFor="let stat of selectedCharacter?.speed?.statArray; let i=index" [class]="i">{{stat}}</li>
+        </ul>
+      </div>
+      <div id="knowledge">
+        <h5>Knowledge</h5>
+        <ul>
+          <li *ngFor="let stat of selectedCharacter?.knowledge?.statArray; let i=index" [class]="i">{{stat}}</li>
+        </ul>
+      </div>
+    </div> <!-- end stats div -->
+  </div> <!-- end stats div -->
   <div class="play-instructions">
     instructions for each play
   </div>
-</div>
+</div> <!-- end last row div -->
 
-</div>  <!-- end board container div -->
+</div> <!-- end board container div -->
 
-<p>{{chosenEvent?.event}}</p>
+<!-- <p>{{chosenEvent?.event}}</p>
 <p>{{chosenEvent?.flavor}}</p>
-<p>{{chosenEvent?.description}}</p>
-<div id="sanity">
-  <p>Sanity</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.sanity?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="might">
-  <p>Might</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.might?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="speed">
-  <p>Speed</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.speed?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
-<div id="knowledge">
-  <p>Knowledge</p>
-  <ul>
-    <li *ngFor="let stat of selectedCharacter?.knowledge?.statArray; let i=index" [class]="i">{{stat}}</li>
-  </ul>
-</div>
+<p>{{chosenEvent?.description}}</p> -->
