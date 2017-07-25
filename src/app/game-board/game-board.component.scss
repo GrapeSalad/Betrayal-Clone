@@ -1,6 +1,10 @@
 .board-container {
   // border: 5px dotted black;
-  height: 100vh;
+  height: 102vh;
+  background-image: url('/assets/img/trophyroom.jpg');
+  background-position: center;
+  background-size: cover;
+
 }
 
 .start-screen {
@@ -10,7 +14,7 @@
 // TOP ROW //
 .top-row {
   height: 10vh;
-  border: 2px solid pink;
+  // border: 2px solid pink;
   display: flex;
   justify-content: space-between;
   .logo {
@@ -23,36 +27,40 @@
   }
   .haunt-counter {
     width: 15%;
-    border: 2px solid blue;
+    // border: 2px solid blue;
     height: 10vh;
   }
 }
 
 // MIDDLE ROW //
 .middle-row {
-  border: 2px solid gray;
+  // border: 2px solid gray;
   height: 70vh;
   display: flex;
   .emptydiv {
-    width: 10%;
+    width: 15%;
     height: 70vh;
-    border: 1px solid red;
+    // border: 1px solid red;
   }
   .board-grid {
-    background-color: thistle;
+    background-color: rgba(138, 137, 133, 0.3);
     height: 70vh;
-    width: 75%;
+    width: 70%;
     display: flex;
     overflow: auto;
     flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
+    border-radius: 20px;
+    // background-image: url('/assets/img/charbg.jpg');
+    background-position: center;
+    background-size: cover;
     h3 {
       margin: 0;
     }
   }
   .omenevent-cards {
-    border: 1px solid orange;
+    // border: 1px solid orange;
     height: 70vh;
     width: 15%;
     display: flex;
@@ -94,7 +102,7 @@
     .event-cards {
       height: 400px;
       width: 250px;
-      border: 1px dotted black;
+      // border: 1px dotted black;
       background-image: url('/assets/img/charbg.jpg');
       background-color: #59451C;
       background-blend-mode: screen;
@@ -127,14 +135,19 @@
 
 // LAST ROW //
 .last-row {
-  border: 1px solid hotpink;
+  // border: 1px solid hotpink;
   height: 20vh;
   display: flex;
+  margin-top: 20px;
   .character-details {
     height: 20vh;
     width: 20%;
-    border: 2px dotted purple;
+    // border: 2px dotted purple;
     display: flex;
+    background-image: url('/assets/img/charbg.jpg');
+    background-color: #59451C;
+    background-blend-mode: screen;
+    border-radius: 0px 20px 0px 0px;
     .portrait {
       display: flex;
       flex-direction: column;
@@ -161,7 +174,7 @@
       height: 20vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       h5 {
         margin: 0;
         font-family: spoopy;
@@ -177,7 +190,7 @@
   }
   .play-instructions {
     height: 20vh;
-    border: 2px dotted green;
+    // border: 2px dotted green;
     width: 80%;
   }
 }
