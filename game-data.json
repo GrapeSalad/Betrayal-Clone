@@ -276,7 +276,7 @@
   },{
     "event": "Something Hidden",
     "flavor": "There's something odd about this room, but what? It's tickling the back of your mind.",
-    "description": "Attempt a Knowledge roll: 4+ A section of wall slides away, revealing an alcove. Draw and item card. 0-3 You can't figure it out, and that makes you a bit crazy. Lose 1 Sanity."
+    "description": "Attempt a Knowledge roll: 4+ A section of wall slides away, revealing an alcove. Draw an item card. 0-3 You can't figure it out, and that makes you a bit crazy. Lose 1 Sanity."
   },{
     "event": "Burning Man",
     "flavor": "A man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.",
@@ -328,7 +328,7 @@
   },{
     "event": "Funeral",
     "flavor": "You see an open coffin. You're inside it.",
-    "description": "You must attempt a Sanity roll: You blink, and it's gone. Gain 1 Sanity. 2-3 The vision disturbs you. Lose 1 Sanity. You're really in that coffin. Lose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one)."
+    "description": "You must attempt a Sanity roll: 4+ You blink, and it's gone. Gain 1 Sanity. 2-3 The vision disturbs you. Lose 1 Sanity. 0-1 You're really in that coffin. Lose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one)."
   },{
     "event": "Creepy Crawlies",
     "flavor": "A thousand bugs spill out on your skin, under your clothes, and in your hair.",
