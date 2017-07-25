@@ -38,4 +38,30 @@ export class GameService {
     return (Math.random() * (max - min +1) | 0) + min;
   }
 
+  diceToRoll(num: number){
+    var dieRoll: number = 0;
+    for(var i=0; i<num; i++){
+      dieRoll += this.getRandomNumber(0,2);
+    }
+    return dieRoll;
+  }
+
+  getEventCardEffects(cardId: string){
+    var damageDone: any[] = [];
+    if(Number(cardId) === 15){
+      var roll: number = this.diceToRoll(2);
+      if(roll === 4){
+        damageDone.push("sanity", 1);
+      }
+      else if(roll === 3){
+        damageDone.push("knowledge", 1);
+      }
+      else{//NOTE:STREATCH GOOOOAAAALLLS to add mental/physical damage
+        damageDone.push("sanity", -1)
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+  }
+
 }

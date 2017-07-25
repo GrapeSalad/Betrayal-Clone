@@ -1,7 +1,15 @@
 <div *ngIf="startScreen">
+  <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
+  <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
   <p>To start the game press enter</p>
   <p>Move around using the arrow keys</p>
 </div>
+
+<p>{{chosenEvent?.description}}</p>
+<p>{{selectedCharacter?.name}}</p>
+<ul *ngFor="let stat of selectedCharacter?.sanity?.statArray">
+  <li>{{stat}}</li>
+</ul>
 
 <div *ngIf="!startScreen">
   <!-- <div *ngIf="groundShow"> -->
