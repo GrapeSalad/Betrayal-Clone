@@ -45,10 +45,69 @@ export class GameService {
     for(var i=0; i<num; i++){
       var randNum = this.getRandomNumber(0,2)
       dieRoll += randNum;
-      console.log(i + " die roll: " + randNum);
+      // console.log(i + " die roll: " + randNum);
     }
-    console.log("total die roll: " + dieRoll);
+    // console.log("total die roll: " + dieRoll);
     return dieRoll;
+  }
+
+  getOmenCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
+    var damageDone: any[] = [];
+    var chosenTrait: number;
+    if(speed != null){
+      chosenTrait = speed;
+    }
+    else if(might != null){
+      chosenTrait = might;
+    }
+    else if(sanity != null){
+      chosenTrait = sanity;
+    }
+    else{
+      chosenTrait = knowledge;
+    }
+    if(Number(cardId) === 0){
+      //hauntRoll
+      return damageDone;
+    } else if(Number(cardId) === 1){
+      //hauntRoll
+      damageDone.push("might", 2);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 2){
+      //hauntRoll
+      damageDone.push("might", 1);
+      damageDone.push("sanity", 1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 3){
+      //hauntRoll
+      damageDone.push("might", -1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 4){
+      //hauntRoll
+      damageDone.push("might", 2);
+      damageDone.push("sanity", -1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 5){
+      //hauntRoll
+      damageDone.push("knowledge", 1);
+      damageDone.push("sanity", 1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 6){
+      //hauntRoll
+      damageDone.push("knowledge", 2);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 7){
+      //hauntRoll
+      damageDone.push("sanity", 2);
+      // console.log(damageDone);
+      return damageDone;
+    }
   }
 
   getEventCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
@@ -77,17 +136,17 @@ export class GameService {
       else{//NOTE:STREATCH GOOOOAAAALLLS to add mental/physical damage
         damageDone.push("sanity", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 1){
       damageDone.push("sanity", -1);
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 2){
       damageDone.push("speed", -1);
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 0){
@@ -102,7 +161,7 @@ export class GameService {
         damageDone.push("might", -1);
         damageDone.push("speed", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 3){
@@ -118,7 +177,7 @@ export class GameService {
         //should be mental damage
         damageDone.push("knowledge", -roll2);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 4){
@@ -136,7 +195,7 @@ export class GameService {
         //should be physical damage
         damageDone.push("speed", -roll2);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 5){
@@ -156,7 +215,7 @@ export class GameService {
         //should be mental damage
         damageDone.push("sanity", -roll2);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 6){
@@ -171,7 +230,7 @@ export class GameService {
         //should be mental damage
         damageDone.push("sanity", -roll1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 7){
@@ -182,7 +241,7 @@ export class GameService {
       else{
         damageDone.push("sanity", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 8){
@@ -190,7 +249,7 @@ export class GameService {
       if(roll >= 4){
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
-        console.log("move to entrance hall");
+        // console.log("move to entrance hall");
         //move to entrance hall
       }
       else{
@@ -198,7 +257,7 @@ export class GameService {
         //should be physical damage
         damageDone.push("might", -roll1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 9){
@@ -216,7 +275,7 @@ export class GameService {
         //should be physical damage
         damageDone.push("speed", -roll2);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 10){
@@ -229,7 +288,7 @@ export class GameService {
         //should be mental damage
         damageDone.push("knowledge", -roll1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 11){
@@ -251,7 +310,7 @@ export class GameService {
           damageDone.push("might", -(roll1-roll2));
         }
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 13){
@@ -267,7 +326,7 @@ export class GameService {
           damageDone.push("sanity", -roll2);
         }
 
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 14){
@@ -275,7 +334,7 @@ export class GameService {
       if(roll >= 4){
         damageDone.push("knowledge", 1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 16){
@@ -284,10 +343,10 @@ export class GameService {
       if(roll >= 4){
         damageDone.push(chosenTrait, 1);
       } else{
-        console.log("trait drops to its lowest value before 0");
+        // console.log("trait drops to its lowest value before 0");
         //trait drops to its lowest value before 0
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 17){
@@ -306,7 +365,7 @@ export class GameService {
         damageDone.push("knowledge", -1);
         damageDone.push("sanity", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 18){
@@ -320,7 +379,7 @@ export class GameService {
         damageDone.push("sanity", -1);
         damageDone.push("might", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 19){
@@ -331,7 +390,7 @@ export class GameService {
       if(sanityRoll >= 2 && knowledgeRoll >= 2 && speedRoll >= 2 && mightRoll >= 2){
         damageDone.push(chosenTrait, 1);
       } else if(sanityRoll >= 2 || knowledgeRoll >= 2 || speedRoll >= 2 || mightRoll >= 2){
-        console.log("nothing happens");
+        // console.log("nothing happens");
       } else if(sanityRoll < 1){
         damageDone.push("sanity", -1);
       } else if(mightRoll < 1){
@@ -341,7 +400,7 @@ export class GameService {
       } else {
         damageDone.push("knowledge", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 20){
@@ -355,7 +414,7 @@ export class GameService {
         damageDone.push("sanity", -1);
         damageDone.push("might", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 21){
@@ -368,16 +427,16 @@ export class GameService {
       else{
         damageDone.push("sanity", -2);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     } else if(Number(cardId) === 22){
       var roll: number = this.diceToRoll(2);
       if(roll >= 4){
         damageDone.push("knowledge", 1);
       } else{
-        console.log("draw an event card");
+        // console.log("draw an event card");
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 23){
@@ -390,7 +449,7 @@ export class GameService {
         damageDone.push("sanity", -1);
         damageDone.push("might", -1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
     else if(Number(cardId) === 24){
@@ -398,7 +457,7 @@ export class GameService {
       if(roll >= 5){
         damageDone.push("knowledge", 1);
       }
-      console.log(damageDone);
+      // console.log(damageDone);
       return damageDone;
     }
   }

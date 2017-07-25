@@ -22,23 +22,14 @@ import {Observable} from 'rxjs/Rx';
 
 export class GameBoardComponent implements OnInit {
   staticRoomTiles;
-  roomTiles;
-  roomTileArr: Room[] = [];
-  randomGroundRoomTiles: any[] = [];
-  rightToLeftDoorArray: any[] = [];
-  randomUpperRoomTiles: any[] = [];
-  randomBasementRoomTiles: any[] = [];
-  basementLanding = false;
   entranceHall;
   foyer;
   grandStaircase;
   chosenEvent;
   chosenOmen;
-  chosenRoom;
   key;
   currentRoomTileArray: any[] = [];
   currentRoomTileId;
-  visibleRoomTileArray: any[] = [];
   startScreen: boolean = true;
   groundShow: boolean = true;
   upstairsShow: boolean = false;
@@ -56,8 +47,81 @@ export class GameBoardComponent implements OnInit {
   rollMight: boolean = false;
   rollKnowledge: boolean = false;
   statAffectedArray;
+  hauntCounter: number = 0;
+  haunt: boolean = false;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
+
+  omenCardResolution(){
+    this.hauntCounter += 1;
+    var hauntDieRoll = this.gameService.diceToRoll(6);
+    if(this.hauntCounter <= hauntDieRoll){
+      this.haunt = false;
+    }else{
+      this.haunt = true;
+    }
+    console.log(this.haunt + " haunt after roll");
+    this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
+      this.chosenOmen = dataLastEmittedFromObserver;
+      this.cardId = dataLastEmittedFromObserver.$key;
+      this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
+      // console.log("stat affected array " + this.statAffectedArray);
+      var stat = this.statAffectedArray[0];
+      var amount = this.statAffectedArray[1];
+      if(stat === "sanity"){
+        if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentSanityIndex += addLifeRoll;
+        } else if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
+        var tag = document.getElementById('sanity');
+        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
+        this.currentSanityIndex += Number(amount);
+        // console.log("currentSanityIndex: " + this.currentSanityIndex);
+        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "speed"){
+        if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === false){
+         var addLifeRoll = this.gameService.diceToRoll(2);
+         this.currentSpeedIndex += addLifeRoll;
+       }else if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
+        var tag = document.getElementById('speed');
+        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
+        this.currentSpeedIndex += Number(amount);
+        // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
+        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "might"){
+        if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentMightIndex += addLifeRoll;
+        }else if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
+        var tag = document.getElementById('might');
+        tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
+        this.currentMightIndex += Number(amount);
+        // console.log("currentMightIndex: " + this.currentMightIndex);
+        tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+      }
+      else if(stat === "knowledge"){
+        if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentKnowledgeIndex += addLifeRoll;
+        }else if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
+        var tag = document.getElementById('knowledge');
+        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
+        this.currentKnowledgeIndex += Number(amount);
+        // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
+        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+      }
+    })
+  }
 
   eventCardResolution(){
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
@@ -82,35 +146,59 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else{
         this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
       }
-      console.log("stat affected array " + this.statAffectedArray);
+      // console.log("stat affected array " + this.statAffectedArray);
       var stat = this.statAffectedArray[0];
       var amount = this.statAffectedArray[1];
       if(stat === "sanity"){
+        if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentSanityIndex += addLifeRoll;
+        } else if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
         var tag = document.getElementById('sanity');
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
         this.currentSanityIndex += Number(amount);
-        console.log("currentSanityIndex: " + this.currentSanityIndex);
+        // console.log("currentSanityIndex: " + this.currentSanityIndex);
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
       }
       else if(stat === "speed"){
+        if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === false){
+         var addLifeRoll = this.gameService.diceToRoll(2);
+         this.currentSpeedIndex += addLifeRoll;
+       }else if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
         var tag = document.getElementById('speed');
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
         this.currentSpeedIndex += Number(amount);
-        console.log("currentSpeedIndex: " + this.currentSpeedIndex);
+        // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
       }
       else if(stat === "might"){
+        if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentMightIndex += addLifeRoll;
+        }else if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
         var tag = document.getElementById('might');
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
         this.currentMightIndex += Number(amount);
-        console.log("currentMightIndex: " + this.currentMightIndex);
+        // console.log("currentMightIndex: " + this.currentMightIndex);
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
       }
       else if(stat === "knowledge"){
+        if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === false){
+          var addLifeRoll = this.gameService.diceToRoll(2);
+          this.currentKnowledgeIndex += addLifeRoll;
+        }else if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === true){
+          alert("ya dead");
+        }
         var tag = document.getElementById('knowledge');
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
         this.currentKnowledgeIndex += Number(amount);
-        console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
+        // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
       }
     })
@@ -164,7 +252,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     //up
     else if(this.key === 38 && (this.currentRoomTileId === 37 || this.currentRoomTileId === 32 || this.currentRoomTileId === 23 || this.currentRoomTileId === 22 || this.currentRoomTileId === 21 || this.currentRoomTileId === 81 || this.currentRoomTileId === 48 || this.currentRoomTileId === 87 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 203 || this.currentRoomTileId === 202 || this.currentRoomTileId === 225 || this.currentRoomTileId === 228 || this.currentRoomTileId === 38)){
-      console.log("FACEPLANT LOL");
+      // console.log("FACEPLANT LOL");
     }
     else if(this.key === 38){
       this.currentRoomTileId -= 8;
@@ -190,32 +278,24 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.currentRoomTileId === 22){
         if(!this.currentRoomTileArray[0].classList.contains('ballroom')){
           this.currentRoomTileArray[0].classList.add('ballroom');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 46){
         if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('statuaryCorridor');
         }
       }
       else if(this.currentRoomTileId === 87){
         if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('operatingLaboratory');
         }
       }
       else if(this.currentRoomTileId === 97){
         if(!this.currentRoomTileArray[0].classList.contains('balcony')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('balcony');
         }
       }
@@ -224,17 +304,13 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 81){
         if(!this.currentRoomTileArray[0].classList.contains('attic')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('attic');
         }
       }
       else if(this.currentRoomTileId === 218){
         if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('catacombs');
         }
       }
@@ -243,33 +319,25 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 210){
         if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('servantsQuarters');
         }
       }
       else if(this.currentRoomTileId === 211){
         if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('furnaceRoom');
         }
       }
       else if(this.currentRoomTileId === 202){
         if(!this.currentRoomTileArray[0].classList.contains('organRoom')){
           this.currentRoomTileArray[0].classList.add('organRoom');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 203){
         if(!this.currentRoomTileArray[0].classList.contains('gymnasium')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('gymnasium');
         }
       }
@@ -299,7 +367,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     //down
     else if(this.key === 40 && (this.currentRoomTileId === 29 || this.currentRoomTileId === 37 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 32 || this.currentRoomTileId === 30 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 113 || this.currentRoomTileId === 119 || this.currentRoomTileId === 209 || this.currentRoomTileId === 228 || this.currentRoomTileId === 225 || this.currentRoomTileId === 235 || this.currentRoomTileId === 250)){
-      console.log("FACEPLANT LOL");
+      // console.log("FACEPLANT LOL");
     }
     else if(this.key === 40){
       this.currentRoomTileId += 8;
@@ -316,40 +384,30 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       if(this.currentRoomTileId === 29){
         if(!this.currentRoomTileArray[0].classList.contains('conservatory')){
           this.currentRoomTileArray[0].classList.add('conservatory');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 46){
         if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
           this.currentRoomTileArray[0].classList.add('statuaryCorridor');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 54){
         if(!this.currentRoomTileArray[0].classList.contains('gameRoom')){
           this.currentRoomTileArray[0].classList.add('gameRoom');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 62){
         if(!this.currentRoomTileArray[0].classList.contains('kitchen')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('kitchen');
         }
       }
       else if(this.currentRoomTileId === 47){
         if(!this.currentRoomTileArray[0].classList.contains('abandonedRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('abandonedRoom');
         }
       }
@@ -359,32 +417,24 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.currentRoomTileId === 56){
         if(!this.currentRoomTileArray[0].classList.contains('gardens')){
           this.currentRoomTileArray[0].classList.add('gardens');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 97){
         if(!this.currentRoomTileArray[0].classList.contains('balcony')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('balcony');
         }
       }
       else if(this.currentRoomTileId === 103){
         if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('charredRoom');
         }
       }
       else if(this.currentRoomTileId === 111){
         if(!this.currentRoomTileArray[0].classList.contains('gallery')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('gallery');
         }
       }
@@ -396,9 +446,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 113){
         if(!this.currentRoomTileArray[0].classList.contains('chapel')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('chapel');
         }
       }
@@ -408,24 +456,18 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.currentRoomTileId === 235){
         if(!this.currentRoomTileArray[0].classList.contains('crypt')){
           this.currentRoomTileArray[0].classList.add('crypt');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 242){
         if(!this.currentRoomTileArray[0].classList.contains('researchLaboratory')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('researchLaboratory');
         }
       }
       else if(this.currentRoomTileId === 250){
         if(!this.currentRoomTileArray[0].classList.contains('vault')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('vault');
         }
       }
@@ -437,9 +479,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 218){
         if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('catacombs');
         }
       }
@@ -447,7 +487,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
     //right
     if(this.key === 39 && (this.currentRoomTileId === 22 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 32 || this.currentRoomTileId === 39 || this.currentRoomTileId === 46 || this.currentRoomTileId === 48 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 54 || this.currentRoomTileId === 62 || this.currentRoomTileId === 81 || this.currentRoomTileId === 89 || this.currentRoomTileId === 97 || this.currentRoomTileId === 95 || this.currentRoomTileId === 105 || this.currentRoomTileId === 113 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 201 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 211 || this.currentRoomTileId === 218 || this.currentRoomTileId === 219 || this.currentRoomTileId === 228 || this.currentRoomTileId === 235 || this.currentRoomTileId === 234 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250)){
-      console.log("FACEPLANT LOL");
+      // console.log("FACEPLANT LOL");
     }
     else if(this.key === 39){
       this.currentRoomTileId += 1;
@@ -464,24 +504,18 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       if(this.currentRoomTileId === 32){
         if(!this.currentRoomTileArray[0].classList.contains('library')){
           this.currentRoomTileArray[0].classList.add('library');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 48){
         if(!this.currentRoomTileArray[0].classList.contains('patio')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('patio');
         }
       }
       else if(this.currentRoomTileId === 88){
         if(!this.currentRoomTileArray[0].classList.contains('tower')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('tower');
         }
       }
@@ -490,9 +524,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 104){
         if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('bedroom');
         }
       }
@@ -501,9 +533,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 106){
         if(!this.currentRoomTileArray[0].classList.contains('masterBedroom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('masterBedroom');
         }
       }
@@ -516,9 +546,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.currentRoomTileId === 211){
         if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('furnaceRoom');
         }
       }
@@ -545,7 +573,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     //left
     else if(this.key === 37 && (this.currentRoomTileId === 21 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 30 || this.currentRoomTileId === 54 || this.currentRoomTileId === 46 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 81 || this.currentRoomTileId === 87 || this.currentRoomTileId === 95 || this.currentRoomTileId === 103 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 113 || this.currentRoomTileId === 97 || this.currentRoomTileId === 201 || this.currentRoomTileId === 209 || this.currentRoomTileId === 218 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 219 || this.currentRoomTileId === 225 || this.currentRoomTileId === 234 || this.currentRoomTileId === 235 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250 || this.currentRoomTileId === 47)){
-      console.log("FACEPLANT LOL");
+      // console.log("FACEPLANT LOL");
     }
     else if(this.key === 37){
       this.currentRoomTileId -= 1;
@@ -561,74 +589,56 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       if(this.currentRoomTileId === 30){
         if(!this.currentRoomTileArray[0].classList.contains('diningRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('diningRoom');
         }
       }
       else if(this.currentRoomTileId === 21){
         if(!this.currentRoomTileArray[0].classList.contains('junkroom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('junkroom');
         }
       }
       else if(this.currentRoomTileId === 87){
         if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('operatingLaboratory');
         }
       }
       else if(this.currentRoomTileId === 88){
         if(!this.currentRoomTileArray[0].classList.contains('tower')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('tower');
         }
       }
       else if(this.currentRoomTileId === 103){
         if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('charredRoom');
         }
       }
       else if(this.currentRoomTileId === 104){
         if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
           this.currentRoomTileArray[0].classList.add('bedroom');
         }
       }
       //basement
       else if(this.currentRoomTileId === 210){
         if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('servantsQuarters');
         }
       }
       else if(this.currentRoomTileId === 209){
         if (!this.currentRoomTileArray[0].classList.contains('undergroundLake')){
           this.currentRoomTileArray[0].classList.add('undergroundLake');
-          this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.eventCardResolution();
         }
       }
       else if(this.currentRoomTileId === 225){
         if(!this.currentRoomTileArray[0].classList.contains('pentagramChamber')){
-          this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
-            this.chosenEvent = dataLastEmittedFromObserver;
-          })
+          this.omenCardResolution();
           this.currentRoomTileArray[0].classList.add('pentagramChamber');
         }
       }
