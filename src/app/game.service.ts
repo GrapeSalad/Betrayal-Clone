@@ -43,9 +43,11 @@ export class GameService {
   diceToRoll(num: number){
     var dieRoll: number = 0;
     for(var i=0; i<num; i++){
-      dieRoll += this.getRandomNumber(0,2);
-      console.log("die roll: " + dieRoll);
+      var randNum = this.getRandomNumber(0,2)
+      dieRoll += randNum;
+      console.log(i + " die roll: " + randNum);
     }
+    console.log("total die roll: " + dieRoll);
     return dieRoll;
   }
 
@@ -253,15 +255,14 @@ export class GameService {
       return damageDone;
     }
     else if(Number(cardId) === 13){
-      //each explorer in the basement must attempt a sanity roll
       var roll: number = this.diceToRoll(sanity);
       if(roll >=1 && roll <= 3){
         var roll1: number = this.diceToRoll(1);
         //should be mental damage
         damageDone.push("sanity", -roll1);
       }
-      else{
-          var roll2: number = this.diceToRoll(1);
+      else if(roll === 0){
+          var roll2: number = this.diceToRoll(2);
           //should be mental damage
           damageDone.push("sanity", -roll2);
         }
@@ -385,6 +386,9 @@ export class GameService {
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
         damageDone.push("sanity", -1);
+      } else {
+        damageDone.push("sanity", -1);
+        damageDone.push("might", -1);
       }
       console.log(damageDone);
       return damageDone;
