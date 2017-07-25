@@ -1,10 +1,11 @@
+<div *ngIf="startScreen" class="start-screen">
+  <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
+  <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
+  <p>To start the game press enter</p>
+  <p>Move around using the arrow keys</p>
+</div>
 <div class="board-container">
-  <div *ngIf="startScreen" class="start-screen">
-    <p>YOUR CHARACTER: {{selectedCharacter?.name}}</p>
-    <p>YOUR FRIEND: {{selectedFriend?.name}}</p>
-    <p>To start the game press enter</p>
-    <p>Move around using the arrow keys</p>
-  </div>
+
 <!--
   <p>{{chosenEvent?.description}}</p>
   <p>{{selectedCharacter?.name}}</p> -->
@@ -15,7 +16,7 @@
 
 <div class="top-row">
   <div class="logo">
-    logo
+    <img src="/assets/img/logo.png" alt="logo">
   </div>
   <div class="haunt-counter">
     haunt counter
@@ -249,7 +250,7 @@
     </div>
     <div class="event-cards">
       <h3>Event</h3>
-      <img src="/assets/img/spiral.png" alt="spiral">  
+      <img src="/assets/img/spiral.png" alt="spiral">
     </div>
   </div>
 
@@ -258,14 +259,17 @@
 <div class="last-row">
   <div class="character-details">
     <div class="portrait">
-      <h5>Character Name</h5>
+      <h5>Heather Granville</h5>
       <div class="character-image">
-
+        <img src="/assets/img/heathergranville.png" alt="heather">
       </div>
     </div>
     <div class="stats">
-
-      character details and stats
+      <h5><b>Might</b> 5</h5>
+      <h5><b>Speed</b> 4</h5>
+      <h5><b>Knowledge</b> 2</h5>
+      <h5><b>Sanity</b> 3</h5>
+      <h5><b>Hobbies</b> Television, Shopping, Frogs, Doctoring</h5>
     </div>
   </div>
   <div class="play-instructions">
