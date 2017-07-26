@@ -244,6 +244,29 @@
     </div>
   </div>
 
+  <div *ngIf="startScreen">
+    <h3>PRESS ENTER AT YOUR OWN RISK</h3>
+  </div>
+
+  <div *ngIf="hauntInfo">
+    <h3>{{hauntCard.haunt}}</h3>
+    <p>{{hauntCard.flavor}}</p>
+    <p>What You Know: {{hauntCard.whatYouKnow}}</p>
+    <p>You Win When: {{hauntCard.youWinWhen}}</p>
+    <p>How: {{hauntCard.how}}</p>
+    <button (click)="hideHauntInfo()">Find {{selectedFriend.name}}!</button>
+  </div>
+
+  <div *ngIf="hauntWin">
+    <h3>YOU WIN</h3>
+    <p>{{hauntCard.ifYouWin}}</p>
+  </div>
+
+  <div *ngIf="hauntLose">
+    <h3>YOU LOSE</h3>
+    <p>The house buries you alive too and both you and your friend are stuck in eternal darkness</p>
+  </div>
+
   <div *ngIf="death">
     <h3>GAME OVER</h3>
   </div>
