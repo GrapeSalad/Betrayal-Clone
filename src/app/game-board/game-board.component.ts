@@ -58,8 +58,15 @@ export class GameBoardComponent implements OnInit {
   omenShow: boolean = false;
   eventShow: boolean = false;
   directionShow: boolean = true;
+  groundToUpstairs: boolean = false;
+  hitWall: boolean = false;
+  upstairsToGround: boolean = false;
+  groundToBasement: boolean = false;
+  basementToGround: boolean = false;
   dieRoll: number = 0;
   burielRoomId;
+  buriedFriendLife: number = 0;
+  movesRemaining: number = 18;
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
@@ -71,6 +78,15 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     var burialRoom = document.getElementById(basementRooms[randNum]);
     burialRoom.classList.add('burialRoom');
     console.log(burialRoom + " is where " + this.selectedFriend.name + " is");
+  }
+
+  isFriendAlive(){
+    this.buriedFriendLife += 1;
+    this.movesRemaining -= 1;
+    if(this.buriedFriendLife >= 18){
+      this.hauntLose = true;
+    }
+    console.log(this.buriedFriendLife);
   }
 
   getHauntInfo(){
@@ -809,14 +825,15 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     //enter Key to start game
     if(this.key === 13){
       this.startScreen = false;
-      var tag = document.getElementById('knowledge');
+      setTimeout(()=>{var tag = document.getElementById('knowledge');
       tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('speed');
       tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('might');
       tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('sanity');
-      tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+      tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');}, 300)
+
       if(this.haunt === false) {
         setTimeout(()=>{this.setBeginningTile()}, 300);
       }
@@ -852,7 +869,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
       }
       //up to foyer from basement stairs
+      if(this.currentRoomTileId === 201){
+        this.basementToGround = true;
+      }
       if(this.key === 38 && this.currentRoomTileId === 201){
+        this.groundToBasement = false;
+        this.basementToGround = false;
         this.currentRoomTileId = 38;
         this.groundShow = true;
         if (this.currentRoomTileArray.length === 0) {
@@ -868,7 +890,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       //up
       else if(this.key === 38 && (this.currentRoomTileId === 37 || this.currentRoomTileId === 32 || this.currentRoomTileId === 23 || this.currentRoomTileId === 22 || this.currentRoomTileId === 21 || this.currentRoomTileId === 81 || this.currentRoomTileId === 48 || this.currentRoomTileId === 87 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 203 || this.currentRoomTileId === 202 || this.currentRoomTileId === 225 || this.currentRoomTileId === 228 || this.currentRoomTileId === 38)){
-        // console.log("FACEPLANT LOL");
+        this.hitWall = true;
+        setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 38){
         this.currentRoomTileId -= 8;
@@ -876,11 +899,17 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         }
         if(this.currentRoomTileId === 31){
           this.currentRoomTileArray[0].classList.add('bloodyRoom');
@@ -963,19 +992,26 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
 
       //down to the basement from the coal coalChute
-      if(this.currentRoomTileId === 55){
+        if(this.currentRoomTileId === 55){
         this.currentRoomTileId = 226;
+        this.groundToBasement = true;
         this.groundShow = false;
         this.basementShow = true;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         }
         if(this.currentRoomTileId === 226){
           this.currentRoomTileArray[0].classList.add("basementLanding");
@@ -983,7 +1019,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       //down
       else if(this.key === 40 && (this.currentRoomTileId === 29 || this.currentRoomTileId === 37 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 32 || this.currentRoomTileId === 30 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 113 || this.currentRoomTileId === 119 || this.currentRoomTileId === 209 || this.currentRoomTileId === 228 || this.currentRoomTileId === 225 || this.currentRoomTileId === 235 || this.currentRoomTileId === 250)){
-        // console.log("FACEPLANT LOL");
+        this.hitWall = true;
+        setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 40){
         this.currentRoomTileId += 8;
@@ -1103,7 +1140,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
       //right
       if(this.key === 39 && (this.currentRoomTileId === 22 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 32 || this.currentRoomTileId === 39 || this.currentRoomTileId === 46 || this.currentRoomTileId === 48 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 54 || this.currentRoomTileId === 62 || this.currentRoomTileId === 81 || this.currentRoomTileId === 89 || this.currentRoomTileId === 97 || this.currentRoomTileId === 95 || this.currentRoomTileId === 105 || this.currentRoomTileId === 113 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 201 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 211 || this.currentRoomTileId === 218 || this.currentRoomTileId === 219 || this.currentRoomTileId === 228 || this.currentRoomTileId === 235 || this.currentRoomTileId === 234 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250)){
-        // console.log("FACEPLANT LOL");
+        this.hitWall = true;
+        setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 39){
         this.currentRoomTileId += 1;
@@ -1111,11 +1149,17 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         }
         if(this.currentRoomTileId === 32){
           if(!this.currentRoomTileArray[0].classList.contains('library')){
@@ -1169,7 +1213,11 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
 
       //left movement to upstairs from grand staircase
+      if(this.currentRoomTileId === 37){
+        this.groundToUpstairs = true;
+      }
       if(this.key === 37 && this.currentRoomTileId === 37){
+        this.groundToUpstairs = false;
         this.groundShow = false;
         this.upstairsShow = true;
         this.currentRoomTileId = 95;
@@ -1189,7 +1237,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       //left
       else if(this.key === 37 && (this.currentRoomTileId === 21 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 30 || this.currentRoomTileId === 54 || this.currentRoomTileId === 46 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 81 || this.currentRoomTileId === 87 || this.currentRoomTileId === 95 || this.currentRoomTileId === 103 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 113 || this.currentRoomTileId === 97 || this.currentRoomTileId === 201 || this.currentRoomTileId === 209 || this.currentRoomTileId === 218 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 219 || this.currentRoomTileId === 225 || this.currentRoomTileId === 234 || this.currentRoomTileId === 235 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250 || this.currentRoomTileId === 47)){
-        // console.log("FACEPLANT LOL");
+        this.hitWall = true;
+        setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 37){
         this.currentRoomTileId -= 1;
@@ -1197,11 +1246,17 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          if(this.haunt === true){
+            this.isFriendAlive();
+          }
         }
         if(this.currentRoomTileId === 30){
           if(!this.currentRoomTileArray[0].classList.contains('diningRoom')){
