@@ -48,7 +48,11 @@ export class GameBoardComponent implements OnInit {
   rollKnowledge: boolean = false;
   statAffectedArray;
   hauntCounter: number = 0;
+  hauntCard;
+  hauntWin: boolean = false;
+  hauntLose: boolean = false;
   haunt: boolean = false;
+  hauntInfo: boolean = false;
   death: boolean = false;
   omenShow: boolean = false;
   eventShow: boolean = false;
@@ -57,121 +61,147 @@ export class GameBoardComponent implements OnInit {
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
+  buryFriend(){
+    var randNum = this.gameService.getRandomNumber(0,14);
+    var basementRooms: any[] = [202, 203, 210, 211, 209, 218, 219, 225, 226, 227, 228, 235, 234, 242, 250];
+    var burialRoom = document.getElementById(basementRooms[randNum]);
+    burialRoom.classList.add('burialRoom');
+    console.log(burialRoom + " is where " + this.selectedFriend.name + " is");
+  }
+
+  getHauntInfo(){
+    this.hauntInfo = true;
+  }
+
+  hideHauntInfo(){
+    this.hauntInfo = false;
+  }
+
   omenCardResolution(){
     this.omenShow = true;
     this.eventShow = false;
     this.directionShow = false;
-    this.hauntCounter += 1;
-    var hauntDieRoll = this.gameService.diceToRoll(6);
-    if(this.hauntCounter <= hauntDieRoll){
-      this.haunt = false;
-    }else{
-      this.haunt = true;
+    if(this.haunt === false){
+      this.hauntCounter += 1;
+      var hauntDieRoll = this.gameService.diceToRoll(6);
+      if(this.hauntCounter <= hauntDieRoll){
+        this.haunt = false;
+      }else{
+        this.haunt = true;
+        this.getHauntInfo();
+        this.buryFriend();
+      }
     }
     console.log(this.haunt + " haunt after roll");
     this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
       this.chosenOmen = dataLastEmittedFromObserver;
+      console.log("omen card: " + this.chosenOmen.omen);
+      console.log("omen card: " + this.chosenOmen.description);
       this.cardId = dataLastEmittedFromObserver.$key;
-      this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
+      this.statAffectedArray = this.gameService.getOmenCardEffects(this.cardId);
       // console.log("stat affected array " + this.statAffectedArray);
       var stat = this.statAffectedArray[0];
       var amount = this.statAffectedArray[1];
       if(stat === "sanity"){
         console.log("omen sanity " + this.currentSanityIndex);
-        if(this.currentSanityIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('sanity');
-          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentSanityIndex += addLifeRoll;
-        } else if(this.currentSanityIndex <= 0 && this.haunt === true){
+
+        if((this.currentSanityIndex <= 0 || (this.currentSanityIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('sanity');
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
-        this.currentSanityIndex += Number(amount);
+        if((this.haunt === false || this.haunt === true) && this.currentSanityIndex + amount > 8){
+          this.currentSanityIndex = 8;
+        }else if(this.haunt === false && (this.currentSanityIndex + amount < 1)){
+          this.currentSanityIndex = 1;
+        }
+        else{
+          this.currentSanityIndex += Number(amount);
+        }
         // console.log("currentSanityIndex: " + this.currentSanityIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
         }
         console.log("omen sanity after " + this.currentSanityIndex);
+        if(this.currentSanityIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "speed"){
         console.log("omen speed " + this.currentSpeedIndex);
-        if(this.currentSpeedIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('speed');
-          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
-         var addLifeRoll = this.gameService.diceToRoll(3);
-         if(addLifeRoll === 0){
-           this.death = true;
-         }
-         this.currentSpeedIndex += addLifeRoll;
-       }else if(this.currentSpeedIndex <= 0 && this.haunt === true){
+       if((this.currentSpeedIndex <= 0 || (this.currentSpeedIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('speed');
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
-        this.currentSpeedIndex += Number(amount);
+        if((this.haunt === false || this.haunt === true) && this.currentSpeedIndex + amount > 8){
+          this.currentSpeedIndex = 8;
+        }else if(this.haunt === false && (this.currentSpeedIndex + amount < 1)){
+          this.currentSpeedIndex = 1;
+        }
+        else{
+          this.currentSpeedIndex += Number(amount);
+        }
         // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
         }
         console.log("omen speed after " + this.currentSpeedIndex);
+        if(this.currentSpeedIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "might"){
         console.log("omen might " + this.currentMightIndex);
-        if(this.currentMightIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('might');
-          tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentMightIndex += addLifeRoll;
-        }else if(this.currentMightIndex <= 0 && this.haunt === true){
+        if((this.currentMightIndex <= 0 || (this.currentMightIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('might');
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
-        this.currentMightIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentMightIndex + amount > 8){
+          this.currentMightIndex = 8;
+        }else if(this.haunt === false && (this.currentMightIndex + amount < 1)){
+          this.currentMightIndex = 1;
+        }
+        else{
+          this.currentMightIndex += Number(amount);
+        }
         // console.log("currentMightIndex: " + this.currentMightIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
         }
         console.log("omen might after " + this.currentMightIndex);
+        if(this.currentMightIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "knowledge"){
         console.log("omen knowledge " + this.currentKnowledgeIndex);
-        if(this.currentKnowledgeIndex <= 0 && this.haunt === false){
-          console.log()
-          console.log("reroll your life");
-          var tag = document.getElementById('knowledge');
-          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentKnowledgeIndex += addLifeRoll;
-        }else if(this.currentKnowledgeIndex <= 0 && this.haunt === true){
+        if((this.currentKnowledgeIndex <= 0 || (this.currentKnowledgeIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('knowledge');
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
-        this.currentKnowledgeIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentKnowledgeIndex + amount > 8){
+          this.currentKnowledgeIndex = 8;
+        }else if(this.haunt === false && (this.currentKnowledgeIndex + amount < 1)){
+          this.currentKnowledgeIndex = 1;
+        }
+        else{
+          this.currentKnowledgeIndex += Number(amount);
+        }
         // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
         }
         console.log("omen knowledge after " + this.currentKnowledgeIndex);
+        if(this.currentKnowledgeIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
     })
   }
@@ -182,6 +212,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.directionShow = false;
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenEvent = dataLastEmittedFromObserver;
+      console.log("event card: " + this.chosenEvent.event);
+      console.log("event card: " + this.chosenEvent.description);
       this.cardId = dataLastEmittedFromObserver.$key;
       if(this.chosenEvent.sanity){
         this.rollSanity = true;
@@ -207,102 +239,103 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       var amount = this.statAffectedArray[1];
       if(stat === "sanity"){
         console.log("event sanity " + this.currentSanityIndex);
-        if(this.currentSanityIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('sanity');
-          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentSanityIndex += addLifeRoll;
-        } else if(this.currentSanityIndex <= 0 && this.haunt === true){
+        if((this.currentSanityIndex <= 0 || (this.currentSanityIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('sanity');
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
-        this.currentSanityIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentSanityIndex + amount > 8){
+          this.currentSanityIndex = 8;
+        }else if(this.haunt === false && (this.currentSanityIndex + amount < 1)){
+          this.currentSanityIndex = 1;
+        }
+        else{
+          this.currentSanityIndex += Number(amount);
+        }
         // console.log("currentSanityIndex: " + this.currentSanityIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
         }
         console.log("event sanity after " + this.currentSanityIndex);
+        if(this.currentSanityIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "speed"){
         console.log("event speed " + this.currentSpeedIndex);
-        if(this.currentSpeedIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('speed');
-          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
-         var addLifeRoll = this.gameService.diceToRoll(3);
-         if(addLifeRoll === 0){
-           this.death = true;
-         }
-         this.currentSpeedIndex += addLifeRoll;
-       }else if(this.currentSpeedIndex <= 0 && this.haunt === true){
+        if((this.currentSpeedIndex <= 0 || (this.currentSpeedIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('speed');
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
-        this.currentSpeedIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentSpeedIndex + amount > 8){
+          this.currentSpeedIndex = 8;
+        }else if(this.haunt === false && (this.currentSpeedIndex + amount < 1)){
+          this.currentSpeedIndex = 1;
+        }
+        else{
+          this.currentSpeedIndex += Number(amount);
+        }
         // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
         }
         console.log("event speed after " + this.currentSpeedIndex);
+        if(this.currentSpeedIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "might"){
         console.log("event might " + this.currentMightIndex);
-        if(this.currentMightIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('might');
-          tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentMightIndex += addLifeRoll;
-        }else if(this.currentMightIndex <= 0 && this.haunt === true){
+        if((this.currentMightIndex <= 0 || (this.currentMightIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('might');
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
-        this.currentMightIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentMightIndex + amount > 8){
+          this.currentMightIndex = 8;
+        }else if(this.haunt === false && (this.currentMightIndex + amount < 1)){
+          this.currentMightIndex = 1;
+        }
+        else{
+          this.currentMightIndex += Number(amount);
+        }
         // console.log("currentMightIndex: " + this.currentMightIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
         }
         console.log("event might after " + this.currentMightIndex);
+        if(this.currentMightIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
       else if(stat === "knowledge"){
         console.log("event knowledge " + this.currentKnowledgeIndex);
-        if(this.currentKnowledgeIndex <= 0 && this.haunt === false){
-          console.log("reroll your life");
-          var tag = document.getElementById('knowledge');
-          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
-          var addLifeRoll = this.gameService.diceToRoll(3);
-          if(addLifeRoll === 0){
-            this.death = true;
-          }
-          this.currentKnowledgeIndex += addLifeRoll;
-        }else if(this.currentKnowledgeIndex <= 0 && this.haunt === true){
+        if((this.currentKnowledgeIndex <= 0 || (this.currentKnowledgeIndex + amount < 1)) && this.haunt === true){
           console.log("dead? " + this.death);
           this.death = true;
         }
         var tag = document.getElementById('knowledge');
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
-        this.currentKnowledgeIndex += Number(amount);
+        if((this.haunt === true || this.haunt === false) && this.currentKnowledgeIndex + amount > 8){
+          this.currentKnowledgeIndex = 8;
+        }else if(this.haunt === false && (this.currentKnowledgeIndex + amount < 1)){
+          this.currentKnowledgeIndex = 1;
+        }
+        else{
+          this.currentKnowledgeIndex += Number(amount);
+        }
         // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
         if(this.death === false){
           tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
         }
         console.log("event knowledge after " + this.currentKnowledgeIndex);
+        if(this.currentKnowledgeIndex <=0 && this.haunt === true){
+          this.death = true;
+        }
       }
     })
   }
@@ -322,7 +355,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       var tag = document.getElementById('sanity');
       tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
     }
-    if(this.death === false){
+    if(this.death === true && (this.key === 37 || this.key === 38 || this.key === 39 || this.key === 40)){
+      console.log("it is the " + this.death + " death");
+    }
+    else{
       //go downstairs from upper landing
       if(this.currentRoomTileId === 95 && this.key === 13){
         this.currentRoomTileId = 37;
@@ -759,6 +795,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   ngOnInit() {
     this.currentRoomTileId = 39;
     this.characterService.getSelectedCharacters().subscribe(dataLastEmittedFromObserver =>{
+      if(dataLastEmittedFromObserver.length > 2){
+        for(var i=0; i < (dataLastEmittedFromObserver.length-2); i++){
+          var charToRemove = this.getCharacterById(dataLastEmittedFromObserver[i].$key);
+          charToRemove.remove();
+        }
+      }
       this.selectedCharacter = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2];
       this.selectedFriend = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-1];
       this.currentSanityIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].sanity.initialIndex;
@@ -767,6 +809,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.currentMightIndex = dataLastEmittedFromObserver[dataLastEmittedFromObserver.length-2].might.initialIndex;
     })
 
+    this.gameService.getHaunt().subscribe(dataLastEmittedFromObserver =>{
+      this.hauntCard = dataLastEmittedFromObserver[0];
+    })
 
     this.gameService.getStaticRoomTiles().subscribe(dataLastEmittedFromObserver => {
       this.staticRoomTiles = dataLastEmittedFromObserver;
