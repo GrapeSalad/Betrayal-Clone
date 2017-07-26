@@ -64,12 +64,20 @@ export class GameBoardComponent implements OnInit {
   groundToBasement: boolean = false;
   basementToGround: boolean = false;
   dieRoll: number = 0;
+  showDieRoll: boolean = false;
   burielRoomId;
   buriedFriendLife: number = 0;
   movesRemaining: number = 18;
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
+
+  getDieRoll(){
+    this.showDieRoll = true;
+    setTimeout(()=>{this.showDieRoll = false;}, 6000);
+    var d = document.getElementsByClassName("dice-image");
+    d[0].classList.remove("diceImageFlash");
+  }
 
   buryFriend(){
     var randNum = this.gameService.getRandomNumber(0,14);
@@ -177,6 +185,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     if(Number(cardId) === 15){
       var roll: number = this.gameService.diceToRoll(2);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll === 4){
         damageDone.push("sanity", 1);
@@ -202,6 +214,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 0){
       var roll: number = this.gameService.diceToRoll(speed);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("speed", 1);
@@ -218,16 +232,22 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 3){
       var roll: number = this.gameService.diceToRoll(1);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       //should be mental damage
       damageDone.push("sanity", -roll);
       var roll1: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll1;
       if(roll1 >= 5){
         damageDone.push("knowledge", 1);
       }
       else{
         var roll2: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         //should be mental damage
         damageDone.push("knowledge", -roll2);
@@ -238,17 +258,23 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     else if(Number(cardId) === 4){
       //add choice for speed or sanity
       var roll: number = this.gameService.diceToRoll(speed);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("speed", 1);
       } else if(roll >= 1){
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be physical damage
         damageDone.push("speed", -roll1);
       }
       else{
         var roll2: number = this.gameService.diceToRoll(2);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         //should be physical damage
         damageDone.push("speed", -roll2);
@@ -258,21 +284,29 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 5){
       var roll: number = this.gameService.diceToRoll(speed);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 5){
         damageDone.push("speed", 1);
       } else if(roll >= 2){
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be mental damage
         damageDone.push("knowledge", -roll1);
       }
       else{
         var roll3: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll3;
         //should be physical damage
         damageDone.push("speed", -roll3);
         var roll2: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         //should be mental damage
         damageDone.push("sanity", -roll2);
@@ -282,15 +316,21 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 6){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 1 && roll <=3){
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be mental damage
         damageDone.push("knowledge", -roll1);
       }
       else{
         var roll1: number = this.gameService.diceToRoll(2);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         //should be mental damage
         damageDone.push("sanity", -roll1);
@@ -300,6 +340,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 7){
       var roll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("knowledge", 1);
@@ -312,6 +354,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 8){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("sanity", 1);
@@ -321,6 +365,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else{
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be physical damage
         damageDone.push("might", -roll1);
@@ -330,18 +376,24 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 9){
       var roll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 5){
         damageDone.push("knowledge", 1);
         damageDone.push("sanity", 1);
       } else if(roll >= 2){
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be physical damage
         damageDone.push("speed", -roll1);
       }
       else{
         var roll2: number = this.gameService.diceToRoll(2);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         //should be physical damage
         damageDone.push("speed", -roll2);
@@ -351,12 +403,16 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 10){
       var roll: number = this.gameService.diceToRoll(6);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= numberOfOmenCardsDrawn){
         damageDone.push("sanity", 1);
       }
       else{
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be mental damage
         damageDone.push("knowledge", -roll1);
@@ -371,6 +427,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     else if(Number(cardId) === 12){
       //if in the gardens, roll 2 fewer die
       var roll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("knowledge", 1);
@@ -378,9 +436,13 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else{
         //computer roll Might 4 attack
         var roll1: number = this.gameService.diceToRoll(4);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //player roll
         var roll2: number = this.gameService.diceToRoll(might);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll2;
         if (roll1 > roll2) {
           damageDone.push("might", -(roll1-roll2));
@@ -391,15 +453,21 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 13){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >=1 && roll <= 3){
         var roll1: number = this.gameService.diceToRoll(1);
+        var d = document.getElementsByClassName("dice-image");
+        d[0].classList.add("diceImageFlash");
         this.dieRoll = roll1;
         //should be mental damage
         damageDone.push("sanity", -roll1);
       }
       else if(roll === 0){
           var roll2: number = this.gameService.diceToRoll(2);
+          var d = document.getElementsByClassName("dice-image");
+          d[0].classList.add("diceImageFlash");
           this.dieRoll = roll2;
           //should be mental damage
           damageDone.push("sanity", -roll2);
@@ -410,6 +478,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 14){
       var roll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("knowledge", 1);
@@ -420,6 +490,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     else if(Number(cardId) === 16){
       //choose any trait to roll
       var roll: number = this.gameService.diceToRoll(chosenTrait);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push(chosenTrait, 1);
@@ -432,6 +504,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 17){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 5){
         damageDone.push("sanity", 1);
@@ -452,6 +526,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 18){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("sanity", 1);
@@ -467,12 +543,20 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 19){
       var sanityRoll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = sanityRoll;
       var knowledgeRoll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = knowledgeRoll;
       var speedRoll: number = this.gameService.diceToRoll(speed);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = speedRoll;
       var mightRoll: number = this.gameService.diceToRoll(might);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = mightRoll;
       if(sanityRoll >= 2 && knowledgeRoll >= 2 && speedRoll >= 2 && mightRoll >= 2){
         damageDone.push(chosenTrait, 1);
@@ -492,6 +576,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 20){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("sanity", 1);
@@ -507,6 +593,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 21){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 5){
         damageDone.push("sanity", 1);
@@ -520,6 +608,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       return damageDone;
     } else if(Number(cardId) === 22){
       var roll: number = this.gameService.diceToRoll(2);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("knowledge", 1);
@@ -531,6 +621,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 23){
       var roll: number = this.gameService.diceToRoll(sanity);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 4){
         damageDone.push("sanity", 1);
@@ -545,6 +637,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(Number(cardId) === 24){
       var roll: number = this.gameService.diceToRoll(knowledge);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = roll;
       if(roll >= 5){
         damageDone.push("knowledge", 1);
@@ -562,6 +656,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     if(this.haunt === false){
       this.hauntCounter += 1;
       var hauntDieRoll = this.gameService.diceToRoll(6);
+      var d = document.getElementsByClassName("dice-image");
+      d[0].classList.add("diceImageFlash");
       this.dieRoll = hauntDieRoll;
       if(this.hauntCounter <= hauntDieRoll){
         this.haunt = false;

@@ -334,9 +334,9 @@
   <div class="dice-roll">
     <div class="dice-words">
       <h3>Your Roll</h3>
-      <h2>{{dieRoll}}</h2>
+      <h2 *ngIf="showDieRoll">{{dieRoll}}</h2>
     </div>
-    <div class="dice-image">
+    <div (click)="getDieRoll()" class="dice-image">
       <img src="/assets/img/dice.png" alt="DIE">
     </div>
   </div>
