@@ -247,7 +247,7 @@
   }],
   "event-cards": [{
     "event": "Something Slimy",
-    "flavor": "What's around your ankle? A bug? A tenticle? A dead hand clawing?",
+    "flavor": "What's around your ankle? A bug? A tentacle? A dead hand clawing?",
     "description": "You much attempt a speed roll. 4+ You break free. Gain 1 Speed. 1-3 Lose 1 Might. 0 Lose 1 Might and 1 Speed.",
     "speed": true
   },{
@@ -290,7 +290,7 @@
   },{
     "event": "Locked Safe",
     "flavor": "Behind a portrait is a wall safe. It is trapped, of course.",
-    "description": "Attempt a Knowledge roll to open the Safe. 5+ You open the Safe. Gain 1 Knowledge. 2-4 Take 1 die of physical damage. The Safe won't open. 0-1 Take 2 dice of physical damage. The Safe won't open.",
+    "description": "Attempt a Knowledge roll to open the Safe. 5+ You open the Safe. Gain 1 Knowledge. 2-4 Take 1 die of physical damage. The Safe won't open. 0-1 Take 2 dice of physical damage and the Safe falls on you.",
     "knowledge": true
   },{
     "event": "Disquieting Sounds",
@@ -299,7 +299,7 @@
   },{
     "event": "Image in the Mirror",
     "flavor": "There is an old mirror in this room.",
-    "description": "Your frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror: THIS WILL HELP Then it whispers something to you through the mirror. Gain 1 Knowledge."
+    "description": "Your frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror: THIS WILL HELP, then whispers something to you. Gain 1 Knowledge."
   },{
     "event": "Groundskeeper",
     "flavor": "You turn to see a man in groundskeeper clothing. He raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.",
@@ -320,9 +320,9 @@
     "flavor": "A phone rings in the room. You feel compelled to answer it.",
     "description": "Roll 2 dice. A sweet little granny voice says: 4 'Tea and cakes! Tea and cakes! You always were my favorite!' Gain 1 Sanity. 3 'I'm always here for you, Pattycakes. Watching...' Gain 1 Knowledge. 1-2 'I'm here, Sweetums! Give us a kiss!' Take 1 die of mental damage. 0 'Bad little children must be punished!' Take 2 dice of physical damage."
   },{
-    "event": "Possession",
-    "flavor": "A shadow separates from the wall. As you stand in shock, the shadow surrounds you and chills you to the core.",
-    "description": "You must choose any one trait and attempt a roll for that trait. 4+ You resist the shadow's corruption. Gain 1 in a trait of your choice. 0-3 The shadow drains your energy. The chosen trait drops to its lowest value. (It doesn't drop to the skull.) If that trait is already at its lowest value, lower a differed trait to its lowest value."
+    "event": "Image in the Mirror",
+    "flavor": "There is an old mirror in this room.",
+    "description": "Your frightened reflection moves on its own. You realize that it is you from another time, and you are in trouble! You need to help, so you write something on the mirror. Lose 1 knowledge in order to help yourself."
   },{
     "event": "Rotten",
     "flavor": "The smell in this room, it's horrible. Smells like death, like blood. A slaugherthouse smell.",
@@ -335,7 +335,7 @@
     "sanity": true
   },{
     "event": "Hanged Men",
-    "flavor": "A breeze chills the room. Before you, three men hand from frayed ropes. They stare at you with cold, dead eyes. The trio swing silently, then fade into dist that falls to the ground. You start to choke.",
+    "flavor": "A breeze chills the room. Before you, three men hang from frayed ropes. They stare at you with cold, dead eyes. The trio swing silently, then fade into dust that falls to the ground. You start to choke.",
     "description": "You must attempt a roll for each trait: 2+ That trait is unaffected. 0-1 Lose 1 from that trait. If you roll a 2+ on all 4 rolls, gain 1 additional point in a trait of your choice.",
     "knowledge": true,
     "sanity": true,
@@ -344,7 +344,7 @@
   },{
     "event": "Funeral",
     "flavor": "You see an open coffin. You're inside it.",
-    "description": "You must attempt a Sanity roll: 4+ You blink, and it's gone. Gain 1 Sanity. 2-3 The vision disturbs you. Lose 1 Sanity. 0-1 You're really in that coffin. Lose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one).",
+    "description": "You must attempt a Sanity roll: 4+ You blink, and it's gone. Gain 1 Sanity. 2-3 The vision disturbs you. Lose 1 Sanity. 0-1 You're really in that coffin. Lose 1 Sanity and 1 Might as you dig yourself out.",
     "sanity": true
   },{
     "event": "Creepy Crawlies",
