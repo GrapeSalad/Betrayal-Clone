@@ -75,7 +75,468 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   hideHauntInfo(){
     this.hauntInfo = false;
+
   }
+  setBeginningTile(){
+    console.log(document.getElementById('39'))
+    // var beginRoomTileArray = ;
+    document.getElementById('39').classList.add('active');
+    // console.log(beginRoomTileArray + " after");
+  }
+
+  getOmenCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
+    var damageDone: any[] = [];
+    var chosenTrait: number;
+    if(speed != null){
+      chosenTrait = speed;
+    }
+    else if(might != null){
+      chosenTrait = might;
+    }
+    else if(sanity != null){
+      chosenTrait = sanity;
+    }
+    else{
+      chosenTrait = knowledge;
+    }
+    if(Number(cardId) === 0){
+      //hauntRoll
+      return damageDone;
+    } else if(Number(cardId) === 1){
+      //hauntRoll
+      damageDone.push("might", 2);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 2){
+      //hauntRoll
+      damageDone.push("might", 1);
+      damageDone.push("sanity", 1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 3){
+      //hauntRoll
+      damageDone.push("might", -1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 4){
+      //hauntRoll
+      damageDone.push("might", 2);
+      damageDone.push("sanity", -1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 5){
+      //hauntRoll
+      damageDone.push("knowledge", 1);
+      damageDone.push("sanity", 1);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 6){
+      //hauntRoll
+      damageDone.push("knowledge", 2);
+      // console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 7){
+      //hauntRoll
+      damageDone.push("sanity", 2);
+      // console.log(damageDone);
+      return damageDone;
+    }
+  }
+
+  getEventCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
+    var damageDone: any[] = [];
+    var chosenTrait: number;
+    if(speed != null){
+      chosenTrait = speed;
+    }
+    else if(might != null){
+      chosenTrait = might;
+    }
+    else if(sanity != null){
+      chosenTrait = sanity;
+    }
+    else{
+      chosenTrait = knowledge;
+    }
+    if(Number(cardId) === 15){
+      var roll: number = this.gameService.diceToRoll(2);
+      this.dieRoll = roll;
+      if(roll === 4){
+        damageDone.push("sanity", 1);
+      }
+      else if(roll === 3){
+        damageDone.push("knowledge", 1);
+      }
+      else{//NOTE:STREATCH GOOOOAAAALLLS to add mental/physical damage
+        damageDone.push("sanity", -1);
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 1){
+      damageDone.push("sanity", -1);
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 2){
+      damageDone.push("speed", -1);
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 0){
+      var roll: number = this.gameService.diceToRoll(speed);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("speed", 1);
+      }
+      else if(roll >= 1){
+        damageDone.push("might", -1);
+      }
+      else{
+        damageDone.push("might", -1);
+        damageDone.push("speed", -1);
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 3){
+      var roll: number = this.gameService.diceToRoll(1);
+      this.dieRoll = roll;
+      //should be mental damage
+      damageDone.push("sanity", -roll);
+      var roll1: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll1;
+      if(roll1 >= 5){
+        damageDone.push("knowledge", 1);
+      }
+      else{
+        var roll2: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll2;
+        //should be mental damage
+        damageDone.push("knowledge", -roll2);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 4){
+      //add choice for speed or sanity
+      var roll: number = this.gameService.diceToRoll(speed);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("speed", 1);
+      } else if(roll >= 1){
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be physical damage
+        damageDone.push("speed", -roll1);
+      }
+      else{
+        var roll2: number = this.gameService.diceToRoll(2);
+        this.dieRoll = roll2;
+        //should be physical damage
+        damageDone.push("speed", -roll2);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 5){
+      var roll: number = this.gameService.diceToRoll(speed);
+      this.dieRoll = roll;
+      if(roll >= 5){
+        damageDone.push("speed", 1);
+      } else if(roll >= 2){
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be mental damage
+        damageDone.push("knowledge", -roll1);
+      }
+      else{
+        var roll3: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll3;
+        //should be physical damage
+        damageDone.push("speed", -roll3);
+        var roll2: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll2;
+        //should be mental damage
+        damageDone.push("sanity", -roll2);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 6){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 1 && roll <=3){
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be mental damage
+        damageDone.push("knowledge", -roll1);
+      }
+      else{
+        var roll1: number = this.gameService.diceToRoll(2);
+        this.dieRoll = roll2;
+        //should be mental damage
+        damageDone.push("sanity", -roll1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 7){
+      var roll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("knowledge", 1);
+      }
+      else{
+        damageDone.push("sanity", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 8){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        // console.log("move to entrance hall");
+        //move to entrance hall
+      }
+      else{
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be physical damage
+        damageDone.push("might", -roll1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 9){
+      var roll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = roll;
+      if(roll >= 5){
+        damageDone.push("knowledge", 1);
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be physical damage
+        damageDone.push("speed", -roll1);
+      }
+      else{
+        var roll2: number = this.gameService.diceToRoll(2);
+        this.dieRoll = roll2;
+        //should be physical damage
+        damageDone.push("speed", -roll2);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 10){
+      var roll: number = this.gameService.diceToRoll(6);
+      this.dieRoll = roll;
+      if(roll >= numberOfOmenCardsDrawn){
+        damageDone.push("sanity", 1);
+      }
+      else{
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be mental damage
+        damageDone.push("knowledge", -roll1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 11){
+      damageDone.push("knowledge", 1);
+      return damageDone;
+    }
+    else if(Number(cardId) === 12){
+      //if in the gardens, roll 2 fewer die
+      var roll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("knowledge", 1);
+      }
+      else{
+        //computer roll Might 4 attack
+        var roll1: number = this.gameService.diceToRoll(4);
+        this.dieRoll = roll1;
+        //player roll
+        var roll2: number = this.gameService.diceToRoll(might);
+        this.dieRoll = roll2;
+        if (roll1 > roll2) {
+          damageDone.push("might", -(roll1-roll2));
+        }
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 13){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >=1 && roll <= 3){
+        var roll1: number = this.gameService.diceToRoll(1);
+        this.dieRoll = roll1;
+        //should be mental damage
+        damageDone.push("sanity", -roll1);
+      }
+      else if(roll === 0){
+          var roll2: number = this.gameService.diceToRoll(2);
+          this.dieRoll = roll2;
+          //should be mental damage
+          damageDone.push("sanity", -roll2);
+        }
+
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 14){
+      var roll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("knowledge", 1);
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 16){
+      //choose any trait to roll
+      var roll: number = this.gameService.diceToRoll(chosenTrait);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push(chosenTrait, 1);
+      } else{
+        // console.log("trait drops to its lowest value before 0");
+        //trait drops to its lowest value before 0
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 17){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 5){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        damageDone.push("might", -1);
+      } else if(roll >= 1){
+        damageDone.push("might", -1);
+        damageDone.push("speed", -1);
+      }
+      else{
+        damageDone.push("might", -1);
+        damageDone.push("speed", -1);
+        damageDone.push("knowledge", -1);
+        damageDone.push("sanity", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 18){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        damageDone.push("sanity", -1);
+      }
+      else{
+        damageDone.push("sanity", -1);
+        damageDone.push("might", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 19){
+      var sanityRoll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = sanityRoll;
+      var knowledgeRoll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = knowledgeRoll;
+      var speedRoll: number = this.gameService.diceToRoll(speed);
+      this.dieRoll = speedRoll;
+      var mightRoll: number = this.gameService.diceToRoll(might);
+      this.dieRoll = mightRoll;
+      if(sanityRoll >= 2 && knowledgeRoll >= 2 && speedRoll >= 2 && mightRoll >= 2){
+        damageDone.push(chosenTrait, 1);
+      } else if(sanityRoll >= 2 || knowledgeRoll >= 2 || speedRoll >= 2 || mightRoll >= 2){
+        // console.log("nothing happens");
+      } else if(sanityRoll < 1){
+        damageDone.push("sanity", -1);
+      } else if(mightRoll < 1){
+        damageDone.push("might", -1);
+      } else if(speedRoll < 1){
+        damageDone.push("speed", -1);
+      } else {
+        damageDone.push("knowledge", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 20){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        damageDone.push("sanity", -1);
+      }
+      else{
+        damageDone.push("sanity", -1);
+        damageDone.push("might", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 21){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 5){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 1){
+        damageDone.push("sanity", -1);
+      }
+      else{
+        damageDone.push("sanity", -2);
+      }
+      console.log(damageDone);
+      return damageDone;
+    } else if(Number(cardId) === 22){
+      var roll: number = this.gameService.diceToRoll(2);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("knowledge", 1);
+      } else{
+        // console.log("draw an event card");
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 23){
+      var roll: number = this.gameService.diceToRoll(sanity);
+      this.dieRoll = roll;
+      if(roll >= 4){
+        damageDone.push("sanity", 1);
+      } else if(roll >= 2){
+        damageDone.push("sanity", -1);
+      } else {
+        damageDone.push("sanity", -1);
+        damageDone.push("might", -1);
+      }
+      console.log(damageDone);
+      return damageDone;
+    }
+    else if(Number(cardId) === 24){
+      var roll: number = this.gameService.diceToRoll(knowledge);
+      this.dieRoll = roll;
+      if(roll >= 5){
+        damageDone.push("knowledge", 1);
+      }
+      // console.log(damageDone);
+      return damageDone;
+    }
+  }
+
 
   omenCardResolution(){
     this.omenShow = true;
@@ -84,6 +545,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     if(this.haunt === false){
       this.hauntCounter += 1;
       var hauntDieRoll = this.gameService.diceToRoll(6);
+      this.dieRoll = hauntDieRoll;
       if(this.hauntCounter <= hauntDieRoll){
         this.haunt = false;
       }else{
@@ -98,7 +560,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       console.log("omen card: " + this.chosenOmen.omen);
       console.log("omen card: " + this.chosenOmen.description);
       this.cardId = dataLastEmittedFromObserver.$key;
-      this.statAffectedArray = this.gameService.getOmenCardEffects(this.cardId);
+      this.statAffectedArray = this.getOmenCardEffects(this.cardId);
       // console.log("stat affected array " + this.statAffectedArray);
       var stat = this.statAffectedArray[0];
       var amount = this.statAffectedArray[1];
@@ -217,22 +679,22 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.cardId = dataLastEmittedFromObserver.$key;
       if(this.chosenEvent.sanity){
         this.rollSanity = true;
-        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, 0, this.selectedCharacter.sanity.statArray[this.currentSanityIndex], 0);
+        this.statAffectedArray = this.getEventCardEffects(this.cardId, 0, 0, this.selectedCharacter.sanity.statArray[this.currentSanityIndex], 0);
       }
       else if(this.chosenEvent.speed){
         this.rollSpeed = true;
-        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId,  this.selectedCharacter.speed.statArray[this.currentSpeedIndex], 0, 0, 0);
+        this.statAffectedArray = this.getEventCardEffects(this.cardId,  this.selectedCharacter.speed.statArray[this.currentSpeedIndex], 0, 0, 0);
       }
       else if(this.chosenEvent.might){
         this.rollMight = true;
-        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, this.selectedCharacter.might.statArray[this.currentMightIndex],  0, 0);
+        this.statAffectedArray = this.getEventCardEffects(this.cardId, 0, this.selectedCharacter.might.statArray[this.currentMightIndex],  0, 0);
       }
       else if(this.chosenEvent.knowledge){
         this.rollKnowledge = true;
-        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId, 0, 0, 0, this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex]);
+        this.statAffectedArray = this.getEventCardEffects(this.cardId, 0, 0, 0, this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex]);
       }
       else{
-        this.statAffectedArray = this.gameService.getEventCardEffects(this.cardId);
+        this.statAffectedArray = this.getEventCardEffects(this.cardId);
       }
       // console.log("stat affected array " + this.statAffectedArray);
       var stat = this.statAffectedArray[0];
@@ -342,9 +804,11 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
+     
 
     //enter Key to start game
     if(this.key === 13){
+
       this.startScreen = false;
       var tag = document.getElementById('knowledge');
       tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
@@ -354,10 +818,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('sanity');
       tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+      setTimeout(()=>{this.setBeginningTile()}, 300);
     }
     if(this.death === true && (this.key === 37 || this.key === 38 || this.key === 39 || this.key === 40)){
       console.log("it is the " + this.death + " death");
     }
+
     else{
       //go downstairs from upper landing
       if(this.currentRoomTileId === 95 && this.key === 13){
@@ -366,12 +832,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.upstairsShow = false;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('95').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
       }
@@ -381,12 +847,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.groundShow = true;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('201').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
       }
@@ -398,12 +864,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId -= 8;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 31){
@@ -493,12 +959,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.basementShow = true;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 226){
@@ -513,12 +979,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId += 8;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 29){
@@ -633,12 +1099,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId += 1;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 32){
@@ -699,12 +1165,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId = 95;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('37').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 95){
@@ -719,12 +1185,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId -= 1;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
-          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
         }
         if(this.currentRoomTileId === 30){
@@ -819,6 +1285,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.foyer = dataLastEmittedFromObserver[1];
       this.grandStaircase = dataLastEmittedFromObserver[2];
     })
+
+
+
+
   }
 
 }

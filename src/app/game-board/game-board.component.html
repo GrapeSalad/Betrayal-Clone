@@ -239,6 +239,10 @@
     </div>
   </div>
 
+  <div *ngIf="startScreen">
+    <h3>PRESS ENTER AT YOUR OWN RISK</h3>
+  </div>
+
   <div *ngIf="hauntInfo">
     <h3>{{hauntCard.haunt}}</h3>
     <p>{{hauntCard.flavor}}</p>
