@@ -16,24 +16,30 @@ export class GameService {
     this.selectedCharacter = database.list('selectedCharacters');
   }
 
+
+
   getStaticRoomTiles(){
     return this.staticRoomTiles;
   }
 
+  getHaunt(){
+    return this.database.object('/haunts/');
+  }
+
   getRoomTiles(){
-    return this.database.object('/rooms/')
+    return this.database.object('/rooms/');
   }
 
   getEventCardById(cardId: number) {
-    return this.database.object('/event-cards/' + cardId)
+    return this.database.object('/event-cards/' + cardId);
   }
 
   getOmenCardById(cardId: number) {
-    return this.database.object('/omen-cards/' + cardId)
+    return this.database.object('/omen-cards/' + cardId);
   }
 
   getRoomTileById(cardId: number) {
-    return this.database.object('/rooms/' + cardId)
+    return this.database.object('/rooms/' + cardId);
   }
 
   getRandomNumber(min: number, max: number): number{
