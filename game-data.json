@@ -1000,10 +1000,10 @@
   }],
   "haunts": [{
     "haunt": "Buried Alive",
-    "flavor": "The spirit board slides back and forth, back and forth across the letters, moving without anyone's aid. Everyone stares in horrified fascination as it spells out: B U R I E D A L I V E.  Looking around, you realize that you haven't seen your friend since you entered this house. Some twisted magic must have prevented you from remembering! If your friend really is buried alive, you must find that person now.",
-    "what-you-know": "The house has buried your friend in a basement room, but you don't know which room the person is buried in.",
-    "you-win-when": "...you find and dig up the buried person before he or she dies.",
+    "flavor": "You found a spirit board. The planchette slides back and forth, back and forth across the letters, moving without anyone's aid. You stare in horrified fascination as it spells out: B U R I E D A L I V E.  Looking around, you realize that you haven't seen your friend since you entered this house. Some twisted magic must have prevented you from remembering! If your friend really is buried alive, you must find that person now.",
+    "whatYouKnow": "The house has buried your friend in a basement room, but you don't know which room the person is buried in.",
+    "youWinWhen": "...you find and dig up the buried person before he or she dies.",
     "how": "Each time you move into a room, you can search it by attempting a Knowledge roll of 3+ in that room. If you succeed at this roll, ask the house whether this is the burial room. You can search a room only once during your turn. Once you've found the burial room, you can attempt a Might roll of 4+ in that room to help dig up the buried person. You can attempt one roll during your turn. Each time you (the hero) succeed, a Might roll token appears in that room. To save the buried person, you need two tokens.",
-    "if-you-win": "Digging frantically, you finally free your trapped friend. Your companion's fingernails are broken-splintered from clawing at the wooden coffin-and blood runs down their shaking hands. Your friend hasn't made a sound since being freed. Slowly you help them out of the house, sure that with the proper care, they will be good as new...someday."
+    "ifYouWin": "Digging frantically, you finally free your trapped friend. Your companion's fingernails are broken-splintered from clawing at the wooden coffin-and blood runs down their shaking hands. Your friend hasn't made a sound since being freed. Slowly you help them out of the house, sure that with the proper care, they will be good as new...someday."
   }]
 }
