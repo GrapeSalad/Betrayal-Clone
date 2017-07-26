@@ -31,8 +31,17 @@
   }
   .haunt-counter {
     width: 15%;
-    // border: 2px solid blue;
     height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h5 {
+      font-family: ghastly;
+      color: darkred;
+      font-size: 4em;
+      letter-spacing: 5px;
+      text-shadow: 0 0 30px black;
+    }
   }
 }
 
@@ -56,16 +65,17 @@
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    // background-image: url('/assets/img/charbg.jpg');
     background-position: center;
     background-size: cover;
+
     h3 {
       margin: 10px;
-      font-family: spoopy;
+      font-family: ghastly;
       color: darkred;
       font-size: 5em;
       text-shadow: 4px 4px 20px black;
       letter-spacing: 4px;
+      padding: 20px 0;
     }
   }
   .omenevent-cards {
@@ -109,11 +119,11 @@
       }
     }
     .event-cards {
-      height: 400px;
+      height: 380px;
       width: 250px;
       // border: 1px dotted black;
       background-image: url('/assets/img/charbg.jpg');
-      background-color: #59451C;
+      background-color: #185360;
       background-blend-mode: screen;
       border-radius: 20px;
       display: flex;
@@ -151,20 +161,18 @@
   outline: 5px solid #01283a;
   border-radius: 2rem;
   box-shadow: 0px 0px 30px #8fc470;
-  // -webkit-filter: drop-shadow(0px 0px 10px #8fc470);
-  // filter: drop-shadow(0px 0px 10px #8fc470);
 }
 
 // LAST ROW //
 .last-row {
-  // border: 1px solid hotpink;
   height: 20vh;
   display: flex;
-  // margin-top: 20px;
+  font-family: Noto Sans;
+
+
   .character-details {
     height: 20vh;
-    width: 40%;
-    // border: 2px dotted purple;
+    width: 30%;
     display: flex;
     background-image: url('/assets/img/charbg.jpg');
     background-color: #59451C;
@@ -181,6 +189,7 @@
         font-family: necrotype;
         font-size: 1.8em;
         text-align: center;
+        padding-left: 15px;
       }
       .character-image {
         img {
@@ -191,6 +200,7 @@
         }
       }
     }
+
     .stats {
       width: 60%;
       height: 20vh;
@@ -199,15 +209,12 @@
       flex-direction: column;
       #speed, #might, #knowledge, #sanity {
         display: flex;
-        // justify-content: space-between;
-
         h5 {
           margin-top: 12px;
+          margin-left: 35px;
           margin-bottom: 0;
           font-family: necrotype;
           font-size: 1.8em;
-
-
         }
         ul {
           list-style: none;
@@ -219,26 +226,66 @@
             font-family: spoopy;
             font-size: 2.5em;
             display: inline-block;
-
-
           }
-
         }
       }
-
-
     }
   }
+
   .play-instructions {
     height: 20vh;
-    // border: 2px dotted green;
-    width: 80%;
+    width: 40%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    background-image: url('/assets/img/charbg.jpg');
+    background-color: #59451C;
+    background-blend-mode: screen;
+    border-radius: 20px 20px 0px 0px;
+    h5 {
+      margin-top: 12px;
+      margin-left: 35px;
+      margin-bottom: 0;
+      font-family: necrotype;
+      font-size: 1.8em;
+      text-align: center;
+    }
+    h3 {
+      font-family: spoopy;
+      color: darkred;
+      text-align: center;
+      font-size: 3em;
+      letter-spacing: 3px;
+      margin: 40px;
+    }
+    p {
+      margin: 15px 40px;
+      font-family: spoopy;
+      font-size: 2em;
+      letter-spacing: 2px;
+    }
+    .event-drawn {
+      height: 20vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-image: url('/assets/img/charbg.jpg');
+      background-color: #185360;
+      background-blend-mode: screen;
+      border-radius: 20px 20px 0px 0px;
+    }
+    .omen-drawn {
+      height: 20vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      background-image: url('/assets/img/charbg.jpg');
+      background-color: #1C591F;
+      background-blend-mode: screen;
+      border-radius: 20px 20px 0px 0px;
+    }
   }
 }
-
-
-
-
 
 .cell {
   margin: 0;
@@ -246,6 +293,7 @@
   display: inline-block;
   width: 198px;
   height: 198px;
+  border: 1px solid black;
 }
 
 img {
@@ -260,7 +308,6 @@ img {
 }
 
 .active {
-  // border: 1px solid green;
   box-shadow: 0 0 50px #8fc470;
 }
 

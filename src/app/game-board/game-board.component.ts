@@ -50,10 +50,16 @@ export class GameBoardComponent implements OnInit {
   hauntCounter: number = 0;
   haunt: boolean = false;
   death: boolean = false;
+  omenShow: boolean = false;
+  eventShow: boolean = false;
+  directionShow: boolean = true;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
   omenCardResolution(){
+    this.omenShow = true;
+    this.eventShow = false;
+    this.directionShow = false;
     this.hauntCounter += 1;
     var hauntDieRoll = this.gameService.diceToRoll(6);
     if(this.hauntCounter <= hauntDieRoll){
@@ -170,6 +176,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   }
 
   eventCardResolution(){
+    this.eventShow = true;
+    this.omenShow = false;
+    this.directionShow = false;
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenEvent = dataLastEmittedFromObserver;
       this.cardId = dataLastEmittedFromObserver.$key;
