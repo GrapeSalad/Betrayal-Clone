@@ -1,3 +1,50 @@
+@keyframes enterglow {
+  from {
+    text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px black, 0 0 70px black, 0 0 80px black, 0 0 100px black, 0 0 150px black;
+  }
+  to {
+    text-shadow: 0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px #5b0101, 0 0 35px #5b0101, 0 0 40px #5b0101, 0 0 50px #5b0101, 0 0 75px #5b0101;
+  }
+}
+
+// HAUNT CONTAINER //
+.haunt-container {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1;
+  .haunt-info {
+    width: 80%;
+  }
+  h1, h2 {
+    font-family: ghastly;
+    color: darkred;
+    font-size: 9em;
+    letter-spacing: 15px;
+    text-shadow: 5px 5px 20px black;
+    text-align: center;
+    margin: 40px;
+  }
+  p {
+    font-family: spoopy;
+    color: darkred;
+    font-size: 3em;
+    letter-spacing: 5px;
+    text-shadow: 5px 5px 20px black;
+  }
+  h2 {
+    animation: enterglow 1.5s ease-in-out infinite alternate;
+    cursor: pointer;
+  }
+}
+
+// BOARD CONTAINER //
 .board-container {
   // border: 5px dotted black;
   height: 100vh;
@@ -10,12 +57,13 @@
   overflow: hidden;
 }
 
+// ENTER PAGE //
 .start-screen {
   background-image: url('/assets/img/trophyroom.jpg');
   background-position: center;
   background-size: cover;
   height: 100vh;
-  width: auto;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,15 +72,56 @@
     color: darkred;
     font-size: 200px;
     letter-spacing: 15px;
+    text-shadow: 15px 15px 30px black;
+    animation: enterglow 1.5s ease-in-out infinite alternate;
+  }
+}
+
+// WINNING AND LOSING PAGES //
+.youWin {
+  background-image: url('/assets/img/trophyroom.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .winContent, .loseContent {
+    background-color: rgba(138, 137, 133, 0.5);
+    width: 70vw;
+    height: 60vh;
+    border-radius: 20px;
+    border: 2px solid black;
+    padding: 50px;
+
+    h1 {
+      font-family: ghastly;
+      color: darkred;
+      font-size: 10em;
+      letter-spacing: 15px;
+      text-shadow: 5px 5px 20px black;
+      text-align: center;
+    }
+    p {
+      font-family: spoopy;
+      color: darkred;
+      font-size: 4em;
+      letter-spacing: 5px;
+      text-shadow: 5px 5px 20px black;
+    }
   }
 }
 
 // TOP ROW //
 .top-row {
   height: 10vh;
-  // border: 2px solid pink;
   display: flex;
   justify-content: space-between;
+
+  // LOGO //
   .logo {
     width: 15%;
     height: 10vh;
@@ -43,6 +132,8 @@
       filter: drop-shadow(6px 6px 30px #8fc470);
     }
   }
+
+  // HAUNT COUNTER //
   .haunt-counter {
     width: 15%;
     height: 10vh;
@@ -61,14 +152,16 @@
 
 // MIDDLE ROW //
 .middle-row {
-  // border: 2px solid gray;
   height: 65vh;
   display: flex;
+
+  // EMPTY LEFT DIV //
   .emptydiv {
     width: 15%;
     height: 65vh;
-    // border: 1px solid red;
   }
+
+  // GAME BOARD GRID //
   .board-grid {
     background-color: rgba(138, 137, 133, 0.3);
     height: 65vh;
@@ -93,8 +186,9 @@
       padding: 20px 0;
     }
   }
+
+  // OMEN AND EVENT CARDS //
   .omenevent-cards {
-    // border: 1px solid orange;
     height: 65vh;
     width: 15%;
     display: flex;
@@ -102,6 +196,8 @@
     align-self: flex-end;
     justify-content: space-around;
     align-items: center;
+
+    // CROWMENS //
     .omen-cards {
       height: 400px;
       width: 250px;
@@ -129,14 +225,13 @@
         width: 90%;
         height: auto;
         transform: rotateZ(-20deg);
-        // -webkit-filter: drop-shadow(0px 0px 10px black);
-        // filter: drop-shadow(0px 0px 10px black);
       }
     }
+
+    // EVENTS //
     .event-cards {
       height: 380px;
       width: 250px;
-      // border: 1px dotted black;
       background-image: url('/assets/img/charbg.jpg');
       background-color: #185360;
       background-blend-mode: screen;
@@ -160,13 +255,12 @@
         width: 60%;
         height: auto;
         transform: rotateZ(-20deg);
-        // -webkit-filter: drop-shadow(0px 0px 10px black);
-        // filter: drop-shadow(0px 0px 10px black);
       }
     }
   }
 }
 
+  // SCROLLBAR STUFF //
 .board-grid::-webkit-scrollbar {
   background-color: transparent;
 }
@@ -184,7 +278,7 @@
   display: flex;
   font-family: Noto Sans;
 
-
+// CHARACTER DETAILS //
   .character-details {
     height: 20vh;
     width: 30%;
@@ -249,6 +343,7 @@
     }
   }
 
+  // INSTRUCTIONS //
   .play-instructions {
     height: 20vh;
     width: 40%;
@@ -326,6 +421,7 @@
     }
   }
 
+  // DICE ROLLS //
   .dice-roll {
     height: 20vh;
     width: 20%;
@@ -341,7 +437,6 @@
     .dice-image {
       margin-top: 25px;
       margin-left: 20px;
-
     }
     .dice-words {
       text-align: center;
@@ -366,6 +461,8 @@
   }
 }
 
+
+// OTHER SHIT //
 .cell {
   margin: 0;
   padding: 0;
