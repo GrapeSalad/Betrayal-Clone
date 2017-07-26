@@ -60,12 +60,7 @@ export class GameBoardComponent implements OnInit {
   directionShow: boolean = true;
   dieRoll: number = 0;
   burielRoomId;
-  // elem = document.getElementsByClassName('active');
-  // scrollToElement(elem, {
-  //   offset: 0,
-  //   ease: 'out-bounce',
-  //   duration: 1500
-  // });
+
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
@@ -810,7 +805,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
-
 
     //enter Key to start game
     if(this.key === 13){
