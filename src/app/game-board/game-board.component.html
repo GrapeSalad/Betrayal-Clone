@@ -1,10 +1,38 @@
-<div *ngIf="startScreen" class="start-screen">
-  <h1>Press Enter. If you dare...</h1>
-</div>
+  <div *ngIf="hauntInfo" class="haunt-container">
+    <div class="haunt-info">
+      <h1>{{hauntCard.haunt}}</h1>
+      <p>{{hauntCard.flavor}}</p>
+      <p>What You Know: {{hauntCard.whatYouKnow}}</p>
+      <p>You Win When: {{hauntCard.youWinWhen}}</p>
+      <p>How: {{hauntCard.how}}</p>
+      <h2 (click)="hideHauntInfo()">Find {{selectedFriend.name}}</h2>
+    </div>
+  </div>
 
 
 <div class="board-container">
-<div *ngIf="!startScreen && !death" class="top-row">
+  <div *ngIf="hauntWin" class="youWin">
+    <div class="winContent">
+      <h1>VICTORY</h1>
+      <p>{{hauntCard.ifYouWin}}</p>
+      <a routerLink="">Play Again</a>
+    </div>
+  </div>
+
+  <div *ngIf="hauntLose">
+    <div class="loseContent">
+      <h1>YOU LOSE</h1>
+      <p>The house buries you alive too and both you and your friend are stuck in eternal darkness</p>
+    </div>
+  </div>
+
+  <div *ngIf="death">
+    <h3>GAME OVER</h3>
+  </div>
+  <div *ngIf="startScreen" class="start-screen">
+    <h1>Press Enter. If you dare...</h1>
+  </div>
+<div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="top-row">
   <div class="logo">
     <img src="/assets/img/logo.png" alt="logo">
   </div>
@@ -13,7 +41,7 @@
   </div>
 </div>
 
-<div *ngIf="!startScreen && !death" class="middle-row">
+<div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="middle-row">
   <div class="emptydiv"></div>
   <div class="board-grid">
     <!-- <div *ngIf="groundShow"> -->
@@ -244,36 +272,9 @@
     </div>
   </div>
 
-  <div *ngIf="startScreen">
-    <h3>PRESS ENTER AT YOUR OWN RISK</h3>
-  </div>
-
-  <div *ngIf="hauntInfo">
-    <h3>{{hauntCard.haunt}}</h3>
-    <p>{{hauntCard.flavor}}</p>
-    <p>What You Know: {{hauntCard.whatYouKnow}}</p>
-    <p>You Win When: {{hauntCard.youWinWhen}}</p>
-    <p>How: {{hauntCard.how}}</p>
-    <button (click)="hideHauntInfo()">Find {{selectedFriend.name}}!</button>
-  </div>
-
-  <div *ngIf="hauntWin">
-    <h3>YOU WIN</h3>
-    <p>{{hauntCard.ifYouWin}}</p>
-  </div>
-
-  <div *ngIf="hauntLose">
-    <h3>YOU LOSE</h3>
-    <p>The house buries you alive too and both you and your friend are stuck in eternal darkness</p>
-  </div>
-
-  <div *ngIf="death">
-    <h3>GAME OVER</h3>
-  </div>
-
 </div><!-- end middle rowdiv -->
 
-<div *ngIf="!startScreen && !death" class="last-row">
+<div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="last-row">
   <div class="character-details">
     <div class="portrait">
       <h5>{{selectedCharacter?.name}}</h5>
