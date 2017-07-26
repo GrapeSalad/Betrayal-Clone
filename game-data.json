@@ -303,7 +303,7 @@
   },{
     "event": "Groundskeeper",
     "flavor": "You turn to see a man in groundskeeper clothing. He raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.",
-    "description": "You must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.) 4+ You find something in the mud. Gain 1 Knowledge. 0-3 The groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might.",
+    "description": "You must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.) 4+ You find something in the mud. Gain 1 Knowledge. 0-3 The groundskeeper reappears and strikes you in the face with the shovel. The groundskeeper rolls a Might 4 attack against you. You defend against this attack as normal, by rolling dice equal to your Might.",
     "knowledge": true
   },{
     "event": "Mist from the Walls",
