@@ -3,7 +3,7 @@
   <div class="logo">
     <img src="/assets/img/logo.png" alt="logo">
   </div>
-  <div class="haunt-counter">
+  <div *ngIf="!haunt"class="haunt-counter">
     <h5>HAUNT COUNTER: {{hauntCounter}}</h5>
   </div>
 </div>
