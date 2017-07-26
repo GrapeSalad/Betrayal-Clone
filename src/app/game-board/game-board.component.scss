@@ -473,6 +473,12 @@
   box-shadow: 0 0 5px black;
 }
 
+.diceImageFlash {
+  -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
+  filter: drop-shadow(1px 1px 25px #8fc470);
+  cursor: pointer;
+}
+
 img {
   width: 198px;
   height: 198px;

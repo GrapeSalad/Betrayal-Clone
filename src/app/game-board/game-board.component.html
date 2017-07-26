@@ -42,7 +42,15 @@
 </div>
 
 <div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="middle-row">
-  <div class="emptydiv"></div>
+
+  <div class="emptydiv">
+    <div *ngIf="groundToUpstairs"><p>Press the left key to move upstairs while in the grand staircase</p></div>
+    <div *ngIf="hitWall"><p>A false door or a wall is blocking your path</p></div>
+    <div *ngIf="upstairsToGround"><p>Press the enter key to go back downstairs</p></div>
+    <div *ngIf="groundToBasement"><p>You fell to the basement!</p></div>
+    <div *ngIf="basementToGround"><p>Press the up key to go to the ground level</p></div>
+    <div *ngIf="haunt"><p>You have {{movesRemaining}} moves until {{selectedFriend.name}} dies! You better hurry to the basement!</p></div>
+  </div>
   <div class="board-grid">
     <!-- <div *ngIf="groundShow"> -->
     <h3>Ground Floor</h3>
@@ -328,9 +336,9 @@
   <div class="dice-roll">
     <div class="dice-words">
       <h3>Your Roll</h3>
-      <h2>{{dieRoll}}</h2>
+      <h2 *ngIf="showDieRoll">{{dieRoll}}</h2>
     </div>
-    <div class="dice-image">
+    <div (click)="getDieRoll()" class="dice-image">
       <img src="/assets/img/dice.png" alt="DIE">
     </div>
   </div>
