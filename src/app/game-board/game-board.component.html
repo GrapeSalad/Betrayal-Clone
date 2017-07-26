@@ -4,7 +4,7 @@
     <img src="/assets/img/logo.png" alt="logo">
   </div>
   <div class="haunt-counter">
-    HAUNT COUNTER: {{hauntCounter}}
+    <h5>HAUNT COUNTER: {{hauntCounter}}</h5>
   </div>
 </div>
 
@@ -300,12 +300,30 @@
     </div> <!-- end stats div -->
   </div> <!-- end stats div -->
   <div class="play-instructions">
-    instructions for each play
+    <div *ngIf="directionShow" class="direction-instructions">
+      <h5>Explore the house</h5>
+      <h3>Use the arrow keys to explore the house. Entering a room triggers either an omen card or event card.</h3>
+    </div>
+    <div *ngIf="eventShow" class="event-drawn">
+      <h5>{{chosenEvent?.event}}</h5>
+      <p>{{chosenEvent?.flavor}}</p>
+      <p>{{chosenEvent?.description}}</p>
+    </div>
+    <div *ngIf="omenShow" class="omen-drawn">
+      <h5>{{chosenOmen?.omen}}</h5>
+      <p>{{chosenOmen?.flavor}}</p>
+      <p>{{chosenOmen?.description}}</p>
+    </div>
   </div>
+  <div class="dice-roll">
+    <div class="dice-words">
+      <h3>Your Roll</h3>
+      <h2>{{dieRoll}}</h2>
+    </div>
+    <div class="dice-image">
+      <img src="/assets/img/dice.png" alt="DIE">
+    </div>
+  </div>
+
 </div> <!-- end last row div -->
-
 </div> <!-- end board container div -->
-
-<!-- <p>{{chosenEvent?.event}}</p>
-<p>{{chosenEvent?.flavor}}</p>
-<p>{{chosenEvent?.description}}</p> -->
