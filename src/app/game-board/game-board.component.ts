@@ -54,6 +54,7 @@ export class GameBoardComponent implements OnInit {
   eventShow: boolean = false;
   directionShow: boolean = true;
   dieRoll: number = 0;
+  // activeDiv = document.getElementsByClassName("active");
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
@@ -309,6 +310,14 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
+    // for(var i=0; i<this.activeDiv.length; i++){
+    //   if( this.activeDiv[i].classList.contains('active')) {
+    //     // this.activeDiv[i].scrollOffset = this.activeDiv[i].getElementsByClassName('active')[0].topOffset;
+    //     this.activeDiv[i].scrollTop = 1000;
+    //     console.log("hi");
+    //   }
+    //
+    // }
 
     //enter Key to start game
     if(this.key === 13){

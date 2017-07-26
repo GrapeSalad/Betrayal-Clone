@@ -1,5 +1,10 @@
+<div *ngIf="startScreen" class="start-screen">
+  <h1>Press Enter. If you dare...</h1>
+</div>
+
+
 <div class="board-container">
-<div class="top-row">
+<div *ngIf="!startScreen && !death" class="top-row">
   <div class="logo">
     <img src="/assets/img/logo.png" alt="logo">
   </div>
@@ -8,9 +13,9 @@
   </div>
 </div>
 
-<div class="middle-row">
+<div *ngIf="!startScreen && !death" class="middle-row">
   <div class="emptydiv"></div>
-  <div *ngIf="!startScreen && !death" class="board-grid">
+  <div class="board-grid">
     <!-- <div *ngIf="groundShow"> -->
     <h3>Ground Floor</h3>
     <div class="row">
@@ -228,7 +233,7 @@
     <!-- </div> -->
   <!-- </div>   end basement div -->
   </div>   <!-- end board grid div -->
-  <div *ngIf="!startScreen && !death" class="omenevent-cards">
+  <div class="omenevent-cards">
     <div class="omen-cards">
       <h3>Omen</h3>
       <img src="/assets/img/crow.png" alt="crow">
@@ -245,7 +250,7 @@
 
 </div><!-- end middle rowdiv -->
 
-<div class="last-row">
+<div *ngIf="!startScreen && !death" class="last-row">
   <div class="character-details">
     <div class="portrait">
       <h5>{{selectedCharacter?.name}}</h5>
