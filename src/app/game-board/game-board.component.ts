@@ -488,18 +488,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       return damageDone;
     }
     else if(Number(cardId) === 16){
-      //choose any trait to roll
-      var roll: number = this.gameService.diceToRoll(chosenTrait);
-      var d = document.getElementsByClassName("dice-image");
-      d[0].classList.add("diceImageFlash");
-      this.dieRoll = roll;
-      if(roll >= 4){
-        damageDone.push(chosenTrait, 1);
-      } else{
-        // console.log("trait drops to its lowest value before 0");
-        //trait drops to its lowest value before 0
-      }
-      // console.log(damageDone);
+      damageDone.push("knowledge", -1);
       return damageDone;
     }
     else if(Number(cardId) === 17){
