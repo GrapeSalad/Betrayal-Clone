@@ -53,6 +53,7 @@ export class GameBoardComponent implements OnInit {
   omenShow: boolean = false;
   eventShow: boolean = false;
   directionShow: boolean = true;
+  dieRoll: number = 0;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
