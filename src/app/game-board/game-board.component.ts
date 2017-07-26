@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {GameService} from '../game.service';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import {Observable} from 'rxjs/Rx';
+// import scrollToElement from 'scroll-to-element';
 
 @Component({
   selector: 'app-game-board',
@@ -58,12 +59,20 @@ export class GameBoardComponent implements OnInit {
   eventShow: boolean = false;
   directionShow: boolean = true;
   dieRoll: number = 0;
+  burielRoomId;
+  // elem = document.getElementsByClassName('active');
+  // scrollToElement(elem, {
+  //   offset: 0,
+  //   ease: 'out-bounce',
+  //   duration: 1500
+  // });
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
   buryFriend(){
     var randNum = this.gameService.getRandomNumber(0,14);
     var basementRooms: any[] = [202, 203, 210, 211, 209, 218, 219, 225, 226, 227, 228, 235, 234, 242, 250];
+    this.burielRoomId = basementRooms[randNum];
     var burialRoom = document.getElementById(basementRooms[randNum]);
     burialRoom.classList.add('burialRoom');
     console.log(burialRoom + " is where " + this.selectedFriend.name + " is");
@@ -78,10 +87,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   }
   setBeginningTile(){
-    console.log(document.getElementById('39'))
-    // var beginRoomTileArray = ;
     document.getElementById('39').classList.add('active');
-    // console.log(beginRoomTileArray + " after");
   }
 
   getOmenCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
@@ -804,11 +810,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
-     
+
 
     //enter Key to start game
     if(this.key === 13){
-
       this.startScreen = false;
       var tag = document.getElementById('knowledge');
       tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
@@ -818,7 +823,15 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('sanity');
       tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
-      setTimeout(()=>{this.setBeginningTile()}, 300);
+      if(this.haunt === false) {
+        setTimeout(()=>{this.setBeginningTile()}, 300);
+      }
+      //haunt stuff
+      if (this.haunt === true && this.currentRoomTileId === this.burielRoomId) {
+        console.log("WIN");
+        this.hauntWin = true;
+      }
+
     }
     if(this.death === true && (this.key === 37 || this.key === 38 || this.key === 39 || this.key === 40)){
       console.log("it is the " + this.death + " death");
@@ -830,15 +843,18 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.currentRoomTileId = 37;
         this.groundShow = true;
         this.upstairsShow = false;
+        setTimeout(()=>{document.getElementById('39').classList.remove('active')}, 301);
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('95').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          // this.scrollToElement();
         } else {
           this.currentRoomTileArray[0].classList.remove('active');
           this.currentRoomTileArray = [];
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
           this.currentRoomTileArray[0].classList.add('active');
+          // this.scrollToElement('.active');
         }
       }
       //up to foyer from basement stairs
