@@ -38,10 +38,10 @@ export class GameBoardComponent implements OnInit {
   selectedCharacter;
   selectedFriend;
   cardId;
-  currentSanityIndex;
-  currentKnowledgeIndex;
-  currentMightIndex;
-  currentSpeedIndex;
+  currentSanityIndex: any = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  currentKnowledgeIndex: any = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  currentMightIndex: any = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  currentSpeedIndex: any = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   rollSanity: boolean = false;
   rollSpeed: boolean = false;
   rollMight: boolean = false;
@@ -49,6 +49,7 @@ export class GameBoardComponent implements OnInit {
   statAffectedArray;
   hauntCounter: number = 0;
   haunt: boolean = false;
+  death: boolean = false;
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
@@ -69,56 +70,101 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       var stat = this.statAffectedArray[0];
       var amount = this.statAffectedArray[1];
       if(stat === "sanity"){
-        if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("omen sanity " + this.currentSanityIndex);
+        if(this.currentSanityIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('sanity');
+          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentSanityIndex += addLifeRoll;
-        } else if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        } else if(this.currentSanityIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('sanity');
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
         this.currentSanityIndex += Number(amount);
         // console.log("currentSanityIndex: " + this.currentSanityIndex);
-        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+        }
+        console.log("omen sanity after " + this.currentSanityIndex);
       }
       else if(stat === "speed"){
-        if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === false){
-         var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("omen speed " + this.currentSpeedIndex);
+        if(this.currentSpeedIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('speed');
+          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
+         var addLifeRoll = this.gameService.diceToRoll(3);
+         if(addLifeRoll === 0){
+           this.death = true;
+         }
          this.currentSpeedIndex += addLifeRoll;
-       }else if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+       }else if(this.currentSpeedIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('speed');
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
         this.currentSpeedIndex += Number(amount);
         // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
-        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+        }
+        console.log("omen speed after " + this.currentSpeedIndex);
       }
       else if(stat === "might"){
-        if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("omen might " + this.currentMightIndex);
+        if(this.currentMightIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('might');
+          tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentMightIndex += addLifeRoll;
-        }else if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        }else if(this.currentMightIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('might');
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
         this.currentMightIndex += Number(amount);
         // console.log("currentMightIndex: " + this.currentMightIndex);
-        tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+        }
+        console.log("omen might after " + this.currentMightIndex);
       }
       else if(stat === "knowledge"){
-        if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("omen knowledge " + this.currentKnowledgeIndex);
+        if(this.currentKnowledgeIndex <= 0 && this.haunt === false){
+          console.log()
+          console.log("reroll your life");
+          var tag = document.getElementById('knowledge');
+          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentKnowledgeIndex += addLifeRoll;
-        }else if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        }else if(this.currentKnowledgeIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('knowledge');
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
         this.currentKnowledgeIndex += Number(amount);
         // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
-        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+        }
+        console.log("omen knowledge after " + this.currentKnowledgeIndex);
       }
     })
   }
@@ -150,56 +196,103 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       var stat = this.statAffectedArray[0];
       var amount = this.statAffectedArray[1];
       if(stat === "sanity"){
-        if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("event sanity " + this.currentSanityIndex);
+        if(this.currentSanityIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('sanity');
+          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentSanityIndex += addLifeRoll;
-        } else if(this.selectedCharacter.sanity.statArray[this.currentSanityIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        } else if(this.currentSanityIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('sanity');
         tag.getElementsByClassName(this.currentSanityIndex)[0].classList.remove('highlighted');
         this.currentSanityIndex += Number(amount);
         // console.log("currentSanityIndex: " + this.currentSanityIndex);
-        tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
+        }
+        console.log("event sanity after " + this.currentSanityIndex);
       }
       else if(stat === "speed"){
-        if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === false){
-         var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("event speed " + this.currentSpeedIndex);
+        if(this.currentSpeedIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('speed');
+          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
+         var addLifeRoll = this.gameService.diceToRoll(3);
+         if(addLifeRoll === 0){
+           this.death = true;
+         }
          this.currentSpeedIndex += addLifeRoll;
-       }else if(this.selectedCharacter.speed.statArray[this.currentSpeedIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+       }else if(this.currentSpeedIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('speed');
         tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.remove('highlighted');
         this.currentSpeedIndex += Number(amount);
         // console.log("currentSpeedIndex: " + this.currentSpeedIndex);
-        tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentSpeedIndex)[0].classList.add('highlighted');
+        }
+        console.log("event speed after " + this.currentSpeedIndex);
       }
       else if(stat === "might"){
-        if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("event might " + this.currentMightIndex);
+        if(this.currentMightIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('might');
+          tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentMightIndex += addLifeRoll;
-        }else if(this.selectedCharacter.might.statArray[this.currentMightIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        }else if(this.currentMightIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('might');
         tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
         this.currentMightIndex += Number(amount);
         // console.log("currentMightIndex: " + this.currentMightIndex);
-        tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentMightIndex)[0].classList.add('highlighted');
+        }
+        console.log("event might after " + this.currentMightIndex);
       }
       else if(stat === "knowledge"){
-        if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === false){
-          var addLifeRoll = this.gameService.diceToRoll(2);
+        console.log("event knowledge " + this.currentKnowledgeIndex);
+        if(this.currentKnowledgeIndex <= 0 && this.haunt === false){
+          console.log("reroll your life");
+          var tag = document.getElementById('knowledge');
+          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
+          var addLifeRoll = this.gameService.diceToRoll(3);
+          if(addLifeRoll === 0){
+            this.death = true;
+          }
           this.currentKnowledgeIndex += addLifeRoll;
-        }else if(this.selectedCharacter.knowledge.statArray[this.currentKnowledgeIndex] === 0 && this.haunt === true){
-          alert("ya dead");
+        }else if(this.currentKnowledgeIndex <= 0 && this.haunt === true){
+          console.log("dead? " + this.death);
+          this.death = true;
         }
         var tag = document.getElementById('knowledge');
         tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.remove('highlighted');
         this.currentKnowledgeIndex += Number(amount);
         // console.log("currentKnowledgeIndex: " + this.currentKnowledgeIndex);
-        tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+        if(this.death === false){
+          tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
+        }
+        console.log("event knowledge after " + this.currentKnowledgeIndex);
       }
     })
   }
@@ -219,427 +312,429 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       var tag = document.getElementById('sanity');
       tag.getElementsByClassName(this.currentSanityIndex)[0].classList.add('highlighted');
     }
-    //go downstairs from upper landing
-    if(this.currentRoomTileId === 95 && this.key === 13){
-      this.currentRoomTileId = 37;
-      this.groundShow = true;
-      this.upstairsShow = false;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('95').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-    }
-    //up to foyer from basement stairs
-    if(this.key === 38 && this.currentRoomTileId === 201){
-      this.currentRoomTileId = 38;
-      this.groundShow = true;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('201').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-    }
-    //up
-    else if(this.key === 38 && (this.currentRoomTileId === 37 || this.currentRoomTileId === 32 || this.currentRoomTileId === 23 || this.currentRoomTileId === 22 || this.currentRoomTileId === 21 || this.currentRoomTileId === 81 || this.currentRoomTileId === 48 || this.currentRoomTileId === 87 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 203 || this.currentRoomTileId === 202 || this.currentRoomTileId === 225 || this.currentRoomTileId === 228 || this.currentRoomTileId === 38)){
-      // console.log("FACEPLANT LOL");
-    }
-    else if(this.key === 38){
-      this.currentRoomTileId -= 8;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-      if(this.currentRoomTileId === 31){
-        this.currentRoomTileArray[0].classList.add('bloodyRoom');
-      }
-      else if(this.currentRoomTileId === 23){
-        if(!this.currentRoomTileArray[0].classList.contains('graveyard')){
-          this.currentRoomTileArray[0].classList.add('graveyard');
-          this.eventCardResolution();
+    if(this.death === false){
+      //go downstairs from upper landing
+      if(this.currentRoomTileId === 95 && this.key === 13){
+        this.currentRoomTileId = 37;
+        this.groundShow = true;
+        this.upstairsShow = false;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('95').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
         }
       }
-      else if(this.currentRoomTileId === 22){
-        if(!this.currentRoomTileArray[0].classList.contains('ballroom')){
-          this.currentRoomTileArray[0].classList.add('ballroom');
-          this.eventCardResolution();
+      //up to foyer from basement stairs
+      if(this.key === 38 && this.currentRoomTileId === 201){
+        this.currentRoomTileId = 38;
+        this.groundShow = true;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('201').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
         }
       }
-      else if(this.currentRoomTileId === 46){
-        if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+      //up
+      else if(this.key === 38 && (this.currentRoomTileId === 37 || this.currentRoomTileId === 32 || this.currentRoomTileId === 23 || this.currentRoomTileId === 22 || this.currentRoomTileId === 21 || this.currentRoomTileId === 81 || this.currentRoomTileId === 48 || this.currentRoomTileId === 87 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 203 || this.currentRoomTileId === 202 || this.currentRoomTileId === 225 || this.currentRoomTileId === 228 || this.currentRoomTileId === 38)){
+        // console.log("FACEPLANT LOL");
+      }
+      else if(this.key === 38){
+        this.currentRoomTileId -= 8;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('39').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        }
+        if(this.currentRoomTileId === 31){
+          this.currentRoomTileArray[0].classList.add('bloodyRoom');
+        }
+        else if(this.currentRoomTileId === 23){
+          if(!this.currentRoomTileArray[0].classList.contains('graveyard')){
+            this.currentRoomTileArray[0].classList.add('graveyard');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 22){
+          if(!this.currentRoomTileArray[0].classList.contains('ballroom')){
+            this.currentRoomTileArray[0].classList.add('ballroom');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 46){
+          if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+          }
+        }
+        else if(this.currentRoomTileId === 87){
+          if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('operatingLaboratory');
+          }
+        }
+        else if(this.currentRoomTileId === 97){
+          if(!this.currentRoomTileArray[0].classList.contains('balcony')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('balcony');
+          }
+        }
+        else if(this.currentRoomTileId === 89){
+          this.currentRoomTileArray[0].classList.add('creakyHallway');
+        }
+        else if(this.currentRoomTileId === 81){
+          if(!this.currentRoomTileArray[0].classList.contains('attic')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('attic');
+          }
+        }
+        else if(this.currentRoomTileId === 218){
+          if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('catacombs');
+          }
+        }
+        else if(this.currentRoomTileId === 219){
+          this.currentRoomTileArray[0].classList.add('wineCellar');
+        }
+        else if(this.currentRoomTileId === 210){
+          if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('servantsQuarters');
+          }
+        }
+        else if(this.currentRoomTileId === 211){
+          if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('furnaceRoom');
+          }
+        }
+        else if(this.currentRoomTileId === 202){
+          if(!this.currentRoomTileArray[0].classList.contains('organRoom')){
+            this.currentRoomTileArray[0].classList.add('organRoom');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 203){
+          if(!this.currentRoomTileArray[0].classList.contains('gymnasium')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('gymnasium');
+          }
+        }
+        else if(this.currentRoomTileId === 201){
+          this.currentRoomTileArray[0].classList.add('stairsFromBasement');
         }
       }
-      else if(this.currentRoomTileId === 87){
-        if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('operatingLaboratory');
-        }
-      }
-      else if(this.currentRoomTileId === 97){
-        if(!this.currentRoomTileArray[0].classList.contains('balcony')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('balcony');
-        }
-      }
-      else if(this.currentRoomTileId === 89){
-        this.currentRoomTileArray[0].classList.add('creakyHallway');
-      }
-      else if(this.currentRoomTileId === 81){
-        if(!this.currentRoomTileArray[0].classList.contains('attic')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('attic');
-        }
-      }
-      else if(this.currentRoomTileId === 218){
-        if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('catacombs');
-        }
-      }
-      else if(this.currentRoomTileId === 219){
-        this.currentRoomTileArray[0].classList.add('wineCellar');
-      }
-      else if(this.currentRoomTileId === 210){
-        if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('servantsQuarters');
-        }
-      }
-      else if(this.currentRoomTileId === 211){
-        if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('furnaceRoom');
-        }
-      }
-      else if(this.currentRoomTileId === 202){
-        if(!this.currentRoomTileArray[0].classList.contains('organRoom')){
-          this.currentRoomTileArray[0].classList.add('organRoom');
-          this.eventCardResolution();
-        }
-      }
-      else if(this.currentRoomTileId === 203){
-        if(!this.currentRoomTileArray[0].classList.contains('gymnasium')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('gymnasium');
-        }
-      }
-      else if(this.currentRoomTileId === 201){
-        this.currentRoomTileArray[0].classList.add('stairsFromBasement');
-      }
-    }
 
-    //down to the basement from the coal coalChute
-    if(this.currentRoomTileId === 55){
-      this.currentRoomTileId = 226;
-      this.groundShow = false;
-      this.basementShow = true;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-      if(this.currentRoomTileId === 226){
-        this.currentRoomTileArray[0].classList.add("basementLanding");
-      }
-    }
-    //down
-    else if(this.key === 40 && (this.currentRoomTileId === 29 || this.currentRoomTileId === 37 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 32 || this.currentRoomTileId === 30 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 113 || this.currentRoomTileId === 119 || this.currentRoomTileId === 209 || this.currentRoomTileId === 228 || this.currentRoomTileId === 225 || this.currentRoomTileId === 235 || this.currentRoomTileId === 250)){
-      // console.log("FACEPLANT LOL");
-    }
-    else if(this.key === 40){
-      this.currentRoomTileId += 8;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-      if(this.currentRoomTileId === 29){
-        if(!this.currentRoomTileArray[0].classList.contains('conservatory')){
-          this.currentRoomTileArray[0].classList.add('conservatory');
-          this.eventCardResolution();
+      //down to the basement from the coal coalChute
+      if(this.currentRoomTileId === 55){
+        this.currentRoomTileId = 226;
+        this.groundShow = false;
+        this.basementShow = true;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('39').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        }
+        if(this.currentRoomTileId === 226){
+          this.currentRoomTileArray[0].classList.add("basementLanding");
         }
       }
-      else if(this.currentRoomTileId === 46){
-        if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
-          this.currentRoomTileArray[0].classList.add('statuaryCorridor');
-          this.eventCardResolution();
+      //down
+      else if(this.key === 40 && (this.currentRoomTileId === 29 || this.currentRoomTileId === 37 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 32 || this.currentRoomTileId === 30 || this.currentRoomTileId === 88 || this.currentRoomTileId === 104 || this.currentRoomTileId === 113 || this.currentRoomTileId === 119 || this.currentRoomTileId === 209 || this.currentRoomTileId === 228 || this.currentRoomTileId === 225 || this.currentRoomTileId === 235 || this.currentRoomTileId === 250)){
+        // console.log("FACEPLANT LOL");
+      }
+      else if(this.key === 40){
+        this.currentRoomTileId += 8;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('39').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        }
+        if(this.currentRoomTileId === 29){
+          if(!this.currentRoomTileArray[0].classList.contains('conservatory')){
+            this.currentRoomTileArray[0].classList.add('conservatory');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 46){
+          if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
+            this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 54){
+          if(!this.currentRoomTileArray[0].classList.contains('gameRoom')){
+            this.currentRoomTileArray[0].classList.add('gameRoom');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 62){
+          if(!this.currentRoomTileArray[0].classList.contains('kitchen')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('kitchen');
+          }
+        }
+        else if(this.currentRoomTileId === 47){
+          if(!this.currentRoomTileArray[0].classList.contains('abandonedRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('abandonedRoom');
+          }
+        }
+        else if(this.currentRoomTileId === 55){
+          this.currentRoomTileArray[0].classList.add('coalChute');
+        }
+        else if(this.currentRoomTileId === 56){
+          if(!this.currentRoomTileArray[0].classList.contains('gardens')){
+            this.currentRoomTileArray[0].classList.add('gardens');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 97){
+          if(!this.currentRoomTileArray[0].classList.contains('balcony')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('balcony');
+          }
+        }
+        else if(this.currentRoomTileId === 103){
+          if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('charredRoom');
+          }
+        }
+        else if(this.currentRoomTileId === 111){
+          if(!this.currentRoomTileArray[0].classList.contains('gallery')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('gallery');
+          }
+        }
+        else if(this.currentRoomTileId === 119){
+          this.currentRoomTileArray[0].classList.add('storeroom');
+        }
+        else if(this.currentRoomTileId === 105){
+          this.currentRoomTileArray[0].classList.add('collapsedRoom');
+        }
+        else if(this.currentRoomTileId === 113){
+          if(!this.currentRoomTileArray[0].classList.contains('chapel')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('chapel');
+          }
+        }
+        else if(this.currentRoomTileId === 234){
+          this.currentRoomTileArray[0].classList.add('larder');
+        }
+        else if(this.currentRoomTileId === 235){
+          if(!this.currentRoomTileArray[0].classList.contains('crypt')){
+            this.currentRoomTileArray[0].classList.add('crypt');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 242){
+          if(!this.currentRoomTileArray[0].classList.contains('researchLaboratory')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('researchLaboratory');
+          }
+        }
+        else if(this.currentRoomTileId === 250){
+          if(!this.currentRoomTileArray[0].classList.contains('vault')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('vault');
+          }
+        }
+        else if(this.currentRoomTileId === 227){
+          this.currentRoomTileArray[0].classList.add('dustyHallway');
+        }
+        else if(this.currentRoomTileId === 219){
+          this.currentRoomTileArray[0].classList.add('wineCellar');
+        }
+        else if(this.currentRoomTileId === 218){
+          if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('catacombs');
+          }
         }
       }
-      else if(this.currentRoomTileId === 54){
-        if(!this.currentRoomTileArray[0].classList.contains('gameRoom')){
-          this.currentRoomTileArray[0].classList.add('gameRoom');
-          this.eventCardResolution();
-        }
-      }
-      else if(this.currentRoomTileId === 62){
-        if(!this.currentRoomTileArray[0].classList.contains('kitchen')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('kitchen');
-        }
-      }
-      else if(this.currentRoomTileId === 47){
-        if(!this.currentRoomTileArray[0].classList.contains('abandonedRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('abandonedRoom');
-        }
-      }
-      else if(this.currentRoomTileId === 55){
-        this.currentRoomTileArray[0].classList.add('coalChute');
-      }
-      else if(this.currentRoomTileId === 56){
-        if(!this.currentRoomTileArray[0].classList.contains('gardens')){
-          this.currentRoomTileArray[0].classList.add('gardens');
-          this.eventCardResolution();
-        }
-      }
-      else if(this.currentRoomTileId === 97){
-        if(!this.currentRoomTileArray[0].classList.contains('balcony')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('balcony');
-        }
-      }
-      else if(this.currentRoomTileId === 103){
-        if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('charredRoom');
-        }
-      }
-      else if(this.currentRoomTileId === 111){
-        if(!this.currentRoomTileArray[0].classList.contains('gallery')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('gallery');
-        }
-      }
-      else if(this.currentRoomTileId === 119){
-        this.currentRoomTileArray[0].classList.add('storeroom');
-      }
-      else if(this.currentRoomTileId === 105){
-        this.currentRoomTileArray[0].classList.add('collapsedRoom');
-      }
-      else if(this.currentRoomTileId === 113){
-        if(!this.currentRoomTileArray[0].classList.contains('chapel')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('chapel');
-        }
-      }
-      else if(this.currentRoomTileId === 234){
-        this.currentRoomTileArray[0].classList.add('larder');
-      }
-      else if(this.currentRoomTileId === 235){
-        if(!this.currentRoomTileArray[0].classList.contains('crypt')){
-          this.currentRoomTileArray[0].classList.add('crypt');
-          this.eventCardResolution();
-        }
-      }
-      else if(this.currentRoomTileId === 242){
-        if(!this.currentRoomTileArray[0].classList.contains('researchLaboratory')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('researchLaboratory');
-        }
-      }
-      else if(this.currentRoomTileId === 250){
-        if(!this.currentRoomTileArray[0].classList.contains('vault')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('vault');
-        }
-      }
-      else if(this.currentRoomTileId === 227){
-        this.currentRoomTileArray[0].classList.add('dustyHallway');
-      }
-      else if(this.currentRoomTileId === 219){
-        this.currentRoomTileArray[0].classList.add('wineCellar');
-      }
-      else if(this.currentRoomTileId === 218){
-        if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('catacombs');
-        }
-      }
-    }
 
-    //right
-    if(this.key === 39 && (this.currentRoomTileId === 22 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 32 || this.currentRoomTileId === 39 || this.currentRoomTileId === 46 || this.currentRoomTileId === 48 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 54 || this.currentRoomTileId === 62 || this.currentRoomTileId === 81 || this.currentRoomTileId === 89 || this.currentRoomTileId === 97 || this.currentRoomTileId === 95 || this.currentRoomTileId === 105 || this.currentRoomTileId === 113 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 201 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 211 || this.currentRoomTileId === 218 || this.currentRoomTileId === 219 || this.currentRoomTileId === 228 || this.currentRoomTileId === 235 || this.currentRoomTileId === 234 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250)){
-      // console.log("FACEPLANT LOL");
-    }
-    else if(this.key === 39){
-      this.currentRoomTileId += 1;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
+      //right
+      if(this.key === 39 && (this.currentRoomTileId === 22 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 32 || this.currentRoomTileId === 39 || this.currentRoomTileId === 46 || this.currentRoomTileId === 48 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 54 || this.currentRoomTileId === 62 || this.currentRoomTileId === 81 || this.currentRoomTileId === 89 || this.currentRoomTileId === 97 || this.currentRoomTileId === 95 || this.currentRoomTileId === 105 || this.currentRoomTileId === 113 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 201 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 211 || this.currentRoomTileId === 218 || this.currentRoomTileId === 219 || this.currentRoomTileId === 228 || this.currentRoomTileId === 235 || this.currentRoomTileId === 234 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250)){
+        // console.log("FACEPLANT LOL");
       }
-      if(this.currentRoomTileId === 32){
-        if(!this.currentRoomTileArray[0].classList.contains('library')){
-          this.currentRoomTileArray[0].classList.add('library');
-          this.eventCardResolution();
+      else if(this.key === 39){
+        this.currentRoomTileId += 1;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('39').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        }
+        if(this.currentRoomTileId === 32){
+          if(!this.currentRoomTileArray[0].classList.contains('library')){
+            this.currentRoomTileArray[0].classList.add('library');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 48){
+          if(!this.currentRoomTileArray[0].classList.contains('patio')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('patio');
+          }
+        }
+        else if(this.currentRoomTileId === 88){
+          if(!this.currentRoomTileArray[0].classList.contains('tower')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('tower');
+          }
+        }
+        else if(this.currentRoomTileId === 89){
+          this.currentRoomTileArray[0].classList.add('creakyHallway');
+        }
+        else if(this.currentRoomTileId === 104){
+          if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('bedroom');
+          }
+        }
+        else if(this.currentRoomTileId === 105){
+          this.currentRoomTileArray[0].classList.add('collapsedRoom');
+        }
+        else if(this.currentRoomTileId === 106){
+          if(!this.currentRoomTileArray[0].classList.contains('masterBedroom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('masterBedroom');
+          }
+        }
+        //basement
+        else if(this.currentRoomTileId === 227){
+          this.currentRoomTileArray[0].classList.add('dustyHallway');
+        }
+        else if(this.currentRoomTileId === 228){
+          this.currentRoomTileArray[0].classList.add('chasm');
+        }
+        else if(this.currentRoomTileId === 211){
+          if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('furnaceRoom');
+          }
         }
       }
-      else if(this.currentRoomTileId === 48){
-        if(!this.currentRoomTileArray[0].classList.contains('patio')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('patio');
-        }
-      }
-      else if(this.currentRoomTileId === 88){
-        if(!this.currentRoomTileArray[0].classList.contains('tower')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('tower');
-        }
-      }
-      else if(this.currentRoomTileId === 89){
-        this.currentRoomTileArray[0].classList.add('creakyHallway');
-      }
-      else if(this.currentRoomTileId === 104){
-        if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('bedroom');
-        }
-      }
-      else if(this.currentRoomTileId === 105){
-        this.currentRoomTileArray[0].classList.add('collapsedRoom');
-      }
-      else if(this.currentRoomTileId === 106){
-        if(!this.currentRoomTileArray[0].classList.contains('masterBedroom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('masterBedroom');
-        }
-      }
-      //basement
-      else if(this.currentRoomTileId === 227){
-        this.currentRoomTileArray[0].classList.add('dustyHallway');
-      }
-      else if(this.currentRoomTileId === 228){
-        this.currentRoomTileArray[0].classList.add('chasm');
-      }
-      else if(this.currentRoomTileId === 211){
-        if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('furnaceRoom');
-        }
-      }
-    }
 
-    //left movement to upstairs from grand staircase
-    if(this.key === 37 && this.currentRoomTileId === 37){
-      this.groundShow = false;
-      this.upstairsShow = true;
-      this.currentRoomTileId = 95;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('37').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-      if(this.currentRoomTileId === 95){
-        this.currentRoomTileArray[0].classList.add("upperLanding");
-      }
-    }
-    //left
-    else if(this.key === 37 && (this.currentRoomTileId === 21 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 30 || this.currentRoomTileId === 54 || this.currentRoomTileId === 46 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 81 || this.currentRoomTileId === 87 || this.currentRoomTileId === 95 || this.currentRoomTileId === 103 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 113 || this.currentRoomTileId === 97 || this.currentRoomTileId === 201 || this.currentRoomTileId === 209 || this.currentRoomTileId === 218 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 219 || this.currentRoomTileId === 225 || this.currentRoomTileId === 234 || this.currentRoomTileId === 235 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250 || this.currentRoomTileId === 47)){
-      // console.log("FACEPLANT LOL");
-    }
-    else if(this.key === 37){
-      this.currentRoomTileId -= 1;
-      if (this.currentRoomTileArray.length === 0) {
-        document.getElementById('39').classList.remove('active');
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      } else {
-        this.currentRoomTileArray[0].classList.remove('active');
-        this.currentRoomTileArray = [];
-        this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
-        this.currentRoomTileArray[0].classList.add('active');
-      }
-      if(this.currentRoomTileId === 30){
-        if(!this.currentRoomTileArray[0].classList.contains('diningRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('diningRoom');
+      //left movement to upstairs from grand staircase
+      if(this.key === 37 && this.currentRoomTileId === 37){
+        this.groundShow = false;
+        this.upstairsShow = true;
+        this.currentRoomTileId = 95;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('37').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        }
+        if(this.currentRoomTileId === 95){
+          this.currentRoomTileArray[0].classList.add("upperLanding");
         }
       }
-      else if(this.currentRoomTileId === 21){
-        if(!this.currentRoomTileArray[0].classList.contains('junkroom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('junkroom');
-        }
+      //left
+      else if(this.key === 37 && (this.currentRoomTileId === 21 || this.currentRoomTileId === 23 || this.currentRoomTileId === 29 || this.currentRoomTileId === 30 || this.currentRoomTileId === 54 || this.currentRoomTileId === 46 || this.currentRoomTileId === 62 || this.currentRoomTileId === 56 || this.currentRoomTileId === 55 || this.currentRoomTileId === 81 || this.currentRoomTileId === 87 || this.currentRoomTileId === 95 || this.currentRoomTileId === 103 || this.currentRoomTileId === 111 || this.currentRoomTileId === 119 || this.currentRoomTileId === 113 || this.currentRoomTileId === 97 || this.currentRoomTileId === 201 || this.currentRoomTileId === 209 || this.currentRoomTileId === 218 || this.currentRoomTileId === 202 || this.currentRoomTileId === 203 || this.currentRoomTileId === 219 || this.currentRoomTileId === 225 || this.currentRoomTileId === 234 || this.currentRoomTileId === 235 || this.currentRoomTileId === 242 || this.currentRoomTileId === 250 || this.currentRoomTileId === 47)){
+        // console.log("FACEPLANT LOL");
       }
-      else if(this.currentRoomTileId === 87){
-        if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('operatingLaboratory');
+      else if(this.key === 37){
+        this.currentRoomTileId -= 1;
+        if (this.currentRoomTileArray.length === 0) {
+          document.getElementById('39').classList.remove('active');
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
+        } else {
+          this.currentRoomTileArray[0].classList.remove('active');
+          this.currentRoomTileArray = [];
+          this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId))
+          this.currentRoomTileArray[0].classList.add('active');
         }
-      }
-      else if(this.currentRoomTileId === 88){
-        if(!this.currentRoomTileArray[0].classList.contains('tower')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('tower');
+        if(this.currentRoomTileId === 30){
+          if(!this.currentRoomTileArray[0].classList.contains('diningRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('diningRoom');
+          }
         }
-      }
-      else if(this.currentRoomTileId === 103){
-        if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('charredRoom');
+        else if(this.currentRoomTileId === 21){
+          if(!this.currentRoomTileArray[0].classList.contains('junkroom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('junkroom');
+          }
         }
-      }
-      else if(this.currentRoomTileId === 104){
-        if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
-          this.eventCardResolution();
-          this.currentRoomTileArray[0].classList.add('bedroom');
+        else if(this.currentRoomTileId === 87){
+          if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('operatingLaboratory');
+          }
         }
-      }
-      //basement
-      else if(this.currentRoomTileId === 210){
-        if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('servantsQuarters');
+        else if(this.currentRoomTileId === 88){
+          if(!this.currentRoomTileArray[0].classList.contains('tower')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('tower');
+          }
         }
-      }
-      else if(this.currentRoomTileId === 209){
-        if (!this.currentRoomTileArray[0].classList.contains('undergroundLake')){
-          this.currentRoomTileArray[0].classList.add('undergroundLake');
-          this.eventCardResolution();
+        else if(this.currentRoomTileId === 103){
+          if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('charredRoom');
+          }
         }
-      }
-      else if(this.currentRoomTileId === 225){
-        if(!this.currentRoomTileArray[0].classList.contains('pentagramChamber')){
-          this.omenCardResolution();
-          this.currentRoomTileArray[0].classList.add('pentagramChamber');
+        else if(this.currentRoomTileId === 104){
+          if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
+            this.eventCardResolution();
+            this.currentRoomTileArray[0].classList.add('bedroom');
+          }
+        }
+        //basement
+        else if(this.currentRoomTileId === 210){
+          if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('servantsQuarters');
+          }
+        }
+        else if(this.currentRoomTileId === 209){
+          if (!this.currentRoomTileArray[0].classList.contains('undergroundLake')){
+            this.currentRoomTileArray[0].classList.add('undergroundLake');
+            this.eventCardResolution();
+          }
+        }
+        else if(this.currentRoomTileId === 225){
+          if(!this.currentRoomTileArray[0].classList.contains('pentagramChamber')){
+            this.omenCardResolution();
+            this.currentRoomTileArray[0].classList.add('pentagramChamber');
+          }
         }
       }
     }
