@@ -341,10 +341,7 @@
     .dice-image {
       margin-top: 25px;
       margin-left: 20px;
-      img {
-        // -webkit-filter: drop-shadow(1px 1px 25px black);
-        // filter: drop-shadow(1px 1px 25px black);
-      }
+
     }
     .dice-words {
       text-align: center;
@@ -377,6 +374,12 @@
   height: 198px;
   border: 1px solid black;
   box-shadow: 0 0 5px black;
+}
+
+.diceImageFlash {
+  -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
+  filter: drop-shadow(1px 1px 25px #8fc470);
+  cursor: pointer;
 }
 
 img {

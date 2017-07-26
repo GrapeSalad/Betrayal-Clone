@@ -110,7 +110,7 @@
     "might": [{"initialIndex": 4, "array": [0, 2, 3, 3, 4, 5, 5, 5, 6]}],
     "sanity": [{"initialIndex": 3, "array": [0, 4, 4, 4, 5, 6, 7, 8, 8]}],
     "knowledge": [{"initialIndex": 4, "array": [0, 1, 3, 4, 4, 4, 5, 6, 6]}],
-    "src": "assets/img/madamezostra.png"
+    "src": "assets/img/thezost.png"
   },{
     "name": "Missy Dubourde",
     "age": "9",
@@ -1003,7 +1003,7 @@
     "flavor": "You found a spirit board. The planchette slides back and forth, back and forth across the letters, moving without anyone's aid. You stare in horrified fascination as it spells out: B U R I E D A L I V E.  Looking around, you realize that you haven't seen your friend since you entered this house. Some twisted magic must have prevented you from remembering! If your friend really is buried alive, you must find that person now.",
     "whatYouKnow": "The house has buried your friend in a basement room, but you don't know which room the person is buried in.",
     "youWinWhen": "...you find and dig up the buried person before he or she dies.",
-    "how": "Each time you move into a room, you can search it by attempting a Knowledge roll of 3+ in that room. If you succeed at this roll, ask the house whether this is the burial room. You can search a room only once during your turn. Once you've found the burial room, you can attempt a Might roll of 4+ in that room to help dig up the buried person. You can attempt one roll during your turn. Each time you (the hero) succeed, a Might roll token appears in that room. To save the buried person, you need two tokens.",
+    "how": "Each time you move into a room, your friend will step closer to death. Once you've found the burial room, you can hit enter to attempt to dig.",
     "ifYouWin": "Digging frantically, you finally free your trapped friend. Your companion's fingernails are broken-splintered from clawing at the wooden coffin-and blood runs down their shaking hands. Your friend hasn't made a sound since being freed. Slowly you help them out of the house, sure that with the proper care, they will be good as new...someday."
   }]
 }
