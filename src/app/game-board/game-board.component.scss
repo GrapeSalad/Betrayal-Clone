@@ -276,7 +276,9 @@
     align-self: flex-end;
     justify-content: space-around;
     align-items: center;
-
+    div{
+      cursor: pointer;
+    }
     // CROWMENS //
     .omen-cards {
       height: 400px;
@@ -510,8 +512,6 @@
         margin-top: 80px;
         display: inline-block;
         text-shadow: 1px 1px 5px black;
-        // animation: enterglow 1.5s ease-in-out infinite alternate;
-        cursor: pointer;
       }
     }
     h3 {
