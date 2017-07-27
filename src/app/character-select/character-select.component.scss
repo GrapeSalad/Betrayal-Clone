@@ -97,6 +97,7 @@ $custom-grid: (
         &:hover {
           text-shadow: 0px 7px 7px black;
           transition: 3s;
+          cursor: pointer;
         }
       }
     }
