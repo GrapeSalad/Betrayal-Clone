@@ -8,12 +8,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 | Pivotal Game Objects | Requirements |
 |---|---|
-| House | Static Foyer, random rooms |
-| Item "cards" | Database Objects referencing in-game items (probably in an array?) |
-| Omen "cards" | same as items, but different object/array |
+| House | Pathing through rooms |
+| Omen "cards" | Database Objects referencing in-game omens |
 | Event "cards" | see omen |
-| Characters | this may be part of the stretch goals, due to complexity in routing <br> for different characters |
-| Turn Counter | this is an *if* dependent on the character functionality |
+| Haunt Counter | on omen reveal, increment haunt counter until haunt occurs |
+| Haunt | special event occurs to change gameplay |
+| Character stats | adjust stats to account for omen and event card resolution |
+
 
 ## MVP
 
@@ -23,28 +24,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 &nbsp;&nbsp;&nbsp;&nbsp; + Character Card  <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Token/Figure “in game”
 
-
 *Card Art* (We don’t need all of the cards for the mvp) <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Item ~ 8 <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Omen ~ 10 <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Event ~ 15
 
+*Haunt* (We should decide on one haunt that we all think is do-able and engaging) <br>
 
-*Room Tiles* <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Upstairs ~ 5 <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Ground ~ 10 <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Downstairs ~ 5
-
-
-*Haunt* (We should decide on one haunt that we all think is do-able and engaging)
+*Animations*
 
 #### Back End
 
 
 *Character Data* <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Scaling stats <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Items <br>
-&nbsp;&nbsp;&nbsp;&nbsp; + Omens
+&nbsp;&nbsp;&nbsp;&nbsp; + Name <br>
+&nbsp;&nbsp;&nbsp;&nbsp; + Picture <br>
 
 
 *Room Tile* <br>
@@ -52,9 +46,28 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 &nbsp;&nbsp;&nbsp;&nbsp; + Triggers <br>
 &nbsp;&nbsp;&nbsp;&nbsp; + Events <br>
 *Draw Card* <br>
-*Special Room* (Maybe not part of MVP) <br>
-*Haunt?* <br>
-*How to traverse the rooms?!?!?*
+*Special Room* <br>
+*Haunt* <br>
+
+<hr>
+## Project Build
+Download from the [repo](https://github.com/GrapeSalad/Betrayal-clone)
+Run `ng -v` to ensure than your Angular is version **4**.
+
+| If Not Run One of these Commands |
+| --- |
+| For Windows |
+|`npm install @angular/common@next @angular/compiler@next @angular/compiler-cli@next @angular/core@next @angular/forms@next @angular/http@next @angular/platform-browser@next @angular/platform-browser-dynamic@next @angular/platform-server@next @angular/router@next @angular/animations@next --save` |
+| For Linux/Mac |
+|`npm install @angular/{common,compiler,compiler-cli,core,forms,http,platform-browser,platform-browser-dynamic,platform-server,router,animations}@next --save` |
+
+Run `npm install` to install all dependencies with Node Package Manager, then `bower install` to install the styling dependencies.
+
+## API Key
+
+You will need to create your own API key variable to access the [Google Firebase](https://firebase.google.com).
+A file will need to be created at `src/app/api-keys.ts` and populated with this code: `export const masterFirebaseConfig = "apiKey";`
+Upload `game-data.json` to the database and ensure that the read and write options are set to true.
 
 ## Development server
 
@@ -67,15 +80,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
 
 ## Further help
 

@@ -1466,11 +1466,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.grandStaircase = dataLastEmittedFromObserver[2];
     })
 
-
-
-    // const activeElem = this.currentRoomTileArray[0].classList.contains('active');
-    // var tag = document.getElementById('might');
-    // tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
   }
 
 }
