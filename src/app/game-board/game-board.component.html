@@ -347,7 +347,7 @@
     </div>
     <div *ngIf="omenShow" class="omen-drawn">
       <h5 *ngIf="omenShowDraw" (click)="drawOmenCard()"><span class="highlighted">DRAW AN OMEN CARD</span></h5>
-      <div *ngIf="eventShowCard">
+      <div *ngIf="omenShowCard">
         <h5>{{chosenOmen?.omen}}</h5>
         <p>{{chosenOmen?.flavor}}</p>
         <p>{{chosenOmen?.description}}</p>
