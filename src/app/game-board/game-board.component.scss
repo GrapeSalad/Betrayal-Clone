@@ -520,6 +520,10 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       flex-direction: column;
       #speed, #might, #knowledge, #sanity {
         display: flex;
+        @media #{$breakpoint-medium2} {
+          margin: 0;
+          padding: 0;
+        }
         h5 {
           margin-top: 12px;
           margin-left: 35px;
@@ -542,6 +546,8 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
             display: inline-block;
             @media #{$breakpoint-medium2} {
               font-size: 1.5em;
+              margin: 0;
+              padding: 0;
             }
           }
         }
@@ -569,6 +575,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       font-family: necrotype;
       font-size: 1.8em;
       text-align: center;
+      @media #{$breakpoint-medium2} {
+        font-size: 1.2em;
+      }
     }
     h4 {
       margin-top: 100px;
@@ -580,6 +589,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         color: black;
         text-shadow: 1px 1px 5px black;
         letter-spacing: 8px;
+        @media #{$breakpoint-medium2} {
+          font-size: 3em;
+        }
       }
 
     }
@@ -591,6 +603,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       letter-spacing: 3px;
       margin: 40px;
       text-shadow: 1px 1px 5px black;
+      @media #{$breakpoint-medium2} {
+        font-size: 2em;
+      }
     }
     p {
       margin: 15px 40px;
@@ -656,6 +671,13 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
     .dice-image {
       margin-top: 25px;
       margin-left: 20px;
+      @media #{$breakpoint-medium2} {
+        img {
+          width: 100px;
+          height: auto;
+          margin-top: 25px;
+        }
+      }
     }
     .dice-words {
       text-align: center;
@@ -667,6 +689,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         margin: 0;
         margin-top: 25px;
         text-shadow: 3px 3px 10px black;
+        @media #{$breakpoint-medium2} {
+          font-size: 7em;
+        }
       }
       h3 {
         margin-top: 12px;
@@ -675,6 +700,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         font-family: necrotype;
         font-size: 1.8em;
         text-align: center;
+        @media #{$breakpoint-medium2} {
+          font-size: 1.2em;
+        }
       }
     }
   }
