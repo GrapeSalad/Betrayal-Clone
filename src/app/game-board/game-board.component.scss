@@ -70,6 +70,7 @@
   background-size: contain;
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
   overflow-y: auto;
   overflow-x: hidden;
@@ -508,14 +509,19 @@
       font-family: necrotype;
       font-size: 1.8em;
       text-align: center;
+    }
+    h4 {
+      margin-top: 100px;
+      text-align: center;
       span {
-        font-size: 150px;
-        margin-top: 80px;
-        display: inline-block;
+        font-size: 5em;
+        margin-top: 200px;
+        align-self: center;
+        color: black;
         text-shadow: 1px 1px 5px black;
-        // animation: enterglow 1.5s ease-in-out infinite alternate;
-        cursor: pointer;
+        letter-spacing: 8px;
       }
+
     }
     h3 {
       font-family: spoopy;
