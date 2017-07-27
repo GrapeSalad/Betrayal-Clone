@@ -276,19 +276,19 @@
   <!-- </div>   end basement div -->
   </div>   <!-- end board grid div -->
   <div class="omenevent-cards">
-    <div *ngIf="directionShow || eventShow" class="omen-cards">
+    <div *ngIf="directionShow || eventShow" class="omen-cards" (click)="drawOmenCard()">
       <h3>Omen</h3>
       <img src="/assets/img/crow.png" alt="crow">
     </div>
-    <div *ngIf="omenShow" class="omen-show-cards">
+    <div *ngIf="omenShow" class="omen-show-cards" (click)="drawOmenCard()">
       <h3>Omen</h3>
       <img src="/assets/img/crow.png" alt="crow">
     </div>
-    <div *ngIf="directionShow || omenShow" class="event-cards">
+    <div *ngIf="directionShow || omenShow" class="event-cards" (click)="drawEventCard()">
       <h3>Event</h3>
       <img src="/assets/img/spiral.png" alt="spiral">
     </div>
-    <div *ngIf="eventShow" class="event-show-cards">
+    <div *ngIf="eventShow" class="event-show-cards" (click)="drawEventCard()">
       <h3>Event</h3>
       <img src="/assets/img/spiral.png" alt="spiral">
     </div>
@@ -338,6 +338,7 @@
       <audio autoplay><source src="././assets/sounds/thunder.mp3"></audio>
     </div>
     <div *ngIf="eventShow" class="event-drawn">
+
       <h4 *ngIf="eventShowDraw" (click)="drawEventCard()"><span class="highlighted">DRAW AN EVENT CARD</span></h4>
       <div *ngIf="eventShowCard">
         <h5>{{chosenEvent?.event}}</h5>
@@ -346,6 +347,7 @@
       </div>
     </div>
     <div *ngIf="omenShow" class="omen-drawn">
+
       <h4 *ngIf="omenShowDraw" (click)="drawOmenCard()"><span class="highlighted">DRAW AN OMEN CARD</span></h4>
       <div *ngIf="omenShowCard">
         <h5>{{chosenOmen?.omen}}</h5>

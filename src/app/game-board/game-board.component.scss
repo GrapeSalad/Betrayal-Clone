@@ -280,7 +280,9 @@
     align-self: flex-end;
     justify-content: space-around;
     align-items: center;
-
+    div{
+      cursor: pointer;
+    }
     // CROWMENS //
     .omen-cards {
       height: 400px;

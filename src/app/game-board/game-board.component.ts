@@ -73,17 +73,17 @@ export class GameBoardComponent implements OnInit {
   burielRoomId;
   buriedFriendLife: number = 0;
   movesRemaining: number = 18;
-  audio = document.getElementById("strangerTheme");
+  move: boolean = false;
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService, private route: ActivatedRoute) { }
 
   getDieRoll(){
-    console.log("audio " + this.audio);
     this.showDieRoll = true;
     setTimeout(()=>{this.showDieRoll = false;}, 6000);
     var d = document.getElementsByClassName("dice-image");
     d[0].classList.remove("diceImageFlash");
+    this.move = true;
   }
 
   buryFriend(){
@@ -881,6 +881,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     }
     else if(this.key === 13){
       this.startScreen = false;
+      this.move = true;
       setTimeout(()=>{var tag = document.getElementById('knowledge');
       tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
       var tag = document.getElementById('speed');
@@ -903,9 +904,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     if(this.death === true && (this.key === 37 || this.key === 38 || this.key === 39 || this.key === 40)){
       console.log("it is the " + this.death + " death");
     }
-
     else{
       //go downstairs from upper landing
+      if(this.move === true){
       if(this.currentRoomTileId === 95 && this.key === 13){
         element[0].scrollIntoView(false);
         this.currentRoomTileId = 37;
@@ -977,29 +978,34 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         else if(this.currentRoomTileId === 23){
           if(!this.currentRoomTileArray[0].classList.contains('graveyard')){
             this.currentRoomTileArray[0].classList.add('graveyard');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 22){
           if(!this.currentRoomTileArray[0].classList.contains('ballroom')){
             this.currentRoomTileArray[0].classList.add('ballroom');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 46){
           if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('statuaryCorridor');
           }
         }
         else if(this.currentRoomTileId === 87){
           if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('operatingLaboratory');
           }
         }
         else if(this.currentRoomTileId === 97){
           if(!this.currentRoomTileArray[0].classList.contains('balcony')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('balcony');
           }
@@ -1009,12 +1015,14 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 81){
           if(!this.currentRoomTileArray[0].classList.contains('attic')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('attic');
           }
         }
         else if(this.currentRoomTileId === 218){
           if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('catacombs');
           }
@@ -1024,12 +1032,14 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 210){
           if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('servantsQuarters');
           }
         }
         else if(this.currentRoomTileId === 211){
           if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('furnaceRoom');
           }
@@ -1037,11 +1047,13 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         else if(this.currentRoomTileId === 202){
           if(!this.currentRoomTileArray[0].classList.contains('organRoom')){
             this.currentRoomTileArray[0].classList.add('organRoom');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 203){
           if(!this.currentRoomTileArray[0].classList.contains('gymnasium')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('gymnasium');
           }
@@ -1098,29 +1110,34 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         if(this.currentRoomTileId === 29){
           if(!this.currentRoomTileArray[0].classList.contains('conservatory')){
             this.currentRoomTileArray[0].classList.add('conservatory');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 46){
           if(!this.currentRoomTileArray[0].classList.contains('statuaryCorridor')){
             this.currentRoomTileArray[0].classList.add('statuaryCorridor');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 54){
           if(!this.currentRoomTileArray[0].classList.contains('gameRoom')){
             this.currentRoomTileArray[0].classList.add('gameRoom');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 62){
           if(!this.currentRoomTileArray[0].classList.contains('kitchen')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('kitchen');
           }
         }
         else if(this.currentRoomTileId === 47){
           if(!this.currentRoomTileArray[0].classList.contains('abandonedRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('abandonedRoom');
           }
@@ -1131,23 +1148,27 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         else if(this.currentRoomTileId === 56){
           if(!this.currentRoomTileArray[0].classList.contains('gardens')){
             this.currentRoomTileArray[0].classList.add('gardens');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 97){
           if(!this.currentRoomTileArray[0].classList.contains('balcony')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('balcony');
           }
         }
         else if(this.currentRoomTileId === 103){
           if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('charredRoom');
           }
         }
         else if(this.currentRoomTileId === 111){
           if(!this.currentRoomTileArray[0].classList.contains('gallery')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('gallery');
           }
@@ -1160,6 +1181,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 113){
           if(!this.currentRoomTileArray[0].classList.contains('chapel')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('chapel');
           }
@@ -1170,17 +1192,20 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         else if(this.currentRoomTileId === 235){
           if(!this.currentRoomTileArray[0].classList.contains('crypt')){
             this.currentRoomTileArray[0].classList.add('crypt');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 242){
           if(!this.currentRoomTileArray[0].classList.contains('researchLaboratory')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('researchLaboratory');
           }
         }
         else if(this.currentRoomTileId === 250){
           if(!this.currentRoomTileArray[0].classList.contains('vault')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('vault');
           }
@@ -1193,6 +1218,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 218){
           if(!this.currentRoomTileArray[0].classList.contains('catacombs')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('catacombs');
           }
@@ -1227,17 +1253,20 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         if(this.currentRoomTileId === 32){
           if(!this.currentRoomTileArray[0].classList.contains('library')){
             this.currentRoomTileArray[0].classList.add('library');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 48){
           if(!this.currentRoomTileArray[0].classList.contains('patio')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('patio');
           }
         }
         else if(this.currentRoomTileId === 88){
           if(!this.currentRoomTileArray[0].classList.contains('tower')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('tower');
           }
@@ -1247,6 +1276,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 104){
           if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('bedroom');
           }
@@ -1256,6 +1286,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 106){
           if(!this.currentRoomTileArray[0].classList.contains('masterBedroom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('masterBedroom');
           }
@@ -1269,6 +1300,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         else if(this.currentRoomTileId === 211){
           if(!this.currentRoomTileArray[0].classList.contains('furnaceRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('furnaceRoom');
           }
@@ -1325,36 +1357,42 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         }
         if(this.currentRoomTileId === 30){
           if(!this.currentRoomTileArray[0].classList.contains('diningRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('diningRoom');
           }
         }
         else if(this.currentRoomTileId === 21){
           if(!this.currentRoomTileArray[0].classList.contains('junkroom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('junkroom');
           }
         }
         else if(this.currentRoomTileId === 87){
           if(!this.currentRoomTileArray[0].classList.contains('operatingLaboratory')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('operatingLaboratory');
           }
         }
         else if(this.currentRoomTileId === 88){
           if(!this.currentRoomTileArray[0].classList.contains('tower')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('tower');
           }
         }
         else if(this.currentRoomTileId === 103){
           if(!this.currentRoomTileArray[0].classList.contains('charredRoom')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('charredRoom');
           }
         }
         else if(this.currentRoomTileId === 104){
           if(!this.currentRoomTileArray[0].classList.contains('bedroom')){
+            this.move = false;
             this.eventCardResolution();
             this.currentRoomTileArray[0].classList.add('bedroom');
           }
@@ -1362,6 +1400,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         //basement
         else if(this.currentRoomTileId === 210){
           if(!this.currentRoomTileArray[0].classList.contains('servantsQuarters')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('servantsQuarters');
           }
@@ -1369,17 +1408,20 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         else if(this.currentRoomTileId === 209){
           if (!this.currentRoomTileArray[0].classList.contains('undergroundLake')){
             this.currentRoomTileArray[0].classList.add('undergroundLake');
+            this.move = false;
             this.eventCardResolution();
           }
         }
         else if(this.currentRoomTileId === 225){
           if(!this.currentRoomTileArray[0].classList.contains('pentagramChamber')){
+            this.move = false;
             this.omenCardResolution();
             this.currentRoomTileArray[0].classList.add('pentagramChamber');
           }
         }
       }
     }
+  }
   }
 
   getCharacterById(charId: string){
