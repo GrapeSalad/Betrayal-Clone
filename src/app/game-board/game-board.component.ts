@@ -908,8 +908,16 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
 
+    if(this.startScreen === false){
+      const element = document.getElementById(this.currentRoomTileId);
+      element.scrollIntoView(false);
+    }
+
     //enter Key to start game
-    if(this.key === 13){
+    if(this.key === 13 && this.startScreen === false && !this.haunt){
+      //do nothing dood
+    }
+    else if(this.key === 13){
       this.startScreen = false;
       setTimeout(()=>{var tag = document.getElementById('knowledge');
       tag.getElementsByClassName(this.currentKnowledgeIndex)[0].classList.add('highlighted');
@@ -980,6 +988,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 38){
+        this.groundToUpstairs = false;
         this.currentRoomTileId -= 8;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
@@ -1230,6 +1239,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         setTimeout(()=>{this.hitWall = false;}, 5000);
       }
       else if(this.key === 39){
+        this.groundToUpstairs = false;
         this.currentRoomTileId += 1;
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
