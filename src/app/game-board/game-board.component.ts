@@ -68,11 +68,13 @@ export class GameBoardComponent implements OnInit {
   burielRoomId;
   buriedFriendLife: number = 0;
   movesRemaining: number = 18;
+  audio = document.getElementById("strangerTheme");
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
 
   getDieRoll(){
+    console.log("audio " + this.audio);
     this.showDieRoll = true;
     setTimeout(()=>{this.showDieRoll = false;}, 6000);
     var d = document.getElementsByClassName("dice-image");
@@ -636,7 +638,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       return damageDone;
     }
   }
-
 
   omenCardResolution(){
     this.omenShow = true;
