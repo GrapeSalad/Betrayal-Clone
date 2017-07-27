@@ -43,21 +43,24 @@
   }
 }
 
-// @keyframes fly {
-//   0% {
-//     transform: translateY(0px) translateX(0px) rotateZ(-20deg);
-//   }
-//   50% {
-//     transform: translateY(-100px) translateX(-80px) rotateZ(0deg);
-//   }
-//   100% {
-//     transform: translateY(-150px) translateX(-20px) rotateZ(20deg);
-//   }
-// }
 @keyframes fly {
-    from { transform: rotateZ(-20deg) translateX(150px) rotateZ(-20deg); }
-    to   { transform: rotateZ(-20deg) translateX(150px) rotateZ(-20deg); }
+  0% {
+    transform: translateY(0px) translateX(0px) rotateZ(-20deg);
+  }
+  54% {
+    transform: translateY(-540px) translateX(-500px) rotateZ(-45deg);
+  }
+  55% {
+    transform: translateY(-540px) translateX(300px) rotateZ(-20deg);
+  }
+  56% {
+    transform: translateY(400px) translateX(300px) rotateZ(-60deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) rotateZ(-20deg);
+  }
 }
+
 
 // HAUNT CONTAINER //
 .haunt-container {
@@ -335,7 +338,7 @@
         width: 90%;
         height: auto;
         transform: rotateZ(-20deg);
-        animation: fly 1s forwards;
+        animation: fly 7s forwards;
       }
     }
 
