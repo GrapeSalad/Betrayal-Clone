@@ -595,6 +595,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.omenShowDraw = true;
     this.eventShow = false;
     this.eventShowCard = false;
+    this.eventShowDraw = true;
     this.directionShow = false;
     if(this.haunt === false){
       this.hauntCounter += 1;
@@ -728,6 +729,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.eventShowDraw = true;
     this.omenShow = false;
     this.omenShowCard = false;
+    this.omenShowDraw = true;
     this.directionShow = false;
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenEvent = dataLastEmittedFromObserver;
