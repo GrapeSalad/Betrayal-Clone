@@ -1,3 +1,4 @@
+$breakpoint-medium2: "only screen and (max-width: 1440px)";
 @keyframes enterglow {
   from {
     text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 30px #000, 0 0 40px black, 0 0 70px black, 0 0 80px black, 0 0 100px black, 0 0 150px black;
@@ -75,6 +76,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
+
   .haunt-info {
     width: 80%;
   }
@@ -131,6 +133,9 @@
     text-shadow: 15px 15px 30px black;
     animation: enterglow 1.5s ease-in-out infinite alternate;
     cursor: none;
+    @media #{$breakpoint-medium2} {
+      font-size: 100px;
+    }
   }
 }
 
@@ -216,6 +221,10 @@
       font-size: 4em;
       letter-spacing: 5px;
       text-shadow: 0 0 30px black;
+      @media #{$breakpoint-medium2} {
+        font-size: 3em;
+        padding-top: 20px;
+      }
     }
   }
 }
@@ -237,10 +246,16 @@
     font-family: spoopy;
     color: darkred;
     font-size: 3em;
-
+    @media #{$breakpoint-medium2} {
+      width: 9%;
+      font-size: 2em;
+    }
     .warnings {
       margin-right: 20px;
       margin-left: 60px;
+      @media #{$breakpoint-medium2} {
+        margin-right: 0;
+      }
     }
 
   }
@@ -259,6 +274,9 @@
     background-position: center;
     background-size: cover;
     border: 2px solid black;
+    @media #{$breakpoint-medium2} {
+      width: 61%;
+    }
 
     h3 {
       margin: 10px;
@@ -298,6 +316,10 @@
       flex-direction: column;
       box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
       border: 2px solid black;
+      @media #{$breakpoint-medium2} {
+        height: 300px;
+        width: 175px;
+      }
 
       h3 {
         font-size: 3em;
@@ -305,6 +327,9 @@
         margin-top: 0;
         text-shadow: 2px 2px 5px black;
         letter-spacing: 2px;
+        @media #{$breakpoint-medium2} {
+          font-size: 2em;
+        }
       }
 
       img {
@@ -327,8 +352,10 @@
       flex-direction: column;
       box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
       border: 2px solid black;
-      // -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
-      // filter: drop-shadow(1px 1px 25px #8fc470);
+      @media #{$breakpoint-medium2} {
+        height: 300px;
+        width: 175px;
+      }
 
       h3 {
         font-size: 3em;
@@ -336,6 +363,9 @@
         margin-top: 0;
         text-shadow: 2px 2px 5px black;
         letter-spacing: 2px;
+        @media #{$breakpoint-medium2} {
+          font-size: 2em;
+        }
       }
 
       img {
@@ -361,6 +391,10 @@
       flex-direction: column;
       box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
       border: 2px solid black;
+      @media #{$breakpoint-medium2} {
+        height: 300px;
+        width: 175px;
+      }
 
       h3 {
         font-size: 3em;
@@ -368,6 +402,9 @@
         margin-top: 0;
         text-shadow: 2px 2px 5px black;
         letter-spacing: 2px;
+        @media #{$breakpoint-medium2} {
+          font-size: 2em;
+        }
       }
 
       img {
@@ -388,8 +425,10 @@
       flex-direction: column;
       box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
       border: 2px solid black;
-      // -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
-      // filter: drop-shadow(1px 1px 25px #8fc470);
+      @media #{$breakpoint-medium2} {
+        height: 300px;
+        width: 175px;
+      }
 
       h3 {
         font-size: 3em;
@@ -397,6 +436,9 @@
         margin-top: 0;
         text-shadow: 2px 2px 5px black;
         letter-spacing: 2px;
+        @media #{$breakpoint-medium2} {
+          font-size: 2em;
+        }
       }
 
       img {
@@ -443,12 +485,18 @@
       align-items: center;
       justify-content: space-around;
       width: 40%;
+      @media #{$breakpoint-medium2} {
+        width: 30%;
+      }
       h5 {
         margin: 0;
         font-family: necrotype;
         font-size: 1.8em;
         text-align: center;
         padding-left: 15px;
+        @media #{$breakpoint-medium2} {
+          font-size: 1.2em;
+        }
       }
       .character-image {
         img {
@@ -456,6 +504,10 @@
           width: 170px;
           -webkit-filter: drop-shadow(3px 3px 2px black);
           filter: drop-shadow(3px 3px 2px black);
+          @media #{$breakpoint-medium2} {
+            height: 120px;
+            width: 120px;
+          }
         }
       }
     }
@@ -474,6 +526,9 @@
           margin-bottom: 0;
           font-family: necrotype;
           font-size: 1.8em;
+          @media #{$breakpoint-medium2} {
+            font-size: 1.2em;
+          }
         }
         ul {
           list-style: none;
@@ -485,6 +540,9 @@
             font-family: spoopy;
             font-size: 2.5em;
             display: inline-block;
+            @media #{$breakpoint-medium2} {
+              font-size: 1.5em;
+            }
           }
         }
       }
