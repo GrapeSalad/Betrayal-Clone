@@ -74,6 +74,7 @@ export class GameBoardComponent implements OnInit {
   buriedFriendLife: number = 0;
   movesRemaining: number = 18;
   move: boolean = false;
+  hauntDieRoll: number = this.gameService.diceToRoll(6);
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService, private route: ActivatedRoute) { }
@@ -84,6 +85,16 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     var d = document.getElementsByClassName("dice-image");
     d[0].classList.remove("diceImageFlash");
     this.move = true;
+    if(this.haunt === false){
+      this.dieRoll = this.hauntDieRoll;
+      if(this.hauntCounter <= this.hauntDieRoll){
+        this.haunt = false;
+      }else{
+        this.haunt = true;
+        this.getHauntInfo();
+        this.buryFriend();
+      }
+    }
   }
 
   buryFriend(){
@@ -117,15 +128,20 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   }
 
   drawEventCard(){
-    this.eventShowDraw = false;
-    this.eventShowCard = true;
+    if(this.eventShowDraw){
+      this.eventShowDraw = false;
+      this.eventShowCard = true;
+    }
     var d = document.getElementsByClassName("dice-image");
     d[0].classList.add("diceImageFlash");
   }
 
   drawOmenCard(){
-    this.omenShowDraw = false;
-    this.omenShowCard = true;
+
+    if(this.omenShowDraw){
+      this.omenShowDraw = false;
+      this.omenShowCard = true;
+    }
     var d = document.getElementsByClassName("dice-image");
     d[0].classList.add("diceImageFlash");
   }
@@ -593,22 +609,13 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   omenCardResolution(){
     this.omenShow = true;
     this.omenShowDraw = true;
+    this.omenShowCard = false;
     this.eventShow = false;
     this.eventShowCard = false;
     this.eventShowDraw = true;
     this.directionShow = false;
     if(this.haunt === false){
       this.hauntCounter += 1;
-      var hauntDieRoll = this.gameService.diceToRoll(6);
-
-      this.dieRoll = hauntDieRoll;
-      if(this.hauntCounter <= hauntDieRoll){
-        this.haunt = false;
-      }else{
-        this.haunt = true;
-        this.getHauntInfo();
-        this.buryFriend();
-      }
     }
     console.log(this.haunt + " haunt after roll");
     this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {
@@ -727,6 +734,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   eventCardResolution(){
     this.eventShow = true;
     this.eventShowDraw = true;
+    this.eventShowCard = false;
     this.omenShow = false;
     this.omenShowCard = false;
     this.omenShowDraw = true;
