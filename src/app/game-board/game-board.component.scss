@@ -7,6 +7,58 @@
   }
 }
 
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  33% {
+    transform: rotateZ(-20deg);
+  }
+  66% {
+    transform: rotateZ(20deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(-1080deg);
+  }
+}
+
+// @keyframes fly {
+//   0% {
+//     transform: translateY(0px) translateX(0px) rotateZ(-20deg);
+//   }
+//   50% {
+//     transform: translateY(-100px) translateX(-80px) rotateZ(0deg);
+//   }
+//   100% {
+//     transform: translateY(-150px) translateX(-20px) rotateZ(20deg);
+//   }
+// }
+@keyframes fly {
+    from { transform: rotateZ(-20deg) translateX(150px) rotateZ(-20deg); }
+    to   { transform: rotateZ(-20deg) translateX(150px) rotateZ(-20deg); }
+}
+
 // HAUNT CONTAINER //
 .haunt-container {
   width: 100%;
@@ -79,24 +131,20 @@
 }
 
 // WINNING AND LOSING PAGES //
-.youWin {
-  background-image: url('/assets/img/trophyroom.jpg');
-  background-position: center;
-  background-size: cover;
+.youWin, .youLose {
   height: 100vh;
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: black;
 
   .winContent, .loseContent {
-    background-color: rgba(138, 137, 133, 0.5);
     width: 70vw;
     height: 60vh;
-    border-radius: 20px;
-    border: 2px solid black;
     padding: 50px;
+
 
     h1 {
       font-family: ghastly;
@@ -105,6 +153,7 @@
       letter-spacing: 15px;
       text-shadow: 5px 5px 20px black;
       text-align: center;
+      margin-top: 10px;
     }
     p {
       font-family: spoopy;
@@ -112,6 +161,21 @@
       font-size: 4em;
       letter-spacing: 5px;
       text-shadow: 5px 5px 20px black;
+    }
+    h2 {
+      text-align: center;
+      font-family: ghastly;
+      font-size: 6em;
+      letter-spacing: 15px;
+      text-shadow: 5px 5px 20px black;
+      text-align: center;
+      margin: 40px;
+      animation: enterglow 1.5s ease-in-out infinite alternate;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+        color: darkred;
+      }
     }
   }
 }
@@ -141,6 +205,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     h5 {
       font-family: ghastly;
       color: darkred;
@@ -155,18 +220,32 @@
 .middle-row {
   height: 65vh;
   display: flex;
+  justify-content: space-between;
 
   // EMPTY LEFT DIV //
   .emptydiv {
     width: 15%;
     height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: spoopy;
+    color: darkred;
+    font-size: 3em;
+
+    .warnings {
+      margin-right: 20px;
+      margin-left: 60px;
+    }
+
   }
 
   // GAME BOARD GRID //
   .board-grid {
     background-color: rgba(138, 137, 133, 0.3);
     height: 65vh;
-    width: 70%;
+    width: 55%;
     display: flex;
     overflow: auto;
     flex-wrap: nowrap;
@@ -228,6 +307,39 @@
         transform: rotateZ(-20deg);
       }
     }
+    .omen-show-cards {
+      height: 400px;
+      width: 250px;
+      border: 1px dotted black;
+      background-image: url('/assets/img/charbg.jpg');
+      background-color: #1C591F;
+      background-blend-mode: screen;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
+      border: 2px solid black;
+      // -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
+      // filter: drop-shadow(1px 1px 25px #8fc470);
+
+      h3 {
+        font-size: 3em;
+        font-family: necrotype;
+        margin-top: 0;
+        text-shadow: 2px 2px 5px black;
+        letter-spacing: 2px;
+      }
+
+      img {
+        width: 90%;
+        height: auto;
+        transform: rotateZ(-20deg);
+        animation: fly 1s forwards;
+      }
+    }
+
 
     // EVENTS //
     .event-cards {
@@ -255,7 +367,36 @@
       img {
         width: 60%;
         height: auto;
-        transform: rotateZ(-20deg);
+      }
+    }
+    .event-show-cards {
+      height: 380px;
+      width: 250px;
+      background-image: url('/assets/img/charbg.jpg');
+      background-color: #185360;
+      background-blend-mode: screen;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-shadow: 0 0.8rem 0.8rem 0 rgba(0,0,0,.6);
+      border: 2px solid black;
+      // -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
+      // filter: drop-shadow(1px 1px 25px #8fc470);
+
+      h3 {
+        font-size: 3em;
+        font-family: necrotype;
+        margin-top: 0;
+        text-shadow: 2px 2px 5px black;
+        letter-spacing: 2px;
+      }
+
+      img {
+        width: 60%;
+        height: auto;
+        animation: spin 10s forwards;
       }
     }
   }
@@ -486,6 +627,10 @@
   -webkit-filter: drop-shadow(1px 1px 25px #8fc470);
   filter: drop-shadow(1px 1px 25px #8fc470);
   cursor: pointer;
+  animation: bounce 2.5s infinite;
+  &:hover {
+    animation: wiggle .5s forwards;
+  }
 }
 
 img {
