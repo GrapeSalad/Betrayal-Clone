@@ -16,14 +16,15 @@
     <div class="winContent">
       <h1>VICTORY</h1>
       <p>{{hauntCard.ifYouWin}}</p>
-      <a routerLink="">Play Again</a>
+      <h2><a routerLink="">Play Again</a></h2>
     </div>
   </div>
 
-  <div *ngIf="hauntLose || death">
+  <div *ngIf="hauntLose || death" class="youLose">
     <div class="loseContent">
       <h1>YOU LOSE</h1>
       <p>The house buries you alive too and both you and your friend are stuck in eternal darkness</p>
+      <h2><a routerLink="">Play Again</a></h2>
     </div>
   </div>
 
@@ -45,14 +46,17 @@
 <div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="middle-row">
 
   <div class="emptydiv">
-    <div *ngIf="groundToUpstairs"><p>Press the enter key to move upstairs while in the grand staircase</p></div>
-    <div *ngIf="hitWall"><p>A false door or a wall is blocking your path</p></div>
-    <div *ngIf="upstairsToGround"><p>Press the enter key to go back downstairs</p></div>
-    <div *ngIf="groundToBasement"><p>You fell to the basement!</p></div>
-    <div *ngIf="basementToGround"><p>Press the up key to go to the ground level</p></div>
-    <div *ngIf="haunt"><p>You have {{movesRemaining}} moves until {{selectedFriend.name}} dies! You better hurry to the basement!</p></div>
-    <!-- <div *ngIf="haunt"><audio autoplay><source src="././assets/sounds/hauntTheme.mp3"></audio></div> -->
+    <div class="warnings">
+      <div *ngIf="groundToUpstairs"><p>Press the left key to move upstairs while in the grand staircase</p></div>
+      <div *ngIf="hitWall"><p>A false door or a wall is blocking your path</p></div>
+      <div *ngIf="upstairsToGround"><p>Press the enter key to go back downstairs</p></div>
+      <div *ngIf="groundToBasement"><p>You fell to the basement!</p></div>
+      <div *ngIf="basementToGround"><p>Press the up key to go to the ground level</p></div>
+      <div *ngIf="haunt"><p>You have {{movesRemaining}} moves until {{selectedFriend.name}} dies! You better hurry to the basement!</p></div>
+      <!-- <div *ngIf="haunt"><audio autoplay><source src="././assets/sounds/hauntTheme.mp3"></audio></div> -->
+    </div>
   </div>
+
   <div class="board-grid">
     <!-- <div *ngIf="groundShow"> -->
     <h3>Ground Floor</h3>
@@ -272,11 +276,19 @@
   <!-- </div>   end basement div -->
   </div>   <!-- end board grid div -->
   <div class="omenevent-cards">
-    <div class="omen-cards">
+    <div *ngIf="directionShow || eventShow" class="omen-cards">
       <h3>Omen</h3>
       <img src="/assets/img/crow.png" alt="crow">
     </div>
-    <div class="event-cards">
+    <div *ngIf="omenShow" class="omen-show-cards">
+      <h3>Omen</h3>
+      <img src="/assets/img/crow.png" alt="crow">
+    </div>
+    <div *ngIf="directionShow || omenShow" class="event-cards">
+      <h3>Event</h3>
+      <img src="/assets/img/spiral.png" alt="spiral">
+    </div>
+    <div *ngIf="eventShow" class="event-show-cards">
       <h3>Event</h3>
       <img src="/assets/img/spiral.png" alt="spiral">
     </div>
