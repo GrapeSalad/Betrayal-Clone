@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div *ngIf="hauntLose" class="youLose">
+  <div *ngIf="hauntLose || death" class="youLose">
     <div class="loseContent">
       <h1>YOU LOSE</h1>
       <p>The house buries you alive too and both you and your friend are stuck in eternal darkness</p>
@@ -28,9 +28,9 @@
     </div>
   </div>
 
-  <div *ngIf="death">
+  <!-- <div *ngIf="death">
     <h3>GAME OVER</h3>
-  </div>
+  </div> -->
   <div *ngIf="startScreen" class="start-screen">
     <h1>Press Enter. If you dare...</h1>
   </div>
@@ -53,7 +53,7 @@
       <div *ngIf="groundToBasement"><p>You fell to the basement!</p></div>
       <div *ngIf="basementToGround"><p>Press the up key to go to the ground level</p></div>
       <div *ngIf="haunt"><p>You have {{movesRemaining}} moves until {{selectedFriend.name}} dies! You better hurry to the basement!</p></div>
-      <div *ngIf="haunt"><audio autoplay><source src="././assets/sounds/hauntTheme.mp3"></audio></div>
+      <!-- <div *ngIf="haunt"><audio autoplay><source src="././assets/sounds/hauntTheme.mp3"></audio></div> -->
     </div>
   </div>
 
@@ -334,7 +334,8 @@
   <div class="play-instructions">
     <div *ngIf="directionShow" class="direction-instructions">
       <h5>Explore the house</h5>
-      <h3>Use the arrow keys to explore the house. Entering a room triggers either an omen card or event card.</h3>
+      <h3>Use the arrow keys to explore the house. Entering a room may trigger an omen card or event card.</h3>
+      <audio autoplay><source src="././assets/sounds/thunder.mp3"></audio>
     </div>
     <div *ngIf="eventShow" class="event-drawn">
       <h5>{{chosenEvent?.event}}</h5>
