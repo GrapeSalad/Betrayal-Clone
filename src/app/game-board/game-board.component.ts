@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import {CharacterService} from '../character.service';
 import {Character} from '../character.model';
 import {Speed} from '../speed.model';
@@ -16,7 +17,7 @@ import {Observable} from 'rxjs/Rx';
   selector: 'app-game-board',
   templateUrl: './game-board.component.html',
   styleUrls: ['./game-board.component.scss'],
-  host: {'(document:keyup)': 'handleKeyboardEvent($event)'},
+  host: {'(document:keydown)': 'handleKeyboardEvent($event)'},
   providers: [GameService, CharacterService]
 })
 
@@ -71,7 +72,7 @@ export class GameBoardComponent implements OnInit {
   audio = document.getElementById("strangerTheme");
 
 
-constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService) { }
+constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService, private route: ActivatedRoute) { }
 
   getDieRoll(){
     console.log("audio " + this.audio);
@@ -907,6 +908,12 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   handleKeyboardEvent(event: KeyboardEvent){
     this.key = event.which || event.keyCode;
+    const element = document.getElementsByClassName("active");
+
+    //   if (this.startScreen === false) {
+    //   element[0].scrollIntoView(false);
+    // }
+
 
     if(this.startScreen === false){
       const element = document.getElementById(this.currentRoomTileId);
@@ -945,6 +952,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     else{
       //go downstairs from upper landing
       if(this.currentRoomTileId === 95 && this.key === 13){
+        element[0].scrollIntoView(false);
         this.currentRoomTileId = 37;
         this.groundShow = true;
         this.upstairsShow = false;
@@ -967,6 +975,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.basementToGround = true;
       }
       if(this.key === 38 && this.currentRoomTileId === 201){
+        element[0].scrollIntoView(false);
         this.groundToBasement = false;
         this.basementToGround = false;
         this.currentRoomTileId = 38;
@@ -990,6 +999,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.key === 38){
         this.groundToUpstairs = false;
         this.currentRoomTileId -= 8;
+        element[0].scrollIntoView(false);
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
@@ -1119,6 +1129,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.key === 40){
         this.currentRoomTileId += 8;
+        element[0].scrollIntoView(true);
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
@@ -1241,6 +1252,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       else if(this.key === 39){
         this.groundToUpstairs = false;
         this.currentRoomTileId += 1;
+        element[0].scrollIntoView(false);
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
@@ -1313,6 +1325,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         this.groundToUpstairs = true;
       }
       if(this.key === 37 && this.currentRoomTileId === 37){
+        element[0].scrollIntoView(false);
         this.groundToUpstairs = false;
         this.groundShow = false;
         this.upstairsShow = true;
@@ -1338,6 +1351,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
       else if(this.key === 37){
         this.currentRoomTileId -= 1;
+        element[0].scrollIntoView(false);
         if (this.currentRoomTileArray.length === 0) {
           document.getElementById('39').classList.remove('active');
           this.currentRoomTileArray.push(document.getElementById(this.currentRoomTileId));
@@ -1449,7 +1463,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
 
 
-
+    // const activeElem = this.currentRoomTileArray[0].classList.contains('active');
+    // var tag = document.getElementById('might');
+    // tag.getElementsByClassName(this.currentMightIndex)[0].classList.remove('highlighted');
   }
 
 }
