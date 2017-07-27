@@ -364,6 +364,14 @@
       font-family: necrotype;
       font-size: 1.8em;
       text-align: center;
+      span {
+        font-size: 150px;
+        margin-top: 80px;
+        display: inline-block;
+        text-shadow: 1px 1px 5px black;
+        animation: enterglow 1.5s ease-in-out infinite alternate;
+        cursor: pointer;
+      }
     }
     h3 {
       font-family: spoopy;

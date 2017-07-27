@@ -57,7 +57,11 @@ export class GameBoardComponent implements OnInit {
   hauntInfo: boolean = false;
   death: boolean = false;
   omenShow: boolean = false;
+  omenShowDraw: boolean = false;
+  omenShowCard: boolean = false;
   eventShow: boolean = false;
+  eventShowDraw: boolean = false;
+  eventShowCard: boolean = false;
   directionShow: boolean = true;
   groundToUpstairs: boolean = false;
   hitWall: boolean = false;
@@ -110,6 +114,16 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
   }
   setBeginningTile(){
     document.getElementById('39').classList.add('active');
+  }
+
+  drawEventCard(){
+    this.eventShowDraw = false;
+    this.eventShowCard = true;
+  }
+
+  drawOmenCard(){
+    this.omenShowDraw = false;
+    this.omenShowCard = true;
   }
 
   getOmenCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
@@ -642,7 +656,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   omenCardResolution(){
     this.omenShow = true;
+    this.omenShowDraw = true;
     this.eventShow = false;
+    this.eventShowCard = false;
     this.directionShow = false;
     if(this.haunt === false){
       this.hauntCounter += 1;
@@ -774,7 +790,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
 
   eventCardResolution(){
     this.eventShow = true;
+    this.eventShowDraw = true;
     this.omenShow = false;
+    this.omenShowCard = false;
     this.directionShow = false;
     this.gameService.getEventCardById(this.gameService.getRandomNumber(0,24)).subscribe(dataLastEmittedFromObserver => {
       this.chosenEvent = dataLastEmittedFromObserver;

@@ -45,7 +45,7 @@
 <div *ngIf="!startScreen && !death && !hauntWin && !hauntLose" class="middle-row">
 
   <div class="emptydiv">
-    <div *ngIf="groundToUpstairs"><p>Press the enter key to move upstairs while in the grand staircase</p></div>
+    <div *ngIf="groundToUpstairs"><p>Press the left arrow key to move upstairs while in the grand staircase</p></div>
     <div *ngIf="hitWall"><p>A false door or a wall is blocking your path</p></div>
     <div *ngIf="upstairsToGround"><p>Press the enter key to go back downstairs</p></div>
     <div *ngIf="groundToBasement"><p>You fell to the basement!</p></div>
@@ -326,14 +326,20 @@
       <audio autoplay><source src="././assets/sounds/thunder.mp3"></audio>
     </div>
     <div *ngIf="eventShow" class="event-drawn">
-      <h5>{{chosenEvent?.event}}</h5>
-      <p>{{chosenEvent?.flavor}}</p>
-      <p>{{chosenEvent?.description}}</p>
+      <h5 *ngIf="eventShowDraw" (click)="drawEventCard()"><span class="highlighted">DRAW AN EVENT CARD</span></h5>
+      <div *ngIf="eventShowCard">
+        <h5>{{chosenEvent?.event}}</h5>
+        <p>{{chosenEvent?.flavor}}</p>
+        <p>{{chosenEvent?.description}}</p>
+      </div>
     </div>
     <div *ngIf="omenShow" class="omen-drawn">
-      <h5>{{chosenOmen?.omen}}</h5>
-      <p>{{chosenOmen?.flavor}}</p>
-      <p>{{chosenOmen?.description}}</p>
+      <h5 *ngIf="omenShowDraw" (click)="drawOmenCard()"><span class="highlighted">DRAW AN OMEN CARD</span></h5>
+      <div *ngIf="eventShowCard">
+        <h5>{{chosenOmen?.omen}}</h5>
+        <p>{{chosenOmen?.flavor}}</p>
+        <p>{{chosenOmen?.description}}</p>
+      </div>
     </div>
   </div>
   <div class="dice-roll">
