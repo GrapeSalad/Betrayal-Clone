@@ -66,7 +66,7 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
 // HAUNT CONTAINER //
 .haunt-container {
   width: 100%;
-  height: 100vh;
+  height: 1300px;
   background-color: black;
   background-size: contain;
   display: flex;
@@ -141,13 +141,14 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
 
 // WINNING AND LOSING PAGES //
 .youWin, .youLose {
-  height: 100vh;
+  height: 1300px;
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: black;
+  overflow: auto;
 
   .winContent, .loseContent {
     width: 70vw;
@@ -215,6 +216,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
     justify-content: center;
     align-items: center;
     text-align: center;
+    @media #{$breakpoint-medium2} {
+      width: 20%;
+    }
     h5 {
       font-family: ghastly;
       color: darkred;
@@ -223,7 +227,7 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       text-shadow: 0 0 30px black;
       @media #{$breakpoint-medium2} {
         font-size: 3em;
-        padding-top: 20px;
+        padding-top: 5px;
       }
     }
   }
@@ -495,7 +499,8 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         text-align: center;
         padding-left: 15px;
         @media #{$breakpoint-medium2} {
-          font-size: 1.2em;
+          font-size: .8em;
+          width: 100%;
         }
       }
       .character-image {
@@ -531,7 +536,7 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
           font-family: necrotype;
           font-size: 1.8em;
           @media #{$breakpoint-medium2} {
-            font-size: 1.2em;
+            font-size: 1em;
           }
         }
         ul {
@@ -549,6 +554,13 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
               margin: 0;
               padding: 0;
             }
+          }
+        }
+      }
+      #knowledge {
+        h5 {
+          @media #{$breakpoint-medium2} {
+            margin-left: -10px;
           }
         }
       }
@@ -582,6 +594,9 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
     h4 {
       margin-top: 100px;
       text-align: center;
+      @media #{$breakpoint-medium2} {
+        margin-top: 50px;
+      }
       span {
         font-size: 5em;
         margin-top: 200px;
@@ -605,6 +620,7 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       text-shadow: 1px 1px 5px black;
       @media #{$breakpoint-medium2} {
         font-size: 2em;
+        margin-top: 5px;
       }
     }
     p {
@@ -612,6 +628,10 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
       font-family: spoopy;
       font-size: 2em;
       letter-spacing: 2px;
+      @media #{$breakpoint-medium2} {
+        font-size: 1.5em;
+        margin-top: 5px;
+      }
     }
     .event-drawn {
       height: 20vh;
@@ -675,7 +695,8 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         img {
           width: 100px;
           height: auto;
-          margin-top: 25px;
+          margin-top: 5px;
+          margin-right: 10px;
         }
       }
     }
@@ -690,7 +711,8 @@ $breakpoint-medium2: "only screen and (max-width: 1440px)";
         margin-top: 25px;
         text-shadow: 3px 3px 10px black;
         @media #{$breakpoint-medium2} {
-          font-size: 7em;
+          font-size: 6em;
+          margin-top: 5px;
         }
       }
       h3 {
