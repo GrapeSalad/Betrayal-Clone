@@ -14,7 +14,7 @@ $breakpoint-medium: "only screen and (max-width: 1300px)";
   background-repeat: no-repeat;
   background-color: #494240;
   background-blend-mode: screen;
-  height: 100vh;
+  height: 900px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -40,12 +40,8 @@ $breakpoint-medium: "only screen and (max-width: 1300px)";
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 80vw;
+  width: 90vw;
   align-self: center;
-  @media #{$breakpoint-medium} {
-    width: 70vw;
-    margin: auto;
-  }
   .character-card {
     height: 500px;
     width: 300px;
