@@ -53,7 +53,7 @@ export class GameService {
       dieRoll += randNum;
       // console.log(i + " die roll: " + randNum);
     }
-    // console.log("total die roll: " + dieRoll);
+    console.log("total die roll: " + dieRoll);
     return dieRoll;
   }
 }

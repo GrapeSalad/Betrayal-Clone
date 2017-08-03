@@ -74,7 +74,7 @@ export class GameBoardComponent implements OnInit {
   buriedFriendLife: number = 0;
   movesRemaining: number = 18;
   move: boolean = false;
-  hauntDieRoll: number = this.gameService.diceToRoll(6);
+  hauntDieRoll: number = 0;
 
 
 constructor(private database: AngularFireDatabase, private gameService: GameService, private characterService: CharacterService, private route: ActivatedRoute) { }
@@ -85,8 +85,9 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     var d = document.getElementsByClassName("dice-image");
     d[0].classList.remove("diceImageFlash");
     this.move = true;
+    console.log("getDieRoll method call- roll = " + this.dieRoll);
     if(this.haunt === false){
-      this.dieRoll = this.hauntDieRoll;
+      // this.dieRoll = this.hauntDieRoll;
       if(this.hauntCounter <= this.hauntDieRoll){
         this.haunt = false;
       }else{
@@ -96,6 +97,10 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       }
     }
   }
+
+  // setShownDieRoll(roll: number){
+  //   this.dieRoll = roll;
+  // }
 
   buryFriend(){
     var randNum = this.gameService.getRandomNumber(0,14);
@@ -203,6 +208,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       // console.log(damageDone);
       return damageDone;
     }
+    console.log("getOmenCardEffects method call- roll = " + this.dieRoll);
   }
 
   getEventCardEffects(cardId: string, speed: number = null, might: number = null, sanity: number = null, knowledge: number = null, numberOfOmenCardsDrawn: number = null){
@@ -341,12 +347,15 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
         //should be mental damage
         damageDone.push("knowledge", -roll1);
       }
+      else if(roll > 3){
+        console.log("resist");
+      }
       else{
-        var roll1: number = this.gameService.diceToRoll(2);
+        var roll2: number = this.gameService.diceToRoll(2);
 
         this.dieRoll = roll2;
         //should be mental damage
-        damageDone.push("sanity", -roll1);
+        damageDone.push("sanity", -roll2);
       }
       console.log(damageDone);
       return damageDone;
@@ -528,16 +537,18 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       this.dieRoll = mightRoll;
       if(sanityRoll >= 2 && knowledgeRoll >= 2 && speedRoll >= 2 && mightRoll >= 2){
         damageDone.push(chosenTrait, 1);
-      } else if(sanityRoll >= 2 || knowledgeRoll >= 2 || speedRoll >= 2 || mightRoll >= 2){
-        // console.log("nothing happens");
-      } else if(sanityRoll < 1){
+      }
+      if(sanityRoll < 2){
         damageDone.push("sanity", -1);
-      } else if(mightRoll < 1){
-        damageDone.push("might", -1);
-      } else if(speedRoll < 1){
-        damageDone.push("speed", -1);
-      } else {
+      }
+      if(knowledgeRoll < 2){
         damageDone.push("knowledge", -1);
+      }
+      if(speedRoll < 2){
+        damageDone.push("speed", -1);
+      }
+      if(mightRoll < 2){
+        damageDone.push("might", -1);
       }
       console.log(damageDone);
       return damageDone;
@@ -604,6 +615,7 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
       // console.log(damageDone);
       return damageDone;
     }
+    console.log("getEventCardEffects method call- roll = " + this.dieRoll);
   }
 
   omenCardResolution(){
@@ -616,6 +628,8 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.directionShow = false;
     if(this.haunt === false){
       this.hauntCounter += 1;
+      this.hauntDieRoll = this.gameService.diceToRoll(6);
+      this.dieRoll = this.hauntDieRoll;
     }
     console.log(this.haunt + " haunt after roll");
     this.gameService.getOmenCardById(this.gameService.getRandomNumber(0,7)).subscribe(dataLastEmittedFromObserver => {

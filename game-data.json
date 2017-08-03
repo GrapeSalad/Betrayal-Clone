@@ -275,7 +275,7 @@
   },{
     "event": "Hideous Shriek",
     "flavor": "It starts like a whisper, but ends in a soul-rending shriek.",
-    "description": "Each explorer must attempt a Sanity roll. 4+ You resist the sound. 1-3 Take 1 die of mental damage. 0 Take 2 dice of mental damage. Each result affects only the explorer making that roll.",
+    "description": "You must attempt a Sanity roll. 4+ You resist the sound. 1-3 Take 1 die of mental damage. 0 Take 2 dice of mental damage.",
     "sanity": true
   },{
     "event": "Something Hidden",
