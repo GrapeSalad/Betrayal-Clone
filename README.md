@@ -72,16 +72,16 @@ Game-Board Page - This is the bulk of the project for the back-end developers, a
 #### Process Development
 
 getDieRoll Method - This is called constantly, and it ensures that the animations play/show correctly.<br>
-![getDieRoll Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/getDieRollMethod.png)
+![Die-Roll Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/getDieRollMethod.png)
 
 getEventCardEffects Method - This template is used for omen cards as well. This is a very large method to account for the 24 different event cards that can be drawn.<br>
-![getEventCardEffects Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/EventCardEffectsMethod.png)
+![Event Card Effects Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/EventCardEffectsMethod.png)
 
 omenCardResolution Method - Controls what is shown when the player enters a room with an omen, interacts with an omen card, and the effects of the randomly generated card are resolved. Also checks to see if the haunt occurs, sets the highlighted value of the players stats based on the cards effects, and checks for player death.<br>
-![omenCardResolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/OmenCardResolutionMethod.png)
+![Omen Card Resolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/OmenCardResolutionMethod.png)
 
 Player Movement Method - Keyboard based movement. First image ensures that the player starts in the correct spot and their base stats are highlighted. <br>
-![playerMovementEnter Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/playerMovementEnter.png)
+![Player Movement Enter Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/playerMovementEnter.png)
 
 Next several images show how the players movement is controlled.<br>
 ![Basement To Foyer Movement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/basementToFoyer.png)
