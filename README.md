@@ -81,7 +81,7 @@ getEventCardEffects Method - This template is used for omen cards as well. This 
 
 omenCardResolution Method - Controls what is shown when the player enters a room with an omen, interacts with an omen card, and the effects of the randomly generated card are resolved. Also checks to see if the haunt occurs, sets the highlighted value of the players stats based on the cards effects, and checks for player death.<br>
 
-![Omen Card Resolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/OmenCardResolutionMethod.PNG) <br>
+![Omen Card Resolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/OmenCardResolution.PNG) <br>
 
 **Player Movement**
 
