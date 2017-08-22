@@ -50,6 +50,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 *Haunt* <br>
 
 <hr>
+## Screenshots && Thoughts
+#### Styling
+Home Page - We were wanting a basic home page that would showcase the haunted theme and prepare the user for a *creepy* experience.<br>
+![Home Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house4.png)
+
+
+Rules Page - Breakdown of the rules, adapted for online-solo play. <br>
+![Rules Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house3.png)
+
+Character Select Page - Choose your character! This page is the first to pull data from Firebase.
+![Character Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house2.png)
+
+<hr>
 ## Project Build
 Download from the [repo](https://github.com/GrapeSalad/Betrayal-clone)
 Run `ng -v` to ensure than your Angular is version **4**.
