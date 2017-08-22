@@ -73,31 +73,31 @@ Game-Board Page - This is the bulk of the project for the back-end developers, a
 
 getDieRoll Method - This is called constantly, and it ensures that the animations play/show correctly.<br>
 
-![Die-Roll Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/getDieRollMethod.png) <br>
+![Die-Roll Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/getDieRollMethod.PNG) <br>
 
 getEventCardEffects Method - This template is used for omen cards as well. This is a very large method to account for the 24 different event cards that can be drawn.<br>
 
-![Event Card Effects Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/EventCardEffectsMethod.png) <br>
+![Event Card Effects Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/EventCardEffectsMethod.PNG) <br>
 
 omenCardResolution Method - Controls what is shown when the player enters a room with an omen, interacts with an omen card, and the effects of the randomly generated card are resolved. Also checks to see if the haunt occurs, sets the highlighted value of the players stats based on the cards effects, and checks for player death.<br>
 
-![Omen Card Resolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/OmenCardResolutionMethod.png) <br>
+![Omen Card Resolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/OmenCardResolutionMethod.PNG) <br>
 
 **Player Movement**
 
 Keyboard based movement. First image ensures that the player starts in the correct spot and their base stats are highlighted. <br>
 
-![Player Movement Enter Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/playerMovementEnter.png) <br>
+![Player Movement Enter Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/playerMovementEnter.PNG) <br>
 
 Next several images show how the players movement is controlled.<br>
 
 ![Basement To Foyer Movement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/basementToFoyer.PNG) <br>
 
-![Coal Chute To Basement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/coalChuteToBasement.png) <br>
+![Coal Chute To Basement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/coalChuteToBasement.PNG) <br>
 
 Testing to see if player can move downward, and if so change the active tile. This is similar to up/left/right movement.<br>
 
-![Down](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/down.png) <br>
+![Down](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/src/assets/img/screenshots/down.PNG) <br>
 
 <hr>
 
