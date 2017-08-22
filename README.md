@@ -51,7 +51,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 <hr>
 ## Screenshots && Thoughts
+
 #### Styling
+
 Home Page - We were wanting a basic home page that would showcase the haunted theme and prepare the user for a *creepy* experience.<br>
 ![Home Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house4.png)
 
