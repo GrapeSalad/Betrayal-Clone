@@ -50,8 +50,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 *Haunt* <br>
 
 <hr>
-## Screenshots && Thoughts
+## Screenshots and Thoughts
+
 #### Styling
+
 Home Page - We were wanting a basic home page that would showcase the haunted theme and prepare the user for a *creepy* experience.<br>
 ![Home Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house4.png)
 
@@ -59,8 +61,33 @@ Home Page - We were wanting a basic home page that would showcase the haunted th
 Rules Page - Breakdown of the rules, adapted for online-solo play. <br>
 ![Rules Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house3.png)
 
-Character Select Page - Choose your character! This page is the first to pull data from Firebase.
+Character Select Page - Choose your character! This page is the first to pull data from Firebase. Next is the friend select page, which is very similar, and not shown here.<br>
 ![Character Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house2.png)
+
+Game-Board Page - This is the bulk of the project for the back-end developers, and a bear to style for the front-end developers. The scrollable section in the center will focus on where the character is, and bring it into view (It may take an extra movement to work). <br>
+![Game-Board Page](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/house1.png)
+
+
+#### Process Development
+
+getDieRoll Method - This is called constantly, and it ensures that the animations play/show correctly.
+![getDieRoll Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/getDieRollMethod.png)
+
+getEventCardEffects Method - This template is used for omen cards as well. This is a very large method to account for the 24 different event cards that can be drawn.<br>
+![getEventCardEffects Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/EventCardEffectsMethod.png)
+
+omenCardResolution Method - Controls what is shown when the player enters a room with an omen, interacts with an omen card, and the effects of the randomly generated card are resolved. Also checks to see if the haunt occurs, sets the highlighted value of the players stats based on the cards effects, and checks for player death.<br>
+![omenCardResolution Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/OmenCardResolutionMethod.png)
+
+Player Movement Method - Keyboard based movement. First image ensures that the player starts in the correct spot and their base stats are highlighted. <br>
+![playerMovementEnter Method](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/playerMovementEnter.png)
+
+Next several images show how the players movement is controlled.<br>
+![Basement To Foyer Movement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/basementToFoyer.png)
+![Coal Chute To Basement](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/coalChuteToBasement.png)
+
+Testing to see if player can move downward, and if so change the active tile. This is similar to up/left/right movement.<br>
+![Down](https://github.com/GrapeSalad/Betrayal-Clone/blob/master/down.png)
 
 <hr>
 ## Project Build

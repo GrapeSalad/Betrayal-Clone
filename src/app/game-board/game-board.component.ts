@@ -887,11 +887,6 @@ constructor(private database: AngularFireDatabase, private gameService: GameServ
     this.key = event.which || event.keyCode;
     const element = document.getElementsByClassName("active");
 
-    //   if (this.startScreen === false) {
-    //   element[0].scrollIntoView(false);
-    // }
-
-
     if(this.startScreen === false){
       const element = document.getElementById(this.currentRoomTileId);
       element.scrollIntoView(false);
